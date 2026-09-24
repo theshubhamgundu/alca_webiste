@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ClerkProvider, SignIn, SignUp } from "@clerk/react";
-import { publishableKeyFromHost } from "@clerk/react/internal";
-import { shadcn } from "@clerk/themes";
-import { Route, Router as WouterRouter, Switch, useLocation } from "wouter";
+import { Route, Router as WouterRouter, Switch } from "wouter";
 import { PhotoAdmin } from "./pages/PhotoAdmin";
 import "./features/features.css";
 import "./features/admin/admin.css";
@@ -30,6 +27,53 @@ function SiteHome() {
   const cart = useCart();
   const [cartOpen, setCartOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
+
+  // Reveal-on-scroll: guarantees every .rv block fully appears, even tall ones.
+  useEffect(() => {
+    const revealAll = () => {
+      const els = document.querySelectorAll<HTMLElement>(".rv");
+      els.forEach((el) => el.classList.add("in"));
+    };
+
+    if (
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      revealAll();
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
+    );
+
+    const observe = () => {
+      document
+        .querySelectorAll<HTMLElement>(".rv:not(.in)")
+        .forEach((el) => io.observe(el));
+    };
+
+    observe();
+    const mo = new MutationObserver(observe);
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    // Safety net: never leave content hidden.
+    const fallback = window.setTimeout(revealAll, 1500);
+
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+      window.clearTimeout(fallback);
+    };
+  }, []);
 
   // Hidden admin panel shortcut: #admin in URL hash
   useEffect(() => {
@@ -201,67 +245,12 @@ function SiteHome() {
 const queryClient = new QueryClient();
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-// For local development, only use Clerk if we have explicit configuration
-const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || 
-  (window.location.hostname !== 'localhost' ? 
-    publishableKeyFromHost(window.location.hostname, import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) : 
-    null);
-
 function SiteRoutes() {
-  const [, setLocation] = useLocation();
-  const stripBase = (path: string) =>
-    basePath && path.startsWith(basePath) ? path.slice(basePath.length) || "/" : path;
-
-  // If no Clerk key is available, render without authentication
-  if (!clerkPubKey) {
-    return (
-      <Switch>
-        <Route path="/" component={SiteHome} />
-        <Route path="/admin" component={PhotoAdmin} />
-        <Route path="/sign-in/*?" component={() => <div className="admin-auth">Authentication not configured for localhost</div>} />
-        <Route path="/sign-up/*?" component={() => <div className="admin-auth">Authentication not configured for localhost</div>} />
-      </Switch>
-    );
-  }
-
   return (
-    <ClerkProvider
-      publishableKey={clerkPubKey}
-      proxyUrl={import.meta.env.VITE_CLERK_PROXY_URL}
-      signInUrl={`${basePath}/sign-in`}
-      signUpUrl={`${basePath}/sign-up`}
-      appearance={{
-        theme: shadcn,
-        cssLayerName: "clerk",
-        variables: {
-          colorPrimary: "#d62839",
-          colorForeground: "#3b1f2b",
-          colorBackground: "#fffcf7",
-          colorInput: "#fff1e2",
-          colorInputForeground: "#3b1f2b",
-        },
-        elements: {
-          socialButtonsBlockButtonText: { color: "#3b1f2b" },
-          formButtonPrimary: { color: "#fff" },
-        },
-      }}
-      localization={{
-        signIn: { start: { title: "ALCA admin", subtitle: "Sign in to manage approved photos" } },
-      }}
-      routerPush={(to) => setLocation(stripBase(to))}
-      routerReplace={(to) => setLocation(stripBase(to), { replace: true })}
-    >
-      <Switch>
-        <Route path="/" component={SiteHome} />
-        <Route path="/admin" component={PhotoAdmin} />
-        <Route path="/sign-in/*?">
-          {() => <div className="admin-auth"><SignIn routing="path" path={`${basePath}/sign-in`} signUpUrl={`${basePath}/sign-up`} forceRedirectUrl={`${basePath}/admin`} /></div>}
-        </Route>
-        <Route path="/sign-up/*?">
-          {() => <div className="admin-auth"><SignUp routing="path" path={`${basePath}/sign-up`} signInUrl={`${basePath}/sign-in`} forceRedirectUrl={`${basePath}/admin`} /></div>}
-        </Route>
-      </Switch>
-    </ClerkProvider>
+    <Switch>
+      <Route path="/" component={SiteHome} />
+      <Route path="/admin" component={PhotoAdmin} />
+    </Switch>
   );
 }
 

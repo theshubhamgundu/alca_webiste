@@ -238,32 +238,30 @@ export function DivisionSection({
               <ul>
                 {(items as [string, string, string?][]).map(
                   ([name, price, desc]) => (
-                    <li key={name}>
-                      <button
-                        type="button"
-                        onClick={() =>
+                    <li
+                      key={name}
+                      role="button"
+                      tabIndex={0}
+                      onClick={() =>
+                        addToCart(
+                          name,
+                          parseInt(price.replace(/[^0-9]/g, ""), 10),
+                        )
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
                           addToCart(
                             name,
                             parseInt(price.replace(/[^0-9]/g, ""), 10),
-                          )
+                          );
                         }
-                        style={{
-                          background: "none",
-                          border: "none",
-                          display: "flex",
-                          width: "100%",
-                          alignItems: "baseline",
-                          gap: "8px",
-                          cursor: "pointer",
-                          textAlign: "left",
-                          padding: 0,
-                        }}
-                      >
-                        <span>{name}</span>
-                        <i style={{ flex: 1 }}></i>
-                        <b>₹{price}</b>
+                      }}
+                    >
+                      <span>{name}</span>
+                      <i></i>
+                      <b>₹{price}</b>
                       {desc && <small>{desc} kcal</small>}
-                      </button>
                     </li>
                   ),
                 )}

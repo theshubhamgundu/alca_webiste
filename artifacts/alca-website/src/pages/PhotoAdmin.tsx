@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from 'react';
-import { useAuth, useClerk } from '@clerk/react';
 import { Link } from 'wouter';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { apiRequest, sections, type Section } from '@/lib/businessPhotos';
@@ -117,19 +116,14 @@ function PhotoForm({ section, current }: { section: Section; current?: AdminPhot
 }
 
 export function PhotoAdmin() {
-  const { isLoaded, isSignedIn } = useAuth();
-  const { signOut } = useClerk();
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ['admin-business-photos'],
     queryFn: () => apiRequest<AdminPhoto[]>('/admin/business-photos'),
-    enabled: !!isSignedIn,
     retry: false,
   });
-  if (!isLoaded) return <main className="admin-page"><p>Loading sign-in…</p></main>;
-  if (!isSignedIn) return <main className="admin-page"><h1>ALCA admin</h1><p>Sign in with the approved ALCA admin account to manage business photos.</p><Link href="/sign-in" className="button primary">Sign in</Link></main>;
   return (
     <main className="admin-page">
-      <header className="admin-head"><div><span className="eyebrow">ALCA</span><h1>Photo admin</h1></div><div className="admin-actions"><Link href="/">View website</Link><button type="button" className="button outline" onClick={() => signOut({ redirectUrl: import.meta.env.BASE_URL })}>Sign out</button></div></header>
+      <header className="admin-head"><div><span className="eyebrow">ALCA</span><h1>Photo admin</h1></div><div className="admin-actions"><Link href="/">View website</Link></div></header>
       <p>Only upload actual ALCA work with publication permission. Photos are optimized for mobile automatically. A published photo replaces its labeled illustrative image.</p>
       {isLoading && <p>Loading sections…</p>}
       {error && <div role="alert" className="admin-error"><p>{error.message}</p><button type="button" onClick={() => refetch()}>Try again</button></div>}

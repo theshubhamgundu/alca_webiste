@@ -125,8 +125,6 @@ export function Hero({ site }: { site: SiteData }) {
                     } as React.CSSProperties
                   }
                   aria-label={div.name}
-                  whileHover={{ scale: 1.08 }}
-                  whileTap={{ scale: 0.96 }}
                 >
                   <span
                     style={{

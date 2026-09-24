@@ -32,7 +32,8 @@ export function SwapConcierge({ site }: { site: SiteData }) {
   };
 
   return (
-    <div className={`swap rv ${alt ? "alt" : ""}`} id="swap">
+    <div className="rv">
+      <div className={`swap ${alt ? "alt" : ""}`} id="swap">
       <div className="sw-tabs" role="tablist">
         <button
           type="button"
@@ -204,6 +205,7 @@ export function SwapConcierge({ site }: { site: SiteData }) {
           }}
         ></i>
       </div>
+    </div>
     </div>
   );
 }

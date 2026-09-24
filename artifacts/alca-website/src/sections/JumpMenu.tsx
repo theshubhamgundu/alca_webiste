@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
 import type { SiteData } from "../types/site";
 
+const divIcons: Record<string, string> = {
+  bites: "🍎",
+  catering: "🍽️",
+  celebrations: "🎉",
+  gifts: "🎁",
+  studio: "👗",
+  beauty: "💄",
+  supply: "🏭",
+};
+
 export function JumpMenu({ site }: { site: SiteData }) {
   const [active, setActive] = useState<string>("");
 
@@ -24,22 +34,23 @@ export function JumpMenu({ site }: { site: SiteData }) {
     return () => observer.disconnect();
   }, [site.divisions]);
 
+  const visibleDivisions = site.divisions.filter((d) => !d.hidden);
+
   return (
     <div className="wrap">
-      <div className="jump" id="jump" aria-label="Jump to a business">
-        {site.divisions
-          .filter((d) => !d.hidden)
-          .map((d) => (
-            <a
-              key={d.id}
-              href={`#${d.id}`}
-              className={active === d.id ? "active" : ""}
-            >
-            {d.name}
-            </a>
-          ))}
-        {(site.reviews?.length || site.faq?.length) ? <a href="#faq">Reviews &amp; FAQ</a> : null}
-      </div>
+      <nav className="jump" id="jump" aria-label="Jump to a business">
+        {visibleDivisions.map((d) => (
+          <a
+            key={d.id}
+            href={`#${d.id}`}
+            className={active === d.id ? "active" : ""}
+            title={d.name}
+          >
+            <span className="jump-icon">{divIcons[d.id] || "📦"}</span>
+            <span className="jump-label">{d.short || d.name}</span>
+          </a>
+        ))}
+      </nav>
     </div>
   );
 }

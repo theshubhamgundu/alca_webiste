@@ -20,7 +20,7 @@ export function ContactFooter({ site }: { site: SiteData }) {
   const dragStart = useRef({ x: 0, y: 0 });
 
   const [pupState, setPupState] = useState<
-    "idle" | "hop" | "look" | "pull"
+    "idle" | "hop" | "look" | "pull" | "drag-pull"
   >("idle");
   const [pupMsg, setPupMsg] = useState("");
   const pupMsgIndex = useRef(0);
@@ -85,7 +85,7 @@ export function ContactFooter({ site }: { site: SiteData }) {
     setPupState("hop");
     setPupMsg(pupMessages[pupMsgIndex.current % pupMessages.length]);
     pupMsgIndex.current++;
-    
+
     setTimeout(() => {
       setPupState((current) => current === "hop" ? "idle" : current);
     }, 1500);
@@ -114,12 +114,12 @@ export function ContactFooter({ site }: { site: SiteData }) {
     if (lampRef.current && e.currentTarget) {
       const pupRect = e.currentTarget.getBoundingClientRect();
       const lampRect = lampRef.current.getBoundingClientRect();
-      
+
       const pupCenterX = pupRect.left + pupRect.width / 2;
       const pupCenterY = pupRect.top + pupRect.height / 2;
       const cordX = lampRect.left + lampRect.width / 2;
       const cordY = lampRect.top + lampRect.height;
-      
+
       const distToCord = Math.hypot(pupCenterX - cordX, pupCenterY - cordY);
       if (distToCord < 150) {
         droppedOnLamp = true;
@@ -127,25 +127,25 @@ export function ContactFooter({ site }: { site: SiteData }) {
     }
 
     if (droppedOnLamp) {
-      setPupState("drag-pull" as any);
+      setPupState("drag-pull");
       setPupMsg("Got it!");
-      
+
       const pupRect = e.currentTarget.getBoundingClientRect();
       const originalPupX = pupRect.left - dragPos.x;
       const originalPupY = pupRect.top - dragPos.y;
-      
+
       // The lamp cord is at left: 66px, top: 88px, height: 40px
       const lampRect = lampRef.current!.getBoundingClientRect();
       const cordX = lampRect.left + 66;
       const cordY = lampRect.top + 128; // 88 + 40
-      
+
       // Dog mouth is roughly top center
       const holdX = cordX - (originalPupX + 65);
       const holdY = cordY - (originalPupY + 15);
-      
+
       // 1. Snap to cord tip
       setDragPos({ x: holdX, y: holdY });
-      
+
       // 2. Wait for snap, then pull down
       setTimeout(() => {
         setPull(false);
@@ -153,10 +153,10 @@ export function ContactFooter({ site }: { site: SiteData }) {
           setIsPullingCord(true); // switch transition timing to match cord exactly
           cycleLamp();
           setPull(true);
-          
+
           // The cord scales by 1.4 (height: 40px -> 56px = 16px diff)
           setDragPos({ x: holdX, y: holdY + 16 });
-          
+
           // Let go at peak of stretch (250ms)
           setTimeout(() => {
             setIsPullingCord(false);
@@ -236,31 +236,33 @@ export function ContactFooter({ site }: { site: SiteData }) {
           <p>
             Tell us what you need, whether it's one service or the whole event.
           </p>
-          <div className="handle">
-            <span className="eyebrow">Orders: food & gifts</span>
-            <code id="c-oph">{site.contact.ordersPhone}</code>
-            <button
-              type="button"
-              className="copy"
-              onClick={() =>
-                navigator.clipboard.writeText(site.contact.ordersPhone)
-              }
+          <div className="ccontact">
+            <a
+              className="cline"
+              href={waLink(
+                site.contact.ordersPhone,
+                "Hi ALCA, I'd like to place an order.",
+              )}
+              target="_blank"
+              rel="noopener"
             >
-              Copy
-            </button>
-          </div>
-          <div className="handle">
-            <span className="eyebrow">ALCA</span>
-            <code id="c-mph">{site.contact.mainPhone}</code>
-            <button
-              type="button"
-              className="copy"
-              onClick={() =>
-                navigator.clipboard.writeText(site.contact.mainPhone)
-              }
-            >
-              Copy
-            </button>
+              <span className="cl">
+                <span className="cl-label">Food & gift orders</span>
+                <span className="cl-num" id="c-oph">
+                  {site.contact.ordersPhone}
+                </span>
+              </span>
+              <span className="cl-cta">WhatsApp</span>
+            </a>
+            <a className="cline" href={`tel:${site.contact.mainPhone}`}>
+              <span className="cl">
+                <span className="cl-label">General enquiries</span>
+                <span className="cl-num" id="c-mph">
+                  {site.contact.mainPhone}
+                </span>
+              </span>
+              <span className="cl-cta">Call</span>
+            </a>
           </div>
 
           <div className="bigsoc" id="c-soc">
@@ -295,7 +297,7 @@ export function ContactFooter({ site }: { site: SiteData }) {
                   </svg>
                 </i>
                 <span>
-                  <small>Instagram</small>@{site.contact.ig1}
+                  <small>Alca Bites</small>@{site.contact.ig1}
                 </span>
               </a>
             )}
@@ -330,14 +332,14 @@ export function ContactFooter({ site }: { site: SiteData }) {
                   </svg>
                 </i>
                 <span>
-                  <small>Instagram</small>@{site.contact.ig2}
+                  <small>ALCA</small>@{site.contact.ig2}
                 </span>
               </a>
             )}
-            
+
             <a
               className="sbtn fb"
-              href={`https://www.facebook.com/search/top?q=${encodeURIComponent("ALCA Hyderabad")}`}
+              href={`https://www.facebook.com/profile.php?id=61572367172675`}
               target="_blank"
               rel="noopener"
             >
@@ -350,7 +352,7 @@ export function ContactFooter({ site }: { site: SiteData }) {
                 </svg>
               </i>
               <span>
-                <small>Facebook</small>ALCA Hyderabad
+                <small>Facebook</small>@ALCABites
               </span>
             </a>
           </div>
@@ -368,10 +370,10 @@ export function ContactFooter({ site }: { site: SiteData }) {
             disabled={pupState === "pull" || pupState === "drag-pull"}
             style={{
               transform: `translate(${dragPos.x}px, ${dragPos.y}px)`,
-              transition: isDragging 
-                ? "none" 
-                : isPullingCord 
-                  ? "transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1)" 
+              transition: isDragging
+                ? "none"
+                : isPullingCord
+                  ? "transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1)"
                   : "transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)",
               touchAction: "none",
               zIndex: isDragging ? 50 : undefined

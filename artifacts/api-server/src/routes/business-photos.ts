@@ -1,5 +1,4 @@
 import { randomUUID } from "node:crypto";
-import { clerkClient, getAuth } from "@clerk/express";
 import { Storage } from "@google-cloud/storage";
 import { db, businessPhotosTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
@@ -41,29 +40,14 @@ function objectFile(path: string) {
   return storage.bucket(bucket).file([...prefix, path.slice("/objects/".length)].join("/"));
 }
 
-async function requireAdmin(req: Request, res: Response, next: NextFunction) {
-  const configuredEmail = process.env.ALCA_ADMIN_EMAIL?.trim().toLowerCase();
-  if (!configuredEmail) {
-    res.status(503).json({ error: "Admin access is not configured yet." });
+function requireAdmin(req: Request, res: Response, next: NextFunction) {
+  const configuredToken = process.env.ALCA_ADMIN_TOKEN?.trim();
+  // When no admin token is configured, admin routes stay open (same-origin only).
+  if (configuredToken && req.get("x-admin-token") !== configuredToken) {
+    res.status(401).json({ error: "Admin access denied." });
     return;
   }
-  const auth = getAuth(req);
-  if (!auth.userId) {
-    res.status(401).json({ error: "Sign in to continue." });
-    return;
-  }
-  try {
-    const user = await clerkClient.users.getUser(auth.userId);
-    const email = user.emailAddresses.find((entry) => entry.id === user.primaryEmailAddressId);
-    if (!email || email.emailAddress.toLowerCase() !== configuredEmail || email.verification?.status !== "verified") {
-      res.status(403).json({ error: "This account does not have admin access." });
-      return;
-    }
-    next();
-  } catch (error) {
-    req.log.error({ err: error }, "Could not verify admin account");
-    res.status(503).json({ error: "Could not verify admin account." });
-  }
+  next();
 }
 
 function sameOrigin(req: Request, res: Response, next: NextFunction) {
