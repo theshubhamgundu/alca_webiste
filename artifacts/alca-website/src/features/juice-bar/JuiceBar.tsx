@@ -21,15 +21,38 @@ export function JuiceBar({
         {division.drinks.map((j) => (
           <article className="feature-card" key={j.name}>
             <button className="text-button" onClick={() => setSelected(j)}>
-              <span style={{ fontSize: "2rem" }} aria-hidden>
-                {j.emoji}
-              </span>
-              <h4>{j.name}</h4>
+              <div className="juice-item-header">
+                <span className="juice-item-emoji" style={{
+                  background: `linear-gradient(135deg, ${j.color}20, ${j.color2}20)`,
+                  color: j.color,
+                  width: 24,
+                  height: 24,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%',
+                  fontSize: '1.2rem'
+                }}>
+                  {j.emoji}
+                </span>
+                <div className="juice-item-info">
+                  <h4>{j.name}</h4>
+                  <div className="juice-item-meta">
+                    <span className="juice-item-kcal">{j.kcal} kcal</span>
+                    {j.goodFor && (
+                      <span className="juice-item-goodfor">
+                        • {j.goodFor.split(',')[0]}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
             </button>
             <p className="muted">{j.about}</p>
-            <b>
-              {rupees(j.price)} <small>· {j.size}</small>
-            </b>
+            <div className="juice-item-price">
+              <strong>{rupees(priceNumber(j.price))}</strong>
+              <small>· {j.size}</small>
+            </div>
             {j.inStock ? (
               <button
                 className="feature-button"
@@ -72,22 +95,34 @@ export function JuiceBar({
             <b>Best within:</b> {selected.bestWithin}
           </p>
           {selected.inStock ? (
-            <button
-              className="feature-button"
-              onClick={() => {
-                addToCart(selected.name, priceNumber(selected.price));
-                setSelected(null);
-              }}
-            >
-              Add to cart
-            </button>
+            <div className="juice-actions">
+              <button
+                className="feature-button"
+                onClick={() => {
+                  addToCart(selected.name, priceNumber(selected.price));
+                  setSelected(null);
+                }}
+              >
+                Add to cart
+              </button>
+              <button
+                className="feature-button-outline"
+                onClick={() => {
+                  setSelected(null);
+                }}
+              >
+                Try another
+              </button>
+            </div>
           ) : (
             <button
               className="feature-button"
               onClick={() =>
                 openWhatsApp(
                   division.phone ?? "",
-                  `Hi ALCA, is ${selected.name} available?`,
+                  division.waText
+                    ? `${division.waText.replace(/I\'d like to place an order\./i, `Is ${selected.name} available?`)}`
+                    : `Hi ALCA, is ${selected.name} available?`,
                 )
               }
             >

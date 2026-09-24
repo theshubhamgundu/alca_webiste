@@ -28,37 +28,35 @@ export function DryStore({
                   className="text-button"
                   onClick={() => setSelected(item)}
                 >
-                  <b>
-                    {item.emoji} {item.name}
-                  </b>
+                  <span className="store-item-header">
+                    <span className="store-item-emoji">{item.emoji}</span>
+                    <span className="store-item-name">
+                      <b>{item.name}</b>
+                    </span>
+                  </span>
+                  {item.price && (
+                    <span className="store-item-price">
+                      <span className="price-value">
+                        <strong>{rupees(priceNumber(item.price))}</strong>
+                      </span>
+                      {item.kcal && (
+                        <span className="store-item-kcal">
+                          {item.kcal} kcal
+                        </span>
+                      )}
+                    </span>
+                  )}
+                  {!item.price && (
+                    <span className="store-item-price muted">
+                      Ask price
+                    </span>
+                  )}
                 </button>
-                <p className="muted">{item.about}</p>
-                {item.price ? (
-                  <>
-                    <strong>{rupees(item.price)}</strong>
-                    <br />
-                    <button
-                      className="feature-button"
-                      disabled={!item.inStock}
-                      onClick={() =>
-                        addToCart(item.name, priceNumber(item.price))
-                      }
-                    >
-                      {item.inStock ? "Add to cart" : "Sold out"}
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    className="text-button"
-                    onClick={() =>
-                      openWhatsApp(
-                        division.phone ?? "",
-                        `Hi ALCA, what is the price and availability of ${item.name}?`,
-                      )
-                    }
-                  >
-                    Ask price on WhatsApp
-                  </button>
+                <span className="muted">{item.about}</span>
+                {item.goodFor && (
+                  <span className="store-item-goodfor">
+                    <span className="label">Good for:</span> {item.goodFor}
+                  </span>
                 )}
               </article>
             ))}
@@ -83,13 +81,11 @@ export function DryStore({
             <br />
             <b>Good for:</b> {selected.goodFor}
           </p>
-          {selected.kcal && (
-            <p>
-              <b>Nutrition:</b> {selected.kcal} kcal · protein{" "}
-              {selected.protein} g · carbs {selected.carbs} g · sugar{" "}
-              {selected.sugar} g · fibre {selected.fibre} g
-            </p>
-          )}
+          <p>
+            <b>Nutrition:</b> {selected.kcal} kcal · protein {selected.protein}{" "}
+            g · carbs {selected.carbs} g · sugar {selected.sugar} g · fibre{" "}
+            {selected.fibre} g
+          </p>
           <p>
             <b>Best within:</b> {selected.bestWithin}
           </p>
@@ -109,7 +105,9 @@ export function DryStore({
               onClick={() =>
                 openWhatsApp(
                   division.phone ?? "",
-                  `Hi ALCA, what is the price and availability of ${selected.name}?`,
+                  division.waText
+                    ? `${division.waText.replace(/I\'d like to place an order\./i, `What is the price and availability of ${selected.name}?`)}`
+                    : `Hi ALCA, what is the price and availability of ${selected.name}?`,
                 )
               }
             >
