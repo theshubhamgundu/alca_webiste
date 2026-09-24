@@ -70,20 +70,15 @@ export function DivisionSection({
           </h2>
         </div>
 
-        <p className="lead-text">{div.lead}</p>
+        <p>{div.lead}</p>
       </div>
 
       {div.tags && div.tags.length > 0 && (
-        <div className="tags-container">
-          <span className="tags-label">What makes us special:</span>
-          <ul className="tags">
-            {div.tags.map((tag) => (
-              <li key={tag}>
-                <span className="tag-item">{tag}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="tags">
+          {div.tags.map((tag) => (
+            <li key={tag}>{tag}</li>
+          ))}
+        </ul>
       )}
 
       {/* Photos */}
@@ -200,14 +195,10 @@ export function DivisionSection({
         <div className="lunch">
           <div className="lunch-intro">
             <span className="eyebrow" style={{ color: "var(--c1)" }}>
-              {div.name} Lunch
+              Office lunch box
             </span>
 
-            <h3>
-              {div.name === "bites"
-                ? "Homestyle lunch, delivered to your office"
-                : "Homestyle lunch plans"}
-            </h3>
+            <h3>Homestyle lunch, delivered to your office</h3>
 
             <p>
               Fresh ingredients, hygienic and made daily. Free delivery to your
@@ -297,36 +288,39 @@ export function DivisionSection({
           {div.menu.map(([groupName, items]) => (
             <div className="mgroup" key={groupName as string}>
               <h3>{groupName as string}</h3>
-              <p className="menu-group-description">
-                {groupName === "Power rolls" && "Energy-packed fruit and nut rolls"}
-                {groupName === "Healthy bites & light meals" && "Nutritious snacks and meal options"}
-                {groupName === "Cold-pressed juices" && "Freshly pressed vegetable and fruit juices"}
-                {groupName === "Seasonal fruit juices" && "Natural seasonal fruit beverages"}
-                {groupName === "Dark chocolate bites (40 g)" && "Premium dark chocolate treats"}
-                {groupName === "Assorted biscuits & cookies" && "Freshly baked assorted treats"}
-              </p>
-              <div className="menu-grid">
+
+              <ul>
                 {(items as [string, string, string?][]).map(
                   ([name, price, desc]) => (
-                    <button
+                    <li
                       key={name}
-                      className="menu-item-button"
+                      role="button"
+                      tabIndex={0}
                       onClick={() => {
                         addToCart(
                           name,
                           parseInt(price.replace(/[^0-9]/g, ""), 10)
                         );
                       }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+
+                          addToCart(
+                            name,
+                            parseInt(price.replace(/[^0-9]/g, ""), 10)
+                          );
+                        }
+                      }}
                     >
-                      <span className="menu-item-name">{name}</span>
-                      <span className="menu-item-price">₹{price}</span>
-                      {desc && (
-                        <span className="menu-item-description">{desc}</span>
-                      )}
-                    </button>
+                      <span>{name}</span>
+                      <i></i>
+                      <b>₹{price}</b>
+                      {desc && <small>{desc} kcal</small>}
+                    </li>
                   )
                 )}
-              </div>
+              </ul>
             </div>
           ))}
         </div>

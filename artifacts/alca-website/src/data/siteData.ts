@@ -394,9 +394,120 @@ export const siteData: SiteData = {
               about:
                 "Crunchy, naturally sweet mango slices with nothing added.",
               bestWithin: "Best before 15 days. Keep in an airtight jar.",
-              color: "#F2A20C"
-            }
-                      ],
+              color: "#F2A20C",
+            },
+            {
+              name: "Guava",
+              emoji: "🍐",
+              price: "249",
+              weight: "",
+              inStock: true,
+              kcal: "110",
+              protein: "",
+              carbs: "",
+              sugar: "",
+              fibre: "",
+              ingredients: "100% guava, slow-dried at home",
+              goodFor: "Healthy snacking, kids' tiffin, office munching",
+              vitamins: "",
+              about:
+                "Crunchy, naturally sweet guava slices with nothing added.",
+              bestWithin: "Best before 15 days. Keep in an airtight jar.",
+              color: "#8DB33A",
+            },
+            {
+              name: "Strawberry",
+              emoji: "🍓",
+              price: "299",
+              weight: "",
+              inStock: true,
+              kcal: "100",
+              protein: "",
+              carbs: "",
+              sugar: "",
+              fibre: "",
+              ingredients: "100% strawberry, slow-dried at home",
+              goodFor: "Healthy snacking, kids' tiffin, office munching",
+              vitamins: "",
+              about:
+                "Crunchy, naturally sweet strawberry slices with nothing added.",
+              bestWithin: "Best before 15 days. Keep in an airtight jar.",
+              color: "#E8435A",
+            },
+            {
+              name: "Kiwi",
+              emoji: "🥝",
+              price: "299",
+              weight: "",
+              inStock: true,
+              kcal: "90",
+              protein: "",
+              carbs: "",
+              sugar: "",
+              fibre: "",
+              ingredients: "100% kiwi, slow-dried at home",
+              goodFor: "Healthy snacking, kids' tiffin, office munching",
+              vitamins: "",
+              about: "Crunchy, naturally sweet kiwi slices with nothing added.",
+              bestWithin: "Best before 15 days. Keep in an airtight jar.",
+              color: "#7C9A2B",
+            },
+            {
+              name: "Dragon fruit",
+              emoji: "🐉",
+              price: "299",
+              weight: "",
+              inStock: true,
+              kcal: "100",
+              protein: "",
+              carbs: "",
+              sugar: "",
+              fibre: "",
+              ingredients: "100% dragon fruit, slow-dried at home",
+              goodFor: "Healthy snacking, kids' tiffin, office munching",
+              vitamins: "",
+              about:
+                "Crunchy, naturally sweet dragon fruit slices with nothing added.",
+              bestWithin: "Best before 15 days. Keep in an airtight jar.",
+              color: "#D6336C",
+            },
+            {
+              name: "Seasonal mix",
+              emoji: "🍇",
+              price: "299",
+              weight: "",
+              inStock: true,
+              kcal: "130",
+              protein: "",
+              carbs: "",
+              sugar: "",
+              fibre: "",
+              ingredients: "A mix of seasonal fruits, slow-dried at home",
+              goodFor: "Healthy snacking, kids' tiffin, office munching",
+              vitamins: "",
+              about: "Our seasonal mix of dried fruits, packed fresh.",
+              bestWithin: "Best before 15 days. Keep in an airtight jar.",
+              color: "#7A4FA0",
+            },
+            {
+              name: "Premium mix",
+              emoji: "✨",
+              price: "349",
+              weight: "",
+              inStock: true,
+              kcal: "140",
+              protein: "",
+              carbs: "",
+              sugar: "",
+              fibre: "",
+              ingredients: "A mix of seasonal fruits, slow-dried at home",
+              goodFor: "Healthy snacking, kids' tiffin, office munching",
+              vitamins: "",
+              about: "Our premium mix of dried fruits, packed fresh.",
+              bestWithin: "Best before 15 days. Keep in an airtight jar.",
+              color: "#B23A5B",
+            },
+          ],
         },
         {
           name: "Dry vegetables",
@@ -710,9 +821,7 @@ export const siteData: SiteData = {
       short: "Events",
       phone: "9010995180",
       waText: "Hi ALCA, I'd like to plan an event.",
-      photos: [
-        ["wow", "Wow Magical Celebrations"]
-      ],
+      photos: [["wow", "Wow Magical Celebrations"]],
       lead: "We create memories, you cherish forever. Weddings, birthdays and corporate events, planned and run from start to finish.",
       tags: [
         "Weddings",
@@ -725,38 +834,38 @@ export const siteData: SiteData = {
       s: [
         [
           "Royal wedding planning",
-          "Unforgettable weddings with smooth planning and flawless execution."
+          "Unforgettable weddings with smooth planning and flawless execution.",
         ],
         [
           "Birthdays, anniversaries & baby showers",
-          "Special days made joyful with creative themes and décor."
+          "Special days made joyful with creative themes and décor.",
         ],
         [
           "Festivals & occasions",
-          "Festival and pooja setups, and décor for every family occasion."
+          "Festival and pooja setups, and décor for every family occasion.",
         ],
         [
           "Corporate & social events",
-          "Professional planning and management for corporate and social gatherings."
+          "Professional planning and management for corporate and social gatherings.",
         ],
         [
           "Premium décor & theme design",
-          "Elegant décor and custom themes that bring every celebration to life."
+          "Elegant décor and custom themes that bring every celebration to life.",
         ],
         [
           "Entertainment & stage management",
-          "Live performances, entertainment and stage coordination."
+          "Live performances, entertainment and stage coordination.",
         ],
         [
           "Grand photography",
-          "Photography that captures every moment of your celebration."
+          "Photography that captures every moment of your celebration.",
         ],
         [
           "Magical wow surprises",
-          "Surprise setups that turn a moment into a memory."
-        ]
+          "Surprise setups that turn a moment into a memory.",
+        ],
       ],
-      hidden: false
+      hidden: false,
     },
     {
       id: "gifts",
