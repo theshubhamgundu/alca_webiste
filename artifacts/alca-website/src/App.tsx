@@ -2,6 +2,12 @@ import { useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Router as WouterRouter, Switch } from "wouter";
 import { PhotoAdmin } from "./pages/PhotoAdmin";
+import CateringPage from "./pages/CateringPage";
+import CelebrationsPage from "./pages/CelebrationsPage";
+import CraftsGiftsPage from "./pages/CraftsGiftsPage";
+import DesignerStudioPage from "./pages/DesignerStudioPage";
+import MakeupBeautyPage from "./pages/MakeupBeautyPage";
+import SupplyPage from "./pages/SupplyPage";
 import "./features/features.css";
 import "./features/admin/admin.css";
 import { Nav } from "./sections/Nav";
@@ -249,6 +255,12 @@ function SiteRoutes() {
   return (
     <Switch>
       <Route path="/" component={SiteHome} />
+      <Route path="/catering" component={CateringPage} />
+      <Route path="/celebrations" component={CelebrationsPage} />
+      <Route path="/crafts-gifts" component={CraftsGiftsPage} />
+      <Route path="/designer-studio" component={DesignerStudioPage} />
+      <Route path="/makeup-beauty" component={MakeupBeautyPage} />
+      <Route path="/supply" component={SupplyPage} />
       <Route path="/admin" component={PhotoAdmin} />
     </Switch>
   );
