@@ -12,9 +12,6 @@ export function QuoteCalculator({ site }: { site: SiteData }) {
   const [food, setFood] = useState<"Veg" | "Non-veg">("Veg");
   const [addons, setAddons] = useState<string[]>([]);
   if (!q.on) return null;
-
-  const minGuests = Number(q.minGuests) || 50;
-  const maxGuests = 1000;
   const types = q.types
     .split(",")
     .map((x) => x.trim())
@@ -24,8 +21,6 @@ export function QuoteCalculator({ site }: { site: SiteData }) {
     .map((x) => x.trim())
     .filter(Boolean);
   const total = guests * Number(food === "Veg" ? q.vegPlate : q.nonvegPlate);
-  const canRequest = event !== "" && date !== "";
-
   return (
     <section className="feature-panel" aria-labelledby="quote-title">
       <small>EVENTS</small>
@@ -49,19 +44,16 @@ export function QuoteCalculator({ site }: { site: SiteData }) {
               onChange={(e) => setDate(e.target.value)}
             />
           </label>
-
-          <fieldset className="food-toggle">
+          <fieldset>
             <legend>Food</legend>
             <button
-              type="button"
               className="feature-button"
               onClick={() => setFood("Veg")}
               aria-pressed={food === "Veg"}
             >
               Veg · {rupees(q.vegPlate)}/plate
-            </button>
+            </button>{" "}
             <button
-              type="button"
               className="feature-button"
               onClick={() => setFood("Non-veg")}
               aria-pressed={food === "Non-veg"}
@@ -69,58 +61,42 @@ export function QuoteCalculator({ site }: { site: SiteData }) {
               Non-veg · {rupees(q.nonvegPlate)}/plate
             </button>
           </fieldset>
-
           <label>
-            <div className="section-row">
-              <span>Guests</span>
-              <span className="count-pill">
-                {guests}
-                {guests === maxGuests ? "+" : ""}
-              </span>
-            </div>
+            Guests: <b>{guests}</b>
             <input
               aria-label="Number of guests"
               type="range"
-              min={minGuests}
-              max={maxGuests}
-              step={10}
+              min={Number(q.minGuests) || 50}
+              max="1000"
+              step="10"
               value={guests}
               onChange={(e) => setGuests(Number(e.target.value))}
             />
-            <div className="range-scale">
-              <span>Min {minGuests}</span>
-              <span>{maxGuests}+</span>
-            </div>
           </label>
-
           <fieldset>
             <legend>Add-ons</legend>
-            <div className="addon-grid">
-              {options.map((x) => (
-                <label key={x} className="addon-option">
-                  <input
-                    type="checkbox"
-                    checked={addons.includes(x)}
-                    onChange={(e) =>
-                      setAddons((a) =>
-                        e.target.checked ? [...a, x] : a.filter((y) => y !== x),
-                      )
-                    }
-                  />
-                  {x}
-                </label>
-              ))}
-            </div>
+            {options.map((x) => (
+              <label key={x}>
+                <input
+                  type="checkbox"
+                  checked={addons.includes(x)}
+                  onChange={(e) =>
+                    setAddons((a) =>
+                      e.target.checked ? [...a, x] : a.filter((y) => y !== x),
+                    )
+                  }
+                />{" "}
+                {x}
+              </label>
+            ))}
           </fieldset>
         </div>
-
         <div className="feature-card">
           <small>ESTIMATED FOOD TOTAL</small>
           <h4 style={{ fontSize: "2rem" }}>{rupees(total)}</h4>
           <p className="muted">Add-ons will be quoted based on your event.</p>
           <button
             className="feature-button"
-            disabled={!canRequest}
             onClick={() =>
               openWhatsApp(
                 site.contact.mainPhone,
@@ -128,9 +104,7 @@ export function QuoteCalculator({ site }: { site: SiteData }) {
               )
             }
           >
-            {canRequest
-              ? "Request quote on WhatsApp"
-              : "Pick an event type and date to continue"}
+            Request quote on WhatsApp
           </button>
         </div>
       </div>

@@ -11,89 +11,57 @@ export function HamperBuilder({ site }: { site: SiteData }) {
   const [date, setDate] = useState("");
   const [note, setNote] = useState("");
   if (!site.hamper.on) return null;
-
   const box = site.hamper.boxes[size];
   const limit = Number(box?.[1]) || 0;
-  const remaining = Math.max(limit - items.length, 0);
-  const isFull = limit > 0 && items.length === limit;
-
   const products = site.divisions.flatMap(
     (d) =>
       d.store?.flatMap((g) =>
         g.items.filter((i) => i.price).map((i) => i.name),
       ) ?? [],
   );
-
-  const toggle = (name: string) => {
-    setItems((prev) => {
-      if (prev.includes(name)) return prev.filter((x) => x !== name);
-      if (prev.length >= limit) return prev;
-      return [...prev, name];
-    });
-  };
-
-  const chooseSize = (i: number) => {
-    setSize(i);
-    const newLimit = Number(site.hamper.boxes[i]?.[1]) || 0;
-    setItems((prev) => prev.slice(0, newLimit));
-  };
-
+  const add = (name: string) =>
+    items.length < limit && setItems((x) => [...x, name]);
   return (
     <section className="feature-panel" aria-labelledby="hamper-title">
       <small>GIFTING</small>
       <h3 id="hamper-title">Build a hamper</h3>
       <p className="muted">{site.hamper.note}</p>
-
       <div className="feature-grid">
         <div>
           <h4>Choose your box</h4>
-          <div className="box-grid">
-            {site.hamper.boxes.map((b, i) => (
+          {site.hamper.boxes.map((b, i) => (
+            <button
+              className="feature-button"
+              style={{ margin: 4, opacity: i === size ? 1 : 0.65 }}
+              key={b[0]}
+              onClick={() => {
+                setSize(i);
+                setItems([]);
+              }}
+            >
+              {b[0]} · {b[1]} items {b[2] && `· ${rupees(b[2])}`}
+            </button>
+          ))}
+          <h4>
+            Choose items ({items.length}/{limit})
+          </h4>
+          <div className="feature-grid">
+            {products.map((name) => (
               <button
-                key={b[0]}
-                type="button"
-                className="box-option"
-                aria-pressed={i === size}
-                onClick={() => chooseSize(i)}
+                className="text-button"
+                disabled={items.length >= limit}
+                key={name}
+                onClick={() => add(name)}
               >
-                <span className="box-option-name">{b[0]}</span>
-                <span className="box-option-meta">
-                  {b[1]} items{b[2] ? ` · ${rupees(b[2])}` : ""}
-                </span>
+                {name}
               </button>
             ))}
           </div>
-
-          <div className="section-row">
-            <h4>Choose items</h4>
-            <span className={`count-pill ${isFull ? "count-pill--done" : ""}`}>
-              {items.length}/{limit} selected
-            </span>
-          </div>
-          <div className="chip-grid">
-            {products.map((name) => {
-              const active = items.includes(name);
-              const disabled = !active && items.length >= limit;
-              return (
-                <button
-                  key={name}
-                  type="button"
-                  className={`item-chip ${active ? "item-chip--active" : ""}`}
-                  aria-pressed={active}
-                  disabled={disabled}
-                  onClick={() => toggle(name)}
-                >
-                  {name}
-                </button>
-              );
-            })}
-          </div>
         </div>
-
         <div className="feature-card">
           <h4>Your hamper</h4>
           {items.length ? (
-            <ul className="summary-list">
+            <ul>
               {items.map((x, i) => (
                 <li key={`${x}-${i}`}>{x}</li>
               ))}
@@ -101,13 +69,11 @@ export function HamperBuilder({ site }: { site: SiteData }) {
           ) : (
             <p className="muted">Choose items to fill your hamper.</p>
           )}
-
           <label>
             Recipient name
             <input
               value={recipient}
               onChange={(e) => setRecipient(e.target.value)}
-              placeholder="Who is this hamper for?"
             />
           </label>
           <label>
@@ -124,10 +90,8 @@ export function HamperBuilder({ site }: { site: SiteData }) {
               value={note}
               onChange={(e) => setNote(e.target.value)}
               rows={3}
-              placeholder="Add a note for the card (optional)"
             />
           </label>
-
           <button
             className="feature-button"
             disabled={!items.length}
@@ -138,11 +102,7 @@ export function HamperBuilder({ site }: { site: SiteData }) {
               )
             }
           >
-            {isFull
-              ? "Request hamper on WhatsApp"
-              : items.length
-                ? `Request hamper on WhatsApp (${remaining} more available)`
-                : "Request hamper on WhatsApp"}
+            Request hamper on WhatsApp
           </button>
         </div>
       </div>

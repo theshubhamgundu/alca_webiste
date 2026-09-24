@@ -1,0 +1,211 @@
+.alca-admin-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #21131dcc;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  color: #3b1f2b;
+  font:
+    14px/1.45 system-ui,
+    sans-serif;
+}
+.alca-admin {
+  background: #fffcf7;
+  width: min(1080px, 100%);
+  height: min(900px, 94vh);
+  border-radius: 22px;
+  box-shadow: 0 24px 80px #0006;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.alca-admin header {
+  padding: 18px 22px;
+  border-bottom: 1px solid #ebdccb;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.alca-admin header h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  flex: 1;
+}
+.alca-admin header small {
+  color: #7a5e66;
+}
+.alca-admin button {
+  border: 0;
+  border-radius: 9px;
+  background: #3b1f2b;
+  color: #fff;
+  padding: 9px 13px;
+  font: inherit;
+  cursor: pointer;
+}
+.alca-admin button.secondary {
+  background: transparent;
+  color: #3b1f2b;
+  border: 1px solid #cebbaa;
+}
+.alca-admin button.danger {
+  background: #a62e3c;
+}
+.alca-admin button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.alca-admin .notice {
+  margin: 14px 22px 0;
+  padding: 10px 13px;
+  border-radius: 10px;
+  background: #fff1e2;
+  color: #7a5e66;
+}
+.alca-admin .tabs {
+  display: flex;
+  gap: 7px;
+  padding: 14px 22px 0;
+  overflow-x: auto;
+  border-bottom: 1px solid #ebdccb;
+}
+.alca-admin .tabs button {
+  white-space: nowrap;
+  background: none;
+  color: #7a5e66;
+  border-radius: 8px 8px 0 0;
+}
+.alca-admin .tabs button.active {
+  background: #3b1f2b;
+  color: #fff;
+}
+.alca-admin main {
+  overflow: auto;
+  padding: 20px 22px;
+  flex: 1;
+}
+.alca-admin .grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.alca-admin label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: 650;
+  color: #53343c;
+}
+.alca-admin label.full {
+  grid-column: 1/-1;
+}
+.alca-admin input,
+.alca-admin textarea,
+.alca-admin select {
+  border: 1px solid #d9c6b6;
+  background: #fff;
+  padding: 9px 10px;
+  border-radius: 8px;
+  color: #3b1f2b;
+  font: inherit;
+}
+.alca-admin textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+.alca-admin section {
+  margin-bottom: 22px;
+}
+.alca-admin h3 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+.alca-admin .row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 7px 0;
+}
+.alca-admin .row > *:first-child {
+  flex: 1;
+}
+.alca-admin .item {
+  border: 1px solid #ebdccb;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 10px 0;
+  background: #fff;
+}
+.alca-admin .item-actions {
+  display: flex;
+  gap: 5px;
+  justify-content: flex-end;
+}
+.alca-admin .upload-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+.alca-admin .upload-card {
+  border: 1px solid #ebdccb;
+  border-radius: 10px;
+  padding: 8px;
+}
+.alca-admin .upload-card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 7px;
+}
+.alca-admin footer {
+  padding: 14px 22px;
+  border-top: 1px solid #ebdccb;
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+}
+@media (max-width: 650px) {
+  .alca-admin .grid {
+    grid-template-columns: 1fr;
+  }
+  .alca-admin label.full {
+    grid-column: auto;
+  }
+}
+.alca-admin .check {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.alca-admin .check input {
+  width: auto;
+}
+.alca-admin .photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.alca-admin .photo-key {
+  height: 130px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: #fff1e2;
+  color: #7a5e66;
+  font-weight: 700;
+}
+.alca-admin .error {
+  color: #a62e3c;
+  font-weight: 650;
+}
+.alca-admin button:focus-visible,
+.alca-admin input:focus-visible,
+.alca-admin textarea:focus-visible {
+  outline: 3px solid #e8892b;
+  outline-offset: 2px;
+}
