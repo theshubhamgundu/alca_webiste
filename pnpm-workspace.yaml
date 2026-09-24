@@ -2,8 +2,7 @@ packages:
   - artifacts/*
   - lib/*
   - lib/integrations/*
-  - scripts
-
+  
 allowBuilds:
   esbuild: false
 

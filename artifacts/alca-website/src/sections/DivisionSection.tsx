@@ -8,6 +8,7 @@ import { QuoteCalculator } from "../features/quote/QuoteCalculator";
 import { SI, svcKind } from "../illustrations/ServiceIcons";
 import { waLink } from "../lib/whatsapp";
 import { usePublishedPhotos } from "../lib/businessPhotos";
+import { supabase } from "@/lib/supabaseClient";
 
 export function DivisionSection({
   div,
@@ -21,19 +22,31 @@ export function DivisionSection({
   const sectionRef = useRef<HTMLElement>(null);
   const { data: publishedPhotos } = usePublishedPhotos();
   const approvedPhoto = publishedPhotos?.find((photo) => photo.section === div.id);
-  const photoUrl = `/api/business-photos/${div.id}`;
+
+  // Helper to get public URL for a stored file with cache-busting version
+  const getPhotoUrl = (path: string, version: number) => {
+    const { data: publicUrl } = supabase.storage
+      .from("business-photos")
+      .getPublicUrl(path);
+
+    // Append version as query parameter to bust cache when photo updates
+    return `${publicUrl}?v=${version}`;
+  };
 
   useEffect(() => {
     if (!sectionRef.current) return;
+
     const observer = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
           e.target.classList.add("seen");
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     );
+
     observer.observe(sectionRef.current);
+
     return () => observer.disconnect();
   }, []);
 
@@ -44,17 +57,19 @@ export function DivisionSection({
       className="div rv"
       id={div.id}
       ref={sectionRef}
-      style={{ "--accent": `var(${div.c})` } as React.CSSProperties}
+      style={({ "--accent": `var(${div.c})` } as React.CSSProperties)}
     >
       <div className="div-head">
         <div>
           <span className="eyebrow" style={{ color: `var(${div.c})` }}>
             ALCA · {div.short}
           </span>
+
           <h2>
             <span className="u">{div.name}</span>
           </h2>
         </div>
+
         <p>{div.lead}</p>
       </div>
 
@@ -68,15 +83,36 @@ export function DivisionSection({
 
       {/* Photos */}
       {approvedPhoto ? (
-        <figure className="business-photo" style={{ overflow: "hidden", borderRadius: "24px", margin: "0 0 25px" }}>
+        <figure
+          className="business-photo"
+          style={{
+            overflow: "hidden",
+            borderRadius: "24px",
+            margin: "0 0 25px",
+          }}
+        >
           <img
-            src={`${photoUrl}/large?v=${approvedPhoto.version}`}
-            srcSet={`${photoUrl}/small?v=${approvedPhoto.version} 480w, ${photoUrl}/large?v=${approvedPhoto.version} 960w`}
+            src={getPhotoUrl(
+              approvedPhoto.largePath,
+              approvedPhoto.version
+            )}
+            srcSet={`${getPhotoUrl(
+              approvedPhoto.smallPath,
+              approvedPhoto.version
+            )} 480w, ${getPhotoUrl(
+              approvedPhoto.largePath,
+              approvedPhoto.version
+            )} 960w`}
             sizes="(max-width: 620px) calc(100vw - 24px), (max-width: 960px) calc(100vw - 32px), 960px"
             alt={approvedPhoto.alt}
             width="960"
             height="960"
-            style={{ display: "block", width: "100%", height: "clamp(220px, 38vw, 430px)", objectFit: "cover" }}
+            style={{
+              display: "block",
+              width: "100%",
+              height: "clamp(220px, 38vw, 430px)",
+              objectFit: "cover",
+            }}
             loading="lazy"
             decoding="async"
           />
@@ -97,12 +133,15 @@ export function DivisionSection({
               <figcaption>{p[1]}</figcaption>
             </figure>
           ))}
+
           {div.uploads?.map((p, i) => (
             <figure
               className="ph"
               key={`up-${i}`}
               style={
-                { "--i": i + (div.photos?.length || 0) } as React.CSSProperties
+                {
+                  "--i": i + (div.photos?.length || 0),
+                } as React.CSSProperties
               }
             >
               <img src={p[0]} alt={p[1]} loading="lazy" />
@@ -132,6 +171,7 @@ export function DivisionSection({
             }}
             loading="lazy"
           />
+
           <figcaption
             style={{
               position: "absolute",
@@ -154,9 +194,18 @@ export function DivisionSection({
       {div.lunch && div.lunch.length > 0 && (
         <div className="lunch">
           <div className="lunch-intro">
-            <span className="eyebrow" style={{ color: "var(--c1)" }}>Office lunch box</span>
+            <span className="eyebrow" style={{ color: "var(--c1)" }}>
+              Office lunch box
+            </span>
+
             <h3>Homestyle lunch, delivered to your office</h3>
-            <p>Fresh ingredients, hygienic and made daily. Free delivery to your office, and a special discount when 10+ people from one office order together.</p>
+
+            <p>
+              Fresh ingredients, hygienic and made daily. Free delivery to your
+              office, and a special discount when 10+ people from one office
+              order together.
+            </p>
+
             <div className="truck">
               <svg
                 width="28"
@@ -175,20 +224,24 @@ export function DivisionSection({
               </svg>
             </div>
           </div>
+
           {div.lunch.map(([name, price, desc]) => (
             <div className="plan" key={name}>
               <h3>{name}</h3>
+
               <span className="price">
                 {price}
                 <span style={{ fontSize: ".78rem" }}>/month</span>
               </span>
+
               <p>{desc}</p>
+
               <button
                 className="btn sm"
                 onClick={() =>
                   addToCart(
                     `${name} (30 days)`,
-                    parseInt(price.replace(/[^0-9]/g, ""), 10),
+                    parseInt(price.replace(/[^0-9]/g, ""), 10)
                   )
                 }
               >
@@ -235,6 +288,7 @@ export function DivisionSection({
           {div.menu.map(([groupName, items]) => (
             <div className="mgroup" key={groupName as string}>
               <h3>{groupName as string}</h3>
+
               <ul>
                 {(items as [string, string, string?][]).map(
                   ([name, price, desc]) => (
@@ -242,18 +296,19 @@ export function DivisionSection({
                       key={name}
                       role="button"
                       tabIndex={0}
-                      onClick={() =>
+                      onClick={() => {
                         addToCart(
                           name,
-                          parseInt(price.replace(/[^0-9]/g, ""), 10),
-                        )
-                      }
+                          parseInt(price.replace(/[^0-9]/g, ""), 10)
+                        );
+                      }}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" || e.key === " ") {
                           e.preventDefault();
+
                           addToCart(
                             name,
-                            parseInt(price.replace(/[^0-9]/g, ""), 10),
+                            parseInt(price.replace(/[^0-9]/g, ""), 10)
                           );
                         }
                       }}
@@ -263,7 +318,7 @@ export function DivisionSection({
                       <b>₹{price}</b>
                       {desc && <small>{desc} kcal</small>}
                     </li>
-                  ),
+                  )
                 )}
               </ul>
             </div>
@@ -277,6 +332,7 @@ export function DivisionSection({
           {div.s.map(([name, desc]) => {
             const kind = svcKind(name);
             const iconSvg = SI[kind] || SI.sparkle;
+
             return (
               <li key={name}>
                 <div className="sicon" aria-hidden="true">
@@ -285,6 +341,7 @@ export function DivisionSection({
                     dangerouslySetInnerHTML={{ __html: iconSvg }}
                   ></svg>
                 </div>
+
                 <h3>{name}</h3>
                 <p>{desc}</p>
               </li>
@@ -292,11 +349,34 @@ export function DivisionSection({
           })}
         </ul>
       )}
+
       <div className="cta">
-        <a className="btn" href={waLink(div.phone ? site.contact.ordersPhone : site.contact.mainPhone, div.waText || `Hi ALCA, I'd like to know more about ${div.name}.`)} target="_blank" rel="noopener noreferrer">
-          {div.phone ? "Order on WhatsApp" : "Enquire on WhatsApp"} <span className="arrow">→</span>
+        <a
+          className="btn"
+          href={waLink(
+            div.phone
+              ? site.contact.ordersPhone
+              : site.contact.mainPhone,
+            div.waText ||
+            `Hi ALCA, I'd like to know more about ${div.name}.`
+          )}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {div.phone ? "Order on WhatsApp" : "Enquire on WhatsApp"}{" "}
+          <span className="arrow">→</span>
         </a>
-        {div.ig && <a className="btn ghost" href={`https://ig.me/m/${encodeURIComponent(div.ig)}`} target="_blank" rel="noopener noreferrer">DM @{div.ig}</a>}
+
+        {div.ig && (
+          <a
+            className="button ghost"
+            href={`https://ig.me/m/${encodeURIComponent(div.ig)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            DM @{div.ig}
+          </a>
+        )}
       </div>
     </section>
   );

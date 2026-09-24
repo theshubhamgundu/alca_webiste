@@ -1,14 +1,17 @@
 import { useState, type FormEvent } from 'react';
 import { Link } from 'wouter';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { apiRequest, sections, type Section } from '@/lib/businessPhotos';
+import { supabase } from '@/lib/supabaseClient';
+import { sections } from '@/lib/businessPhotos';
 
-type AdminPhoto = {
+export type AdminPhoto = {
   section: Section;
   alt: string;
   updatedAt: string;
+  smallPath: string;
+  largePath: string;
 };
-type UploadTicket = { uploadUrl: string; objectPath: string };
+type Section = 'catering' | 'studio' | 'beauty' | 'supply';
 
 async function resizedWebp(file: File, maxWidth: number): Promise<Blob> {
   const bitmap = await createImageBitmap(file);
@@ -30,15 +33,15 @@ async function resizedWebp(file: File, maxWidth: number): Promise<Blob> {
   }
 }
 
-async function uploadPhoto(blob: Blob): Promise<string> {
-  const ticket = await apiRequest<UploadTicket>('/admin/business-photos/upload-url', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ contentType: 'image/webp', size: blob.size }),
-  });
-  const response = await fetch(ticket.uploadUrl, { method: 'PUT', headers: { 'Content-Type': 'image/webp' }, body: blob });
-  if (!response.ok) throw new Error('Image upload failed. Please try again.');
-  return ticket.objectPath;
+async function uploadPhoto(blob: Blob, section: Section, size: 'small' | 'large'): Promise<string> {
+  const fileName = `${size}/${section}-${crypto.randomUUID()}.webp`;
+  const { error } = await supabase
+    .storage
+    .from('business-photos')
+    .upload(fileName, blob, { contentType: 'image/webp' });
+  if (error) throw error;
+  // Return the path (used to construct public URL)
+  return fileName;
 }
 
 function PhotoForm({ section, current }: { section: Section; current?: AdminPhoto }) {
@@ -56,13 +59,20 @@ function PhotoForm({ section, current }: { section: Section; current?: AdminPhot
     setBusy(true);
     setMessage('');
     try {
-      const [small, large] = await Promise.all([resizedWebp(file, 480), resizedWebp(file, 960)]);
-      const [smallPath, largePath] = await Promise.all([uploadPhoto(small), uploadPhoto(large)]);
-      await apiRequest('/admin/business-photos', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ section, smallPath, largePath, alt: alt.trim(), approved: true }),
-      });
+      const [smallBlob, largeBlob] = await Promise.all([
+        resizedWebp(file, 480),
+        resizedWebp(file, 960),
+      ]);
+      const [smallPath, largePath] = await Promise.all([
+        uploadPhoto(smallBlob, section, 'small'),
+        uploadPhoto(largeBlob, section, 'large'),
+      ]);
+      await supabase
+        .from('business_photos')
+        .upsert(
+          { section, alt: alt.trim(), smallPath, largePath, updatedAt: new Date().toISOString() },
+          { onConflict: ['section'] }
+        );
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ['admin-business-photos'] }),
         queryClient.invalidateQueries({ queryKey: ['business-photos'] }),
@@ -83,7 +93,10 @@ function PhotoForm({ section, current }: { section: Section; current?: AdminPhot
     setBusy(true);
     setMessage('');
     try {
-      await apiRequest(`/admin/business-photos/${section}`, { method: 'DELETE' });
+      await supabase
+        .from('business_photos')
+        .delete()
+        .eq('section', section);
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ['admin-business-photos'] }),
         queryClient.invalidateQueries({ queryKey: ['business-photos'] }),
@@ -100,15 +113,62 @@ function PhotoForm({ section, current }: { section: Section; current?: AdminPhot
     <form className="admin-card" onSubmit={submit}>
       <h2>{sections.find((item) => item.id === section)?.title}</h2>
       <p>{current ? 'Published photo' : 'No approved photo yet. The website shows an illustrative image.'}</p>
-      {current && <img className="admin-preview" src={`/api/business-photos/${section}/small?v=${encodeURIComponent(current.updatedAt)}`} alt={current.alt} loading="lazy" />}
+      {current && (
+        <img
+          className="admin-preview"
+          src={supabase.storage.from('business-photos').getPublicUrl(current.smallPath)}
+          alt={current.alt}
+          loading="lazy"
+        />
+      )}
       <label htmlFor={`photo-${section}`}>Original photo</label>
-      <input id={`photo-${section}`} type="file" accept="image/jpeg,image/png,image/webp" required onChange={(event) => setFile(event.target.files?.[0] ?? null)} disabled={busy} />
-      <label htmlFor={`alt-${section}`}>Image description for screen readers</label>
-      <input id={`alt-${section}`} value={alt} minLength={12} maxLength={180} required placeholder="Describe the actual ALCA work shown" onChange={(event) => setAlt(event.target.value)} disabled={busy} />
-      <label className="admin-consent"><input type="checkbox" checked={approved} onChange={(event) => setApproved(event.target.checked)} required disabled={busy} /> I confirm ALCA approved this original photo for publication and I have permission from the photographer and anyone identifiable.</label>
+      <input
+        id={`photo-${section}`}
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        required
+        onChange={(event) => setFile(event.target.files?.[0] ?? null)}
+        disabled={busy}
+      />
+      <label htmlFor={`alt-{section}`}>Image description for screen readers</label>
+      <input
+        id={`alt-{section}`}
+        value={alt}
+        minLength={12}
+        maxLength={180}
+        required
+        placeholder="Describe the actual ALCA work shown"
+        onChange={(event) => setAlt(event.target.value)}
+        disabled={busy}
+      />
+      <label className="admin-consent">
+        <input
+          type="checkbox"
+          checked={approved}
+          onChange={(event) => setApproved(event.target.checked)}
+          required
+          disabled={busy}
+        />
+        I confirm ALCA approved this original photo for publication and I have permission from the photographer and anyone identifiable.
+      </label>
       <div className="admin-actions">
-        <button className="button primary" disabled={busy || !file || !approved} type="submit">{busy ? 'Processing…' : current ? 'Replace published photo' : 'Publish photo'}</button>
-        {current && <button className="button outline" type="button" disabled={busy} onClick={unpublish}>Unpublish</button>}
+        <button
+          className="button primary"
+          disabled={busy || !file || !approved}
+          type="submit"
+        >
+          {busy ? 'Processing…' : current ? 'Replace published photo' : 'Publish photo'}
+        </button>
+        {current && (
+          <button
+            className="button outline"
+            type="button"
+            disabled={busy}
+            onClick={unpublish}
+          >
+            Unpublish
+          </button>
+        )}
       </div>
       {message && <p role="status">{message}</p>}
     </form>
@@ -118,16 +178,47 @@ function PhotoForm({ section, current }: { section: Section; current?: AdminPhot
 export function PhotoAdmin() {
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ['admin-business-photos'],
-    queryFn: () => apiRequest<AdminPhoto[]>('/admin/business-photos'),
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('business_photos')
+        .select('*');
+      if (error) throw error;
+      return data as AdminPhoto[];
+    },
     retry: false,
   });
   return (
     <main className="admin-page">
-      <header className="admin-head"><div><span className="eyebrow">ALCA</span><h1>Photo admin</h1></div><div className="admin-actions"><Link href="/">View website</Link></div></header>
-      <p>Only upload actual ALCA work with publication permission. Photos are optimized for mobile automatically. A published photo replaces its labeled illustrative image.</p>
+      <header className="admin-head">
+        <div>
+          <span className="eyebrow">ALCA</span>
+          <h1>Photo admin</h1>
+        </div>
+        <div className="admin-actions">
+          <Link href="/">View website</Link>
+        </div>
+      </header>
+      <p>
+        Only upload actual ALCA work with publication permission. Photos are optimized for mobile automatically. A published photo replaces its labeled illustrative image.
+      </p>
       {isLoading && <p>Loading sections…</p>}
-      {error && <div role="alert" className="admin-error"><p>{error.message}</p><button type="button" onClick={() => refetch()}>Try again</button></div>}
-      {data && <div className="admin-grid">{sections.map(({ id }) => <PhotoForm key={`${id}-${data.find((item) => item.section === id)?.updatedAt ?? 'empty'}`} section={id} current={data.find((item) => item.section === id)} />)}</div>}
+      {error && (
+        <div role="alert" className="admin-error">
+          <p>{error.message}</p>
+          <button type="button" onClick={() => refetch()}>Try again</button>
+        </div>
+      )}
+      {data && (
+        <div className="admin-grid">
+          {sections.map(({ id }) => (
+            <PhotoForm
+              key={`${id}-${data.find((item) => item.section === id)?.updatedAt ?? 'empty'}`}
+              section={id}
+              current={data.find((item) => item.section === id)}
+            />
+          ))}
+        </div>
+      )}
     </main>
   );
 }
