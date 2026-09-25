@@ -633,14 +633,14 @@ export default function SupplyPage() {
           <div className="mt-10 flex justify-center gap-3">
             <a
               href="#shop"
-              className="rounded-full bg-[#19351D] px-8 py-4 text-xs uppercase tracking-[0.2em] text-white"
+              className="rounded-full bg-[#19351D] px-8 py-4 text-xs uppercase tracking-[0.2em] !text-white"
             >
               Explore products
             </a>
 
             <a
               href="tel:9010995180"
-              className="rounded-full bg-[#19351D] px-8 py-4 text-xs uppercase tracking-[0.2em] text-white"
+              className="rounded-full bg-[#19351D] px-8 py-4 text-xs uppercase tracking-[0.2em] !text-white"
             >
               Talk to us
             </a>

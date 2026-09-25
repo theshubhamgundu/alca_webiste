@@ -351,7 +351,7 @@ export function DivisionSection({
 
       <div className="cta">
         <a
-          className="btn"
+          className="btn !text-white"
           href={waLink(
             div.phone
               ? site.contact.ordersPhone
@@ -368,7 +368,7 @@ export function DivisionSection({
 
         {div.ig && (
           <a
-            className="button ghost"
+            className="button ghost !text-white"
             href={`https://ig.me/m/${encodeURIComponent(div.ig)}`}
             target="_blank"
             rel="noopener noreferrer"

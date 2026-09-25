@@ -88,10 +88,10 @@ export function Hero({ site }: { site: SiteData }) {
           </h1>
           <p>{site.hero.text}</p>
           <div className="cta">
-            <a className="btn" href="#services">
+            <a className="btn !text-white" href="#services">
               Explore services <span className="arrow">→</span>
             </a>
-            <a className="btn ghost" href="#contact">
+            <a className="btn ghost !text-white" href="#contact">
               Contact
             </a>
           </div>
