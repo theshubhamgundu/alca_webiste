@@ -2,31 +2,34 @@ import { useState } from "react";
 import type { SiteData } from "../../types/site";
 import { openWhatsApp } from "../../lib/whatsapp";
 import { rupees } from "../../lib/format";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { cn } from "../../lib/utils";
+import { Button } from "../../components/ui/button";
+import { Calendar } from "../../components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../../components/ui/popover";
 import "../features.css";
 
 export function QuoteCalculator({ site }: { site: SiteData }) {
   const q = site.quote;
   const [event, setEvent] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<Date>();
   const [guests, setGuests] = useState(Number(q.minGuests) || 50);
   const [food, setFood] = useState<"Veg" | "Non-veg">("Veg");
-  const [addons, setAddons] = useState<string[]>([]);
   if (!q.on) return null;
 
   const minGuests = Number(q.minGuests) || 50;
   const maxGuests = 1000;
-  const now = new Date();
-  const minDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
   const types = q.types
     .split(",")
     .map((x) => x.trim())
     .filter(Boolean);
-  const options = q.addons
-    .split(",")
-    .map((x) => x.trim())
-    .filter(Boolean);
   const total = guests * Number(food === "Veg" ? q.vegPlate : q.nonvegPlate);
-  const canRequest = event !== "" && date !== "";
+  const canRequest = event !== "" && date !== undefined;
 
   return (
     <section
@@ -45,14 +48,9 @@ export function QuoteCalculator({ site }: { site: SiteData }) {
           onSubmit={(e) => {
             e.preventDefault();
             if (!canRequest) return;
-            const formattedDate = new Intl.DateTimeFormat("en-IN", {
-              day: "2-digit",
-              month: "short",
-              year: "numeric",
-            }).format(new Date(`${date}T00:00:00`));
             openWhatsApp(
               site.contact.mainPhone,
-              `Hello ALCA, I would like a catering quote.\nEvent: ${event}\nDate: ${formattedDate}\nGuests: ${guests}\nFood: ${food} · ${rupees(total)}\nAdd-ons: ${addons.length ? addons.join(", ") : "None"}`,
+              `Hello ALCA, I would like a catering quote.\nEvent: ${event}\nDate: ${format(date!, "PPP")}\nGuests: ${guests}\nFood: ${food} · ${rupees(total)}`,
             );
           }}
         >
@@ -71,17 +69,29 @@ export function QuoteCalculator({ site }: { site: SiteData }) {
           </label>
           <label className="quote-field">
             <span className="quote-field-label">Event date</span>
-            <input
-              type="date"
-              value={date}
-              min={minDate}
-              required
-              aria-describedby="quote-date-hint"
-              onChange={(e) => setDate(e.target.value)}
-            />
-            <small className="quote-field-hint" id="quote-date-hint">
-              Choose a date · DD-MM-YYYY
-            </small>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className={cn(
+                    "w-full justify-start text-left font-normal",
+                    !date && "text-muted-foreground",
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {date ? format(date, "PPP") : <span>Pick a date</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  disabled={(date) => date < new Date()}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
           </label>
 
           <fieldset className="food-toggle">
@@ -127,26 +137,6 @@ export function QuoteCalculator({ site }: { site: SiteData }) {
               <span>{maxGuests}+</span>
             </div>
           </label>
-
-          <fieldset>
-            <legend>Add-ons</legend>
-            <div className="addon-grid">
-              {options.map((x) => (
-                <label key={x} className="addon-option">
-                  <input
-                    type="checkbox"
-                    checked={addons.includes(x)}
-                    onChange={(e) =>
-                      setAddons((a) =>
-                        e.target.checked ? [...a, x] : a.filter((y) => y !== x),
-                      )
-                    }
-                  />
-                  {x}
-                </label>
-              ))}
-            </div>
-          </fieldset>
         </form>
 
         <aside className="feature-card quote-total" aria-live="polite">
@@ -155,9 +145,6 @@ export function QuoteCalculator({ site }: { site: SiteData }) {
           <p className="quote-total-detail">
             {guests} guests · {food} at{" "}
             {rupees(food === "Veg" ? q.vegPlate : q.nonvegPlate)}/plate
-          </p>
-          <p className="quote-total-note">
-            Add-ons are priced separately after we learn more about your event.
           </p>
           <button
             className="feature-button quote-submit"

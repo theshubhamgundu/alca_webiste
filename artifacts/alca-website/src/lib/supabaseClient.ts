@@ -1,19 +1,23 @@
 
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder-anon-key';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// Only show error in development if variables are actually missing (not just using fallbacks)
-if (!import.meta.env.VITE_SUPABASE_URL) {
-  console.warn('VITE_SUPABASE_URL is missing. Using placeholder value. Supabase functionality will not work.');
+let supabase: any;
+
+// Safe initialization
+if (supabaseUrl && supabaseUrl.startsWith('http') && supabaseAnonKey) {
+  supabase = createClient(supabaseUrl, supabaseAnonKey);
+} else {
+  console.warn('Supabase credentials missing or invalid. Supabase functionality disabled.');
+  // Mock client to prevent crashes
+  supabase = {
+    from: () => ({
+      select: () => Promise.resolve({ data: [], error: new Error('Supabase not configured') }),
+      insert: () => Promise.resolve({ data: null, error: new Error('Supabase not configured') }),
+    }),
+  };
 }
 
-if (!import.meta.env.VITE_SUPABASE_ANON_KEY) {
-  console.warn('VITE_SUPABASE_ANON_KEY is missing. Using placeholder value. Supabase functionality will not work.');
-}
-
-export const supabase = createClient(
-  supabaseUrl,
-  supabaseAnonKey
-);
+export { supabase };

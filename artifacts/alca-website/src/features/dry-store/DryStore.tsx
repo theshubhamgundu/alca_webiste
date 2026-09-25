@@ -36,6 +36,15 @@ export function DryStore({
                 {item.price ? (
                   <>
                     <strong>{rupees(item.price)}</strong>
+                    {item.options && (
+                      <div className="flex gap-2 my-2">
+                        {item.options.map((opt) => (
+                          <span key={opt.weight} className="text-xs font-semibold bg-[#ebdccb] px-2 py-1 rounded">
+                            {opt.weight}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                     <br />
                     <button
                       className="feature-button"
@@ -49,7 +58,7 @@ export function DryStore({
                   </>
                 ) : (
                   <button
-                    className="text-button"
+                    className="feature-button"
                     onClick={() =>
                       openWhatsApp(
                         division.phone ?? "",
@@ -83,6 +92,16 @@ export function DryStore({
             <br />
             <b>Good for:</b> {selected.goodFor}
           </p>
+          {selected.options && (
+            <div className="flex gap-2 my-4">
+              {selected.options.map((opt) => (
+                <div key={opt.weight} className="border p-2 rounded-lg text-center">
+                  <p className="font-bold">{opt.weight}</p>
+                  <p>{rupees(opt.price)}</p>
+                </div>
+              ))}
+            </div>
+          )}
           {selected.kcal && (
             <p>
               <b>Nutrition:</b> {selected.kcal} kcal · protein{" "}

@@ -29,11 +29,12 @@ heartbrush:`<g class="beat"><path d="M32 52C16 42 8 32 8 22a11 11 0 0 1 24-4 11 
 bangles:`<g class="spin" style="transform-origin:26px 34px"><ellipse cx="26" cy="34" rx="16" ry="16" class="nf k"/><ellipse cx="26" cy="34" rx="16" ry="16" class="nf ac dash w3"/></g><g class="spin rev" style="transform-origin:40px 30px"><circle cx="40" cy="30" r="14" class="nf gs w3"/><circle cx="40" cy="30" r="14" class="nf k"/></g><circle cx="40" cy="16" r="2.5" class="p"/>`,
 bottleart:`<path d="M26 6h12v10c6 4 8 8 8 14v20a6 6 0 0 1-6 6H24a6 6 0 0 1-6-6V30c0-6 2-10 8-14z" class="s k"/><path d="M18 34c8 4 20-4 28 0v12c-8-4-20 4-28 0z" class="a"/><circle cx="26" cy="28" r="2" class="p"/><circle cx="38" cy="26" r="2" class="g"/><path d="M26 6h12" class="nf k"/><path class="shine" d="M22 32v12"/><path class="tw" d="M54 12l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z"/>`,
 hamper:`<path d="M8 30h48l-5 24H13z" class="a k"/><path d="M8 30c0-16 48-16 48 0" class="nf k"/><path d="M14 38h36M16 46h32" class="nf k w2"/><g class="bob"><circle cx="22" cy="26" r="5" class="p k"/><rect x="30" y="16" width="8" height="14" rx="2" class="g k"/><circle cx="44" cy="26" r="5" class="s k"/></g>`,
-sparkle:`<g class="beat"><path d="M32 6l6 20 20 6-20 6-6 20-6-20-20-6 20-6z" class="a k"/></g><path class="tw" d="M52 6l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z"/><path class="tw d2" d="M10 46l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"/>`
+sparkle:`<g class="beat"><path d="M32 6l6 20 20 6-20 6-6 20-6-20-20-6 20-6z" class="a k"/></g><path class="tw" d="M52 6l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z"/><path class="tw d2" d="M10 46l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"/>`,
+juice:`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor"><path d="M20 10h24l-4 44H24z" class="a k"/><path d="M24 10h16M28 54h8" class="nf k"/><path d="M22 20h20M24 30h16M26 40h12" class="nf k w2"/><path d="M32 10v-4" class="g k"/><path d="M30 6h4" class="nf k"/></svg>`
 };
 
 const SI_MAP = [
- [/couple|paint/i,"heartbrush"],[/bangle|jewel/i,"bangles"],[/bottle/i,"bottleart"],[/hamper/i,"hamper"],
+ [/juice/i, "juice"],[/bangle|jewel/i,"bangles"],[/bottle/i,"bottleart"],[/hamper/i,"hamper"],
  [/return gift|gifting|surprise/i,"gift"],[/wedding catering/i,"handi"],[/wedding/i,"rings"],[/birthday|anniversar|shower/i,"cake"],
  [/festival|occasion(s)?$/i,"diya"],[/corporate catering/i,"cloche"],[/corporate|social/i,"podium"],[/d[ée]cor|theme/i,"balloons"],
  [/entertain|stage/i,"mic"],[/photo|portfolio/i,"camera"],[/outdoor/i,"tent"],[/menu/i,"menu"],[/live counter|buffet/i,"chef"],

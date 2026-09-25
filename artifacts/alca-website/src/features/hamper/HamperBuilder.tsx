@@ -20,12 +20,16 @@ export function HamperBuilder({ site }: { site: SiteData }) {
   const now = new Date();
   const minDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 
-  const products = site.divisions.flatMap(
-    (d) =>
-      d.store?.flatMap((g) =>
-        g.items.filter((i) => i.price).map((i) => i.name),
-      ) ?? [],
-  );
+  const products = [
+    "Hand-painted couple art",
+    "Handmade bangles & jewellery",
+    "Bottle art & décor pieces",
+    "Corporate gifting",
+    "Wedding & event return gifts",
+    "Custom gift hampers",
+    "Varalakshmi Devi idol",
+    "Traditional rakhis",
+  ];
   const formattedDate = date
     ? new Intl.DateTimeFormat("en-IN", {
         day: "2-digit",

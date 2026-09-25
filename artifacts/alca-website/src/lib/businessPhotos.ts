@@ -25,7 +25,7 @@ export function usePublishedPhotos() {
         .select('section, alt, smallPath, largePath, updatedAt');
       if (error) throw error;
       // Map to PublishedPhoto format: section, alt, version (timestamp), smallPath, largePath
-      return data.map((row) => ({
+      return data.map((row: any) => ({
         section: row.section as Section,
         alt: row.alt,
         version: new Date(row.updatedAt).getTime(),

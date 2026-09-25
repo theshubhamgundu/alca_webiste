@@ -7,9 +7,13 @@ type Product = {
   price: number
   oldPrice?: number
   unit: string
+  options?: { unit: string; price: number }[]
   image: string
   tag?: string
   description: string
+  benefits?: string[]
+  ingredients?: string
+  howToUse?: string
 }
 
 const products: Product[] = [
@@ -20,11 +24,13 @@ const products: Product[] = [
     price: 149,
     oldPrice: 179,
     unit: '250g',
+    options: [{ unit: '250g', price: 149 }, { unit: '500g', price: 279 }],
     tag: 'BESTSELLER',
-    image:
-      'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1000&q=85',
-    description:
-      'Bright, aromatic turmeric powder sourced from premium turmeric roots and processed for maximum flavour and colour.',
+    image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1000&q=85',
+    description: 'Bright, aromatic turmeric powder sourced from premium turmeric roots, processed to retain high curcumin content.',
+    benefits: ['Anti-inflammatory properties', 'Boosts natural immunity', 'Promotes skin radiance'],
+    ingredients: '100% Pure Turmeric Root',
+    howToUse: 'Add to warm milk for golden latte, or use in daily curries.'
   },
   {
     id: 2,
@@ -32,11 +38,13 @@ const products: Product[] = [
     category: 'Dehydrated',
     price: 299,
     unit: '100g',
+    options: [{ unit: '100g', price: 299 }, { unit: '200g', price: 549 }],
     tag: 'NATURAL',
-    image:
-      'https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=1000&q=85',
-    description:
-      'Naturally dehydrated orange slices with vibrant colour and concentrated citrus flavour.',
+    image: 'https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=1000&q=85',
+    description: 'Naturally dehydrated, crisp orange slices bursting with concentrated citrus aroma and flavor.',
+    benefits: ['Rich in Vitamin C', 'Excellent antioxidant source', 'Zero added sugar'],
+    ingredients: '100% Fresh Oranges',
+    howToUse: 'Perfect garnish for beverages, baked goods, or enjoy as a zesty snack.'
   },
   {
     id: 3,
@@ -45,11 +53,13 @@ const products: Product[] = [
     price: 249,
     oldPrice: 299,
     unit: '250g',
+    options: [{ unit: '250g', price: 249 }, { unit: '500g', price: 449 }],
     tag: 'POPULAR',
-    image:
-      'https://images.unsplash.com/photo-1605966802076-5d6a6c1c0e6e?auto=format&fit=crop&w=1000&q=85',
-    description:
-      'A nutritious blend of carefully selected seeds for everyday snacking and wellness.',
+    image: 'https://images.unsplash.com/photo-1605966802076-5d6a6c1c0e6e?auto=format&fit=crop&w=1000&q=85',
+    description: 'A nutritious, crunchy blend of roasted sunflower, pumpkin, flax, and sesame seeds.',
+    benefits: ['High in protein', 'Source of Omega-3', 'Great for heart health'],
+    ingredients: 'Sunflower seeds, pumpkin seeds, flax seeds, sesame seeds',
+    howToUse: 'Sprinkle over salads, yogurt, or eat straight out of the jar.'
   },
   {
     id: 4,
@@ -58,10 +68,11 @@ const products: Product[] = [
     price: 179,
     unit: '100g',
     tag: 'HANDMADE',
-    image:
-      'https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=1000&q=85',
-    description:
-      'Handcrafted soap made with botanical oils and naturally derived ingredients.',
+    image: 'https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=1000&q=85',
+    description: 'Gentle, handcrafted soap infused with nourishing botanical oils for a soft skin feel.',
+    benefits: ['Gentle on skin', 'Free from harsh chemicals', 'Moisturizing'],
+    ingredients: 'Coconut oil, olive oil, essential oils, lye',
+    howToUse: 'Lather between hands and apply to skin; rinse thoroughly.'
   },
   {
     id: 5,
@@ -69,11 +80,13 @@ const products: Product[] = [
     category: 'Personal Care',
     price: 349,
     unit: '500ml',
+    options: [{ unit: '250ml', price: 199 }, { unit: '500ml', price: 349 }],
     tag: 'PURE',
-    image:
-      'https://images.unsplash.com/photo-1621073117412-1e4a2c5f9a74?auto=format&fit=crop&w=1000&q=85',
-    description:
-      'Pure coconut oil suitable for cooking, hair care and everyday natural wellness.',
+    image: 'https://images.unsplash.com/photo-1621073117412-1e4a2c5f9a74?auto=format&fit=crop&w=1000&q=85',
+    description: 'Pure, cold-pressed coconut oil retains all natural nutrients for skin, hair, and cooking.',
+    benefits: ['Deeply moisturizing', 'Hair strengthening', 'Edible grade'],
+    ingredients: '100% Cold-pressed coconut oil',
+    howToUse: 'Apply to hair/skin or use in healthy cooking.'
   },
   {
     id: 6,
@@ -82,10 +95,11 @@ const products: Product[] = [
     price: 399,
     unit: '100g',
     tag: 'NEW',
-    image:
-      'https://images.unsplash.com/photo-1518635017498-87f514b751ba?auto=format&fit=crop&w=1000&q=85',
-    description:
-      'Sweet, naturally dehydrated strawberry pieces with concentrated flavour and texture.',
+    image: 'https://images.unsplash.com/photo-1518635017498-87f514b751ba?auto=format&fit=crop&w=1000&q=85',
+    description: 'Sweet, chewy, and naturally dried strawberries that make a delicious healthy treat.',
+    benefits: ['Fiber-rich', 'Natural sweetness', 'Vitamin-packed'],
+    ingredients: '100% Fresh Strawberries',
+    howToUse: 'Add to breakfast cereal, oatmeal, or eat as a snack.'
   },
   {
     id: 7,
@@ -93,10 +107,12 @@ const products: Product[] = [
     category: 'Spices',
     price: 169,
     unit: '250g',
-    image:
-      'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1000&q=85',
-    description:
-      'Rich and aromatic chilli powder prepared from carefully selected dried chillies.',
+    options: [{ unit: '250g', price: 169 }, { unit: '500g', price: 319 }],
+    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1000&q=85',
+    description: 'Vibrant chilli powder sourced from the finest dry chillies for balanced heat and colour.',
+    benefits: ['Enhances metabolism', 'Adds rich colour', 'Authentic flavour'],
+    ingredients: '100% Dried Red Chillies',
+    howToUse: 'Perfect for curries, marinades, and seasoning.'
   },
   {
     id: 8,
@@ -105,10 +121,11 @@ const products: Product[] = [
     price: 129,
     unit: '10g',
     tag: 'EVERYDAY',
-    image:
-      'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1000&q=85',
-    description:
-      'Nourishing lip balm formulated with naturally derived oils and butters.',
+    image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1000&q=85',
+    description: 'A soothing lip balm packed with natural waxes and butters to prevent dryness.',
+    benefits: ['Long-lasting moisture', 'Heals chapped lips', 'Chemical-free'],
+    ingredients: 'Beeswax, cocoa butter, vitamin E oil',
+    howToUse: 'Apply generously to lips as needed throughout the day.'
   },
 ]
 
@@ -428,7 +445,9 @@ export default function SupplyPage() {
                   </div>
 
                   <div className="text-right">
-                    <p className="font-medium">₹{product.price}</p>
+                    <p className="font-medium">
+                      ₹{product.options && product.options.length > 0 ? product.options[0].price : product.price}
+                    </p>
 
                     {product.oldPrice && (
                       <p className="text-xs text-[#9A9E96] line-through">
@@ -439,7 +458,7 @@ export default function SupplyPage() {
                 </div>
 
                 <p className="mt-2 text-[10px] uppercase tracking-widest text-[#858D83]">
-                  {product.unit}
+                  {product.options && product.options.length > 0 ? product.options[0].unit : product.unit}
                 </p>
               </div>
             </article>
@@ -621,7 +640,7 @@ export default function SupplyPage() {
 
             <a
               href="tel:9010995180"
-              className="rounded-full border border-[#19351D]/20 px-8 py-4 text-xs uppercase tracking-[0.2em]"
+              className="rounded-full bg-[#19351D] px-8 py-4 text-xs uppercase tracking-[0.2em] text-white"
             >
               Talk to us
             </a>
@@ -693,6 +712,41 @@ export default function SupplyPage() {
                 {selectedProduct.description}
               </p>
 
+              {selectedProduct.benefits && (
+                <div className="mt-6">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#19351D]">
+                    Benefits
+                  </p>
+                  <ul className="mt-2 list-inside list-disc text-sm text-[#646D62]">
+                    {selectedProduct.benefits.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {selectedProduct.ingredients && (
+                <div className="mt-6">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#19351D]">
+                    Ingredients
+                  </p>
+                  <p className="mt-2 text-sm text-[#646D62]">
+                    {selectedProduct.ingredients}
+                  </p>
+                </div>
+              )}
+
+              {selectedProduct.howToUse && (
+                <div className="mt-6">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#19351D]">
+                    How to use
+                  </p>
+                  <p className="mt-2 text-sm text-[#646D62]">
+                    {selectedProduct.howToUse}
+                  </p>
+                </div>
+              )}
+
               <div className="mt-8 flex items-end gap-3">
                 <span className="font-serif text-3xl">
                   ₹{selectedProduct.price}
@@ -708,6 +762,28 @@ export default function SupplyPage() {
                   / {selectedProduct.unit}
                 </span>
               </div>
+
+              {selectedProduct.options && selectedProduct.options.length > 1 && (
+                <div className="mt-6">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#19351D]">
+                    Available Options
+                  </p>
+                  <div className="mt-2 flex gap-2">
+                    {selectedProduct.options.map((opt) => (
+                      <button
+                        key={opt.unit}
+                        className={`rounded-full border px-4 py-2 text-xs transition ${
+                          selectedProduct.unit === opt.unit
+                            ? 'border-[#19351D] bg-[#19351D] text-white'
+                            : 'border-[#19351D]/20 hover:border-[#19351D]'
+                        }`}
+                      >
+                        {opt.unit} - ₹{opt.price}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <button
                 onClick={() => {

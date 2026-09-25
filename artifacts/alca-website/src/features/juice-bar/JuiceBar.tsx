@@ -21,9 +21,7 @@ export function JuiceBar({
         {division.drinks.map((j) => (
           <article className="feature-card" key={j.name}>
             <button className="text-button" onClick={() => setSelected(j)}>
-              <span style={{ fontSize: "2rem" }} aria-hidden>
-                {j.emoji}
-              </span>
+              <img src={j.image} alt={j.name} className="feature-icon" />
               <h4>{j.name}</h4>
             </button>
             <p className="muted">{j.about}</p>
@@ -53,7 +51,7 @@ export function JuiceBar({
             Close
           </button>
           <h4>
-            {selected.emoji} {selected.name}
+            <img src={selected.image} alt={selected.name} className="feature-icon" /> {selected.name}
           </h4>
           <p>{selected.about}</p>
           <p>

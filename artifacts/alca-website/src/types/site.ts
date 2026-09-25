@@ -41,6 +41,7 @@ export type Review = [author: string, text: string, rating?: string];
 export interface Juice {
   name: string;
   emoji: string;
+  image: string;
   price: string;
   size: string;
   inStock: boolean;
@@ -63,6 +64,7 @@ export interface StoreItem {
   emoji: string;
   price: string;
   weight: string;
+  options?: { weight: string; price: string }[];
   inStock: boolean;
   kcal: string;
   protein: string;

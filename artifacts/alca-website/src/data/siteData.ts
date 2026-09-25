@@ -53,6 +53,7 @@ export const siteData: SiteData = {
         {
           name: "Carrot juice",
           emoji: "🥕",
+          image: "/images/juice/carrot.jpg",
           price: "70",
           size: "250 ml",
           inStock: true,
@@ -73,6 +74,7 @@ export const siteData: SiteData = {
         {
           name: "Beetroot juice",
           emoji: "🔴",
+          image: "/images/juice/beetroot.jpg",
           price: "70",
           size: "250 ml",
           inStock: true,
@@ -93,6 +95,7 @@ export const siteData: SiteData = {
         {
           name: "ABC juice",
           emoji: "🍎",
+          image: "/images/juice/abc.jpg",
           price: "99",
           size: "250 ml",
           inStock: true,
@@ -112,6 +115,7 @@ export const siteData: SiteData = {
         {
           name: "Orange juice",
           emoji: "🍊",
+          image: "/images/juice/orange.jpg",
           price: "50",
           size: "250 ml",
           inStock: true,
@@ -131,6 +135,7 @@ export const siteData: SiteData = {
         {
           name: "Watermelon juice",
           emoji: "🍉",
+          image: "/images/juice/watermelon.jpg",
           price: "50",
           size: "250 ml",
           inStock: true,
@@ -150,6 +155,7 @@ export const siteData: SiteData = {
         {
           name: "Muskmelon juice",
           emoji: "🍈",
+          image: "/images/juice/muskmelon.jpg",
           price: "50",
           size: "250 ml",
           inStock: true,
@@ -169,6 +175,7 @@ export const siteData: SiteData = {
         {
           name: "Pineapple juice",
           emoji: "🍍",
+          image: "/images/juice/pineapple.jpg",
           price: "50",
           size: "250 ml",
           inStock: true,
@@ -188,6 +195,7 @@ export const siteData: SiteData = {
         {
           name: "Mango juice",
           emoji: "🥭",
+          image: "/images/juice/mango.jpg",
           price: "50",
           size: "250 ml",
           inStock: true,
@@ -207,6 +215,7 @@ export const siteData: SiteData = {
         {
           name: "Ragi malt",
           emoji: "🌾",
+          image: "/images/juice/ragi.jpg",
           price: "30",
           size: "200 ml",
           inStock: true,
@@ -286,7 +295,11 @@ export const siteData: SiteData = {
               name: "Banana",
               emoji: "🍌",
               price: "149",
-              weight: "",
+              weight: "250g",
+              options: [
+                { weight: "250g", price: "149" },
+                { weight: "500g", price: "279" },
+              ],
               inStock: true,
               kcal: "120",
               protein: "",
