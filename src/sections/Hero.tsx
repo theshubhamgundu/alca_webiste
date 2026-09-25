@@ -115,14 +115,13 @@ export function Hero({ site }: { site: SiteData }) {
                 ? `/api/business-photos/${div.id}/small?v=${published.version}`
                 : `${import.meta.env.BASE_URL}images/${img}`;
 
-              // Map division IDs to their respective page paths
               const divisionToPath: Record<string, string> = {
-                catering: '/catering',
-                celebrations: '/celebrations',
-                gifts: '/crafts-gifts',
-                studio: '/designer-studio',
-                beauty: '/makeup-beauty',
-                supply: '/supply',
+                catering: "/catering",
+                celebrations: "/celebrations",
+                gifts: "/crafts-gifts",
+                studio: "/designer-studio",
+                beauty: "/makeup-beauty",
+                supply: "/supply",
               };
               const href = divisionToPath[div.id] || `#${div.id}`;
 

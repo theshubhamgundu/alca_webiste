@@ -114,10 +114,21 @@ export function Hero({ site }: { site: SiteData }) {
               const imageUrl = published
                 ? `/api/business-photos/${div.id}/small?v=${published.version}`
                 : `${import.meta.env.BASE_URL}images/${img}`;
+
+              const divisionToPath: Record<string, string> = {
+                catering: "/catering",
+                celebrations: "/celebrations",
+                gifts: "/crafts-gifts",
+                studio: "/designer-studio",
+                beauty: "/makeup-beauty",
+                supply: "/supply",
+              };
+              const href = divisionToPath[div.id] || `#${div.id}`;
+
               return (
                 <motion.a
                   key={div.id}
-                  href={`#${div.id}`}
+                  href={href}
                   style={
                     {
                       "--a": angle,
