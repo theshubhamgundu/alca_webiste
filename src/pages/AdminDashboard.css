@@ -1,0 +1,965 @@
+/* ALCA Admin Dashboard - Light, Clean & Elegant Design */
+
+.alca-dashboard-app {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Toast notification */
+.alca-toast-pill {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 999px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  font-size: 0.875rem;
+  animation: slideInDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* TOP HEADER */
+.alca-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+.alca-brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.alca-brand-logo {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #312e81, #4f46e5);
+  color: #ffffff;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 1.15rem;
+  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+}
+
+.alca-brand-badge strong {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.alca-brand-badge small {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.alca-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.alca-phone-pill {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.825rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.alca-phone-pill span {
+  color: #64748b;
+}
+
+.alca-phone-pill b {
+  color: #059669;
+  font-weight: 600;
+}
+
+/* BUTTONS */
+.alca-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.alca-btn-primary {
+  background: #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(79, 70, 229, 0.2);
+}
+
+.alca-btn-primary:hover {
+  background: #4338ca;
+  transform: translateY(-1px);
+}
+
+.alca-btn-secondary {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.alca-btn-secondary:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.alca-btn-ghost {
+  background: transparent;
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.alca-btn-ghost:hover {
+  background: #eef2ff;
+}
+
+.alca-btn-danger {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.alca-btn-danger:hover {
+  background: #dc2626;
+}
+
+.alca-btn-add {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.1);
+}
+
+.alca-btn-add:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+.alca-pulse {
+  animation: pulse-ring 1.5s infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(79, 70, 229, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+  }
+}
+
+/* LAYOUT */
+.alca-layout {
+  display: flex;
+  flex: 1;
+}
+
+/* SIDEBAR */
+.alca-sidebar {
+  width: 290px;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.alca-sidebar-heading {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.08em;
+  padding: 0 12px 10px;
+}
+
+.alca-nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #475569;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  margin-bottom: 3px;
+}
+
+.alca-nav-item:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.alca-nav-item.active {
+  background: #eef2ff;
+  color: #4f46e5;
+  font-weight: 700;
+}
+
+.alca-nav-emoji {
+  font-size: 1.15rem;
+}
+
+.alca-nav-text {
+  flex: 1;
+}
+
+.alca-nav-count {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.alca-nav-item.active .alca-nav-count {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+}
+
+/* MAIN CONTENT */
+.alca-main-content {
+  flex: 1;
+  padding: 32px 40px;
+  overflow-y: auto;
+}
+
+/* BUSINESS BANNER */
+.alca-business-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px 30px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+}
+
+.alca-badge-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #4f46e5;
+  background: #eef2ff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.alca-business-banner h1 {
+  margin: 0 0 6px;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.alca-business-banner p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* CATEGORY PILLS SCROLLER */
+.alca-category-scroller {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+
+.alca-cat-pill {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+}
+
+.alca-cat-pill:hover {
+  border-color: #cbd5e1;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+.alca-cat-pill.active {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.alca-cat-pill.active small {
+  color: #94a3b8;
+}
+
+.alca-cat-pill-new {
+  background: #faf5ff;
+  border-color: #e9d5ff;
+  color: #7e22ce;
+  font-weight: 600;
+}
+
+.alca-cat-pill-new:hover {
+  background: #f3e8ff;
+  border-color: #d8b4fe;
+}
+
+/* FILTER & SEARCH BAR */
+.alca-filter-bar {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.alca-search-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 16px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+}
+
+.alca-search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #0f172a;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.alca-search-box input::placeholder {
+  color: #94a3b8;
+}
+
+.alca-search-box button {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.alca-filter-group select {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+}
+
+/* PRODUCTS TABLE */
+.alca-products-table-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+}
+
+.alca-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.alca-table th {
+  background: #f8fafc;
+  padding: 14px 20px;
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.alca-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+  color: #334155;
+}
+
+.alca-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.alca-product-cell {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.alca-product-img {
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.alca-product-emoji {
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+}
+
+.alca-product-title {
+  display: block;
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.alca-product-desc {
+  color: #64748b;
+  font-size: 0.8rem;
+  display: block;
+  margin-top: 2px;
+}
+
+.alca-tag-chip {
+  display: inline-block;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.alca-price-cell b {
+  color: #0f172a;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.alca-price-cell del {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  margin-left: 6px;
+}
+
+.alca-variant-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.alca-mini-chip {
+  background: #eef2ff;
+  border: 1px solid #e0e7ff;
+  color: #4338ca;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.muted-dash {
+  color: #cbd5e1;
+}
+
+.alca-stock-badge {
+  border: none;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.775rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.alca-stock-badge.in-stock {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+}
+
+.alca-stock-badge.out-stock {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #fecdd3;
+}
+
+.alca-actions-cell {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.alca-icon-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #334155;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.alca-icon-btn:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.alca-icon-btn.delete {
+  color: #ef4444;
+  border-color: #fecdd3;
+}
+
+.alca-icon-btn.delete:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
+
+/* EMPTY STATE */
+.alca-empty-state {
+  text-align: center;
+  padding: 70px 20px;
+}
+
+.alca-empty-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.alca-empty-state h3 {
+  margin: 0 0 6px;
+  color: #0f172a;
+}
+
+.alca-empty-state p {
+  color: #64748b;
+  margin: 0 0 16px;
+}
+
+/* SETTINGS CARDS */
+.alca-settings-view {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.alca-form-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+}
+
+.alca-form-card h3 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.alca-form-desc {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin: 0 0 18px;
+}
+
+.alca-form-card hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 24px 0;
+}
+
+.alca-form-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.alca-form-card input[type="text"],
+.alca-form-card textarea {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: #0f172a;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.alca-form-card input[type="text"]:focus,
+.alca-form-card textarea:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.alca-input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.alca-checkbox-label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.alca-wa-preview-box {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  padding: 18px;
+  color: #15803d;
+  font-family: monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.alca-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alca-review-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* MODALS */
+.alca-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.alca-modal-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  width: min(720px, 100%);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: modalScale 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.alca-modal-card.sm {
+  width: min(440px, 100%);
+}
+
+@keyframes modalScale {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.alca-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 28px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.alca-modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.alca-modal-header small {
+  color: #64748b;
+  display: block;
+  margin-top: 2px;
+}
+
+.alca-modal-close {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.alca-modal-close:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.alca-modal-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 8px 28px 0;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  overflow-x: auto;
+}
+
+.alca-modal-tabs button {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #64748b;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.alca-modal-tabs button.active {
+  border-bottom-color: #4f46e5;
+  color: #4f46e5;
+}
+
+.alca-modal-body {
+  padding: 28px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.alca-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.alca-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.alca-form-grid label.full {
+  grid-column: 1 / -1;
+}
+
+.alca-form-grid input,
+.alca-form-grid select,
+.alca-form-grid textarea {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 9px 12px;
+  color: #0f172a;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.alca-form-grid input:focus,
+.alca-form-grid select:focus,
+.alca-form-grid textarea:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.alca-checkbox-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.alca-variant-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.alca-variant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alca-variant-row {
+  display: flex;
+  gap: 10px;
+}
+
+.alca-variant-row input {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 9px 12px;
+  color: #0f172a;
+  font-size: 0.875rem;
+  flex: 1;
+}
+
+.muted-box {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.alca-file-dropzone {
+  border: 2px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 36px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.2s ease;
+  background: #f8fafc;
+}
+
+.alca-file-dropzone:hover {
+  border-color: #4f46e5;
+  background: #eef2ff;
+}
+
+.alca-image-preview-card {
+  margin-top: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.alca-image-preview-card img {
+  max-width: 220px;
+  max-height: 220px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.alca-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 18px 28px;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}

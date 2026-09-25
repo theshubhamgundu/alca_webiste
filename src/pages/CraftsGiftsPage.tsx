@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import { siteData } from '../data/siteData'
-
-const division = siteData.divisions.find((d) => d.id === 'gifts')!
+import { useSiteData } from '../hooks/useSiteData'
 
 function Arrow({ dark = false }: { dark?: boolean }) {
   return (
@@ -18,6 +16,8 @@ function Arrow({ dark = false }: { dark?: boolean }) {
 }
 
 export default function CraftsPage() {
+  const { site } = useSiteData()
+  const division = site.divisions.find((d) => d.id === 'gifts') || site.divisions[0]
   const [showServices, setShowServices] = useState(false)
 
   return (

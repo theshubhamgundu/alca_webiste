@@ -267,12 +267,12 @@ export function DivisionSection({
       {/* Juice Bar */}
       {div.drinks && <JuiceBar division={div} addToCart={addToCart} />}
 
-      {/* Offers & Dry Store in Bites */}
-      {div.id === "bites" && (
-        <>
-          <Offers site={site} addToCart={addToCart} />
-          <DryStore division={div} addToCart={addToCart} />
-        </>
+      {/* Offers in Bites */}
+      {div.id === "bites" && <Offers site={site} addToCart={addToCart} />}
+
+      {/* Dynamic Store & Product Catalog for any division */}
+      {div.store && div.store.length > 0 && (
+        <DryStore division={div} addToCart={addToCart} />
       )}
 
       {/* Catering quote */}

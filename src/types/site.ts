@@ -63,20 +63,20 @@ export interface StoreItem {
   name: string;
   emoji: string;
   price: string;
-  weight: string;
+  weight?: string;
   options?: { weight: string; price: string }[];
   inStock: boolean;
-  kcal: string;
-  protein: string;
-  carbs: string;
-  sugar: string;
-  fibre: string;
-  ingredients: string;
-  goodFor: string;
-  vitamins: string;
-  about: string;
-  bestWithin: string;
-  color: string;
+  kcal?: string;
+  protein?: string;
+  carbs?: string;
+  sugar?: string;
+  fibre?: string;
+  ingredients?: string;
+  goodFor?: string;
+  vitamins?: string;
+  about?: string;
+  bestWithin?: string;
+  color?: string;
 }
 
 export interface StoreGroup {

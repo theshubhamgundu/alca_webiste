@@ -520,7 +520,7 @@ export function ContactFooter({ site }: { site: SiteData }) {
       <footer>
         <span>
           <b className="wmf">ALCA</b> · Hyderabad ©{" "}
-          {new Date().getFullYear()}
+          {new Date().getFullYear()} · <a href="/admin" style={{ opacity: 0.6, textDecoration: "none", color: "inherit" }}>Admin Portal</a>
         </span>
         <div id="f-foot">{site.footer}</div>
       </footer>

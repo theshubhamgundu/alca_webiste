@@ -14,8 +14,8 @@ export function DryStore({
   if (!division.store?.length) return null;
   return (
     <section className="feature-panel" aria-labelledby="store-title">
-      <small>ALCA BITES</small>
-      <h3 id="store-title">Dry store</h3>
+      <small>{division.short ? `ALCA · ${division.short}` : division.name}</small>
+      <h3 id="store-title">{division.id === "bites" ? "Dry store & Healthy Snacks" : "Catalog & Products"}</h3>
       <div className="feature-grid">
         {division.store.map((group) => (
           <div key={group.name}>
