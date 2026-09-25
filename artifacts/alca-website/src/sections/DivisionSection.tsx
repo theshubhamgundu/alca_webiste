@@ -275,9 +275,8 @@ export function DivisionSection({
         </>
       )}
 
-      {/* Quote in Celebrations */}
-      {div.id === "catering" && null}
-      {div.id === "celebrations" && <QuoteCalculator site={site} />}
+      {/* Catering quote */}
+      {div.id === "catering" && <QuoteCalculator site={site} />}
 
       {/* Hamper in Gifts */}
       {div.id === "gifts" && <HamperBuilder site={site} />}

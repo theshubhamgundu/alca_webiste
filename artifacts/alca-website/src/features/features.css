@@ -279,3 +279,747 @@
   gap: 6px;
   font-size: 0.9rem;
 }
+
+/* Catering quote calculator */
+.quote-calculator {
+  --quote-ink: #173e32;
+  --quote-muted: #506c60;
+  --quote-line: #b9d2c1;
+  --quote-accent: #c0632a;
+  margin: 30px 0;
+  padding: clamp(20px, 3vw, 34px);
+  border: 1px solid #c2dac8;
+  background:
+    radial-gradient(ellipse at 100% 0%, #d9edda 0, transparent 38%),
+    #edf5ee;
+  color: var(--quote-ink);
+  box-shadow: 0 18px 48px #244b3514;
+}
+
+.quote-calculator .quote-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #25624a;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.quote-calculator .quote-kicker::before {
+  width: 20px;
+  height: 2px;
+  background: #c0632a;
+  content: "";
+}
+
+.quote-calculator h3 {
+  margin: 8px 0 4px;
+  color: var(--quote-ink);
+  font: 700 clamp(1.5rem, 3vw, 2rem) "Bricolage Grotesque", sans-serif;
+}
+
+.quote-intro {
+  max-width: 58ch;
+  margin: 0 0 22px;
+  color: var(--quote-muted);
+  line-height: 1.55;
+}
+
+.quote-calculator .feature-grid {
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.8fr);
+  align-items: start;
+  gap: clamp(20px, 3vw, 34px);
+}
+
+.quote-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.quote-calculator .quote-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: var(--quote-ink);
+  font-weight: 700;
+}
+
+.quote-field-label,
+.quote-calculator legend {
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.quote-calculator select,
+.quote-calculator input[type="date"] {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--quote-line);
+  border-radius: 12px;
+  outline: none;
+  background: #fffefa;
+  color: var(--quote-ink);
+  font: 600 0.95rem "Figtree", sans-serif;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.quote-calculator select:invalid {
+  color: #60776a;
+}
+
+.quote-calculator select:focus-visible,
+.quote-calculator input[type="date"]:focus-visible,
+.quote-calculator input[type="checkbox"]:focus-visible,
+.quote-calculator input[type="range"]:focus-visible,
+.quote-calculator button:focus-visible {
+  outline: 3px solid #e0a13d;
+  outline-offset: 3px;
+}
+
+.quote-calculator select:focus,
+.quote-calculator input[type="date"]:focus {
+  border-color: #347254;
+  box-shadow: 0 0 0 3px #34725420;
+}
+
+.quote-field-hint {
+  color: var(--quote-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.quote-calculator .food-toggle {
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
+
+.quote-calculator .food-toggle legend,
+.quote-calculator .quote-form > fieldset > legend {
+  width: 100%;
+  margin-bottom: 8px;
+  color: var(--quote-ink);
+}
+
+.quote-calculator .feature-button {
+  border: 1px solid #91b49b;
+  background: #fffefa;
+  color: var(--quote-ink);
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.quote-calculator .food-toggle .feature-button[aria-pressed="true"] {
+  border-color: #c0632a;
+  background: #ffdfad;
+  outline: 2px solid #c0632a;
+  outline-offset: 2px;
+  box-shadow: inset 0 0 0 1px #c0632a;
+}
+
+.quote-calculator .feature-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: #347254;
+}
+
+.quote-calculator .section-row {
+  margin: 0;
+}
+
+.quote-calculator .count-pill {
+  border: 1px solid #abcbb3;
+  background: #dcefe0;
+  color: #173e32;
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 5px 12px;
+}
+
+.quote-calculator input[type="range"] {
+  width: 100%;
+  margin: 4px 0 0;
+  accent-color: #c0632a;
+  cursor: pointer;
+}
+
+.quote-calculator .range-scale {
+  color: var(--quote-muted);
+  font-size: 0.78rem;
+}
+
+.quote-calculator .quote-form > fieldset:not(.food-toggle) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.quote-calculator .addon-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 9px;
+}
+
+.quote-calculator .addon-option {
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid #c3d9c9;
+  border-radius: 10px;
+  background: #f9fcf8;
+  color: #244b3a;
+  cursor: pointer;
+  line-height: 1.3;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.quote-calculator .addon-option:has(input:checked) {
+  border-color: #347254;
+  background: #dcefe0;
+}
+
+.quote-calculator .addon-option input {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  margin: 0;
+  accent-color: #347254;
+}
+
+.quote-calculator .quote-total {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: clamp(20px, 2.8vw, 28px);
+  border: 0;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #174d3b, #102f2b);
+  color: #f8fff8;
+  box-shadow: 0 16px 38px #173e322e;
+}
+
+.quote-total-label {
+  color: #d3efb1;
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.quote-total-amount {
+  color: #ffe28a;
+  font: 800 clamp(2.5rem, 5vw, 3.4rem) "Bricolage Grotesque", sans-serif;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.quote-total-detail,
+.quote-total-note {
+  margin: 0;
+  color: #edf7ed;
+  line-height: 1.5;
+}
+
+.quote-total-detail {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.quote-total-note {
+  color: #d2e4d5;
+  font-size: 0.84rem;
+}
+
+.quote-calculator .quote-submit {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 12px;
+  background: #f0a04c;
+  color: #18392e;
+  font-size: 0.95rem;
+}
+
+.quote-calculator .quote-submit:hover:not(:disabled) {
+  background: #ffd27f;
+  box-shadow: 0 6px 18px #091c183b;
+}
+
+.quote-calculator .quote-submit:disabled {
+  background: #d7e1d8;
+  color: #52675a;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.quote-submit-hint {
+  margin: -4px 0 0;
+  color: #d2e4d5;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.gift-hamper {
+  --gift-ink: #51263f;
+  --gift-muted: #765766;
+  --gift-line: #e8cbd7;
+  margin: 30px 0;
+  padding: clamp(20px, 3vw, 34px);
+  border: 1px solid #e8cbd7;
+  background:
+    radial-gradient(ellipse at 100% 0%, #ffe1e9 0, transparent 38%),
+    #fff5f1;
+  color: var(--gift-ink);
+  box-shadow: 0 18px 48px #642b5012;
+}
+
+.gift-hamper .gift-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #8a3e65;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.gift-hamper .gift-kicker::before {
+  width: 20px;
+  height: 2px;
+  background: #d87957;
+  content: "";
+}
+
+.gift-hamper h3 {
+  margin: 8px 0 4px;
+  color: var(--gift-ink);
+  font: 700 clamp(1.5rem, 3vw, 2rem) "Bricolage Grotesque", sans-serif;
+}
+
+.gift-intro {
+  max-width: 65ch;
+  margin: 0 0 22px;
+  color: var(--gift-muted);
+  line-height: 1.6;
+}
+
+.gift-hamper .feature-grid {
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.9fr);
+  align-items: start;
+  gap: clamp(20px, 3vw, 34px);
+}
+
+.gift-section-heading h4,
+.gift-items-heading h4 {
+  margin: 0;
+  color: var(--gift-ink);
+  font: 700 1.05rem "Bricolage Grotesque", sans-serif;
+}
+
+.gift-section-heading p {
+  margin: 4px 0 0;
+  color: var(--gift-muted);
+  font-size: 0.88rem;
+}
+
+.gift-hamper .gift-box-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 12px 0 22px;
+}
+
+.gift-hamper .gift-box-option {
+  min-width: 0;
+  min-height: 106px;
+  justify-content: center;
+  gap: 5px;
+  padding: 12px 8px;
+  border: 1px solid #dfbdcc;
+  border-radius: 14px;
+  background: #fffdfa;
+  color: var(--gift-ink);
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.gift-hamper .gift-box-option:hover {
+  transform: translateY(-2px);
+  border-color: #a24d75;
+}
+
+.gift-hamper .gift-box-option[aria-pressed="true"] {
+  border: 2px solid #7b315b;
+  background: #7b315b;
+  color: #fffaf7;
+  box-shadow: 0 8px 18px #7b315b24;
+}
+
+.gift-hamper .gift-box-option[aria-pressed="true"] .box-option-meta {
+  color: #fbe4ef;
+}
+
+.gift-hamper .box-option-meta {
+  color: #765766;
+}
+
+.gift-box-state {
+  margin-top: 3px;
+  color: #92506f;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.gift-hamper .gift-box-option[aria-pressed="true"] .gift-box-state {
+  color: #ffe0a6;
+}
+
+.gift-box-notice {
+  min-height: 1.4em;
+  margin: -12px 0 20px;
+  color: #765766;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.gift-items-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gift-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border: 1px solid #e3c1d0;
+  border-radius: 999px;
+  background: #fffdfa;
+  color: var(--gift-muted);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.gift-count strong {
+  color: #7b315b;
+  font-size: 0.9rem;
+}
+
+.gift-progress {
+  height: 8px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #ead7de;
+}
+
+.gift-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a54e77, #e4895c);
+  transition: width 200ms ease;
+}
+
+.gift-instruction {
+  margin: 7px 0 12px;
+  color: var(--gift-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.gift-hamper .gift-item-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 126px), 1fr));
+  gap: 10px;
+}
+
+.gift-hamper .gift-item-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 78px;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px;
+  border: 1px solid #e3c8d4;
+  border-radius: 13px;
+  background: #fffdfa;
+  color: var(--gift-ink);
+  font-weight: 800;
+  text-align: center;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.gift-hamper .gift-item-chip:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: #a24d75;
+}
+
+.gift-hamper .gift-item-chip[aria-pressed="true"] {
+  border-color: #7b315b;
+  background: #7b315b;
+  color: #fffaf7;
+}
+
+.gift-item-state {
+  color: #8a6176;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.gift-hamper .gift-item-chip[aria-pressed="true"] .gift-item-state {
+  color: #ffe0a6;
+}
+
+.gift-hamper .gift-item-chip:disabled {
+  border-color: #eadce2;
+  background: #f3ecef;
+  color: #7c6d74;
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.gift-hamper .gift-item-chip:disabled .gift-item-state {
+  color: #786a70;
+}
+
+.gift-hamper button:focus-visible,
+.gift-hamper input:focus-visible,
+.gift-hamper textarea:focus-visible {
+  outline: 3px solid #d87957;
+  outline-offset: 3px;
+}
+
+.gift-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(18px, 2.6vw, 26px);
+  border: 0;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #702c53, #49213d);
+  color: #fffaf7;
+  box-shadow: 0 16px 38px #51263f2b;
+}
+
+.gift-summary-kicker {
+  color: #ffdda1;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.gift-summary h4 {
+  margin: -4px 0 0;
+  color: #fffaf7;
+  font: 700 1.4rem "Bricolage Grotesque", sans-serif;
+}
+
+.gift-empty {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 16px 12px;
+  border: 1px dashed #d9b3c6;
+  border-radius: 14px;
+  background: #fff8f422;
+  text-align: center;
+}
+
+.gift-empty-mark {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid #e4bfd0;
+  border-radius: 50%;
+  color: #ffdda1;
+  font-size: 1.35rem;
+}
+
+.gift-empty p {
+  margin: 3px 0 0;
+  font-weight: 800;
+}
+
+.gift-empty small {
+  color: #f4dfe9;
+  line-height: 1.45;
+}
+
+.gift-selected-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 196px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.gift-selected-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 38px;
+  padding: 5px 6px 5px 12px;
+  border: 1px solid #f3dce7;
+  border-radius: 10px;
+  background: #fff8f4;
+  color: #51263f;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.gift-remove-item {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #f6e4ea;
+  color: #702c53;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.gift-remove-item:hover {
+  transform: scale(1.05);
+  background: #f1cbd9;
+}
+
+.gift-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #fff7f4;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.gift-field > span small {
+  color: #efd2df;
+  font-weight: 500;
+}
+
+.gift-field input,
+.gift-field textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 12px;
+  border: 1px solid #e5c5d3;
+  border-radius: 11px;
+  background: #fffdfa;
+  color: #51263f;
+  font: 500 0.9rem "Figtree", sans-serif;
+}
+
+.gift-field input::placeholder,
+.gift-field textarea::placeholder {
+  color: #806575;
+  opacity: 1;
+}
+
+.gift-field textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.gift-field-hint {
+  color: #f4dfe9;
+  font-size: 0.73rem;
+  font-weight: 500;
+}
+
+.gift-summary .gift-submit {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 2px;
+  border: 0;
+  border-radius: 11px;
+  background: #f0ad68;
+  color: #48243b;
+  font-size: 0.92rem;
+}
+
+.gift-summary .gift-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #ffd18c;
+}
+
+.gift-summary .gift-submit:disabled {
+  background: #eadbe2;
+  color: #65535d;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.gift-submit-hint {
+  margin: -5px 0 0;
+  color: #f4dfe9;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 720px) {
+  .quote-calculator .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-calculator .quote-total {
+    position: static;
+  }
+
+  .gift-hamper .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 430px) {
+  .gift-hamper .gift-box-grid {
+    gap: 6px;
+  }
+
+  .gift-hamper .gift-box-option {
+    min-height: 96px;
+    padding: 10px 5px;
+  }
+
+  .gift-hamper .box-option-meta {
+    font-size: 0.72rem;
+  }
+
+  .gift-items-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
