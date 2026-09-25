@@ -1,17 +1,6 @@
 {
-  "builds": [
-    {
-      "src": "artifacts/alca-website/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist/public"
-      }
-    }
-  ],
+  "outputDirectory": "dist/public",
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
