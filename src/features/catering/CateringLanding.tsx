@@ -428,13 +428,13 @@ export default function CateringLanding() {
               </div>
               <div className="relative z-10">
                 <p className="text-xs text-[#E0D0BC] font-semibold tracking-[0.3em] uppercase mb-3">Veg Platter</p>
-                <h3 className="font-display text-4xl font-bold text-[#F5C842] mb-3">Starts from ₹199</h3>
+                <h3 className="font-display text-3xl font-bold text-[#F5C842] mb-3">Traditional Pure-Veg Feasts</h3>
                 <p className="text-sm text-[#F5EDE0] opacity-90 leading-relaxed mb-5">
-                  Ideal for vegetarian gatherings, tiffin service, and family celebrations.
+                  Ideal for traditional vegetarian rituals, banana leaf service, and family celebrations.
                 </p>
                 <div className="flex items-center gap-2 text-sm text-[#FAF7F2]">
                   <span className="text-[#F5C842]">✦</span>
-                  <span>Freshly prepared with balanced portions and clean presentation</span>
+                  <span>Freshly prepared with authentic recipes and pristine hygienic presentation</span>
                 </div>
               </div>
             </div>
@@ -450,13 +450,13 @@ export default function CateringLanding() {
               </div>
               <div className="relative z-10">
                 <p className="text-xs text-[#E0D0BC] font-semibold tracking-[0.3em] uppercase mb-3">Non-Veg Platter</p>
-                <h3 className="font-display text-4xl font-bold text-[#F5C842] mb-3">Starts from ₹299</h3>
+                <h3 className="font-display text-3xl font-bold text-[#F5C842] mb-3">Hyderabadi Non-Veg Specialties</h3>
                 <p className="text-sm text-[#F5EDE0] opacity-90 leading-relaxed mb-5">
-                  Perfect for weddings, receptions, corporate dining, and premium guest menus.
+                  Perfect for grand weddings, sangeet, receptions, and corporate gala buffets.
                 </p>
                 <div className="flex items-center gap-2 text-sm text-[#FAF7F2]">
                   <span className="text-[#F5C842]">✦</span>
-                  <span>Served with rich flavors and event-friendly presentation</span>
+                  <span>Authentic Dum Biryanis, rich gravies, live kebabs, and gourmet desserts</span>
                 </div>
               </div>
             </div>

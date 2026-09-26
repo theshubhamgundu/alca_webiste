@@ -1,8 +1,8 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 
 interface CelebrationTheme {
   id: string
-  category: 'wedding' | 'pre-wedding' | 'birthday' | 'milestone' | 'traditional'
+  category: 'wedding' | 'birthday' | 'housewarming' | 'traditional' | 'corporate'
   title: string
   tagline: string
   occasionName: string
@@ -12,260 +12,215 @@ interface CelebrationTheme {
   highlights: string[]
   idealFor: string
   image: string
-  priceEst: string
 }
 
 const themesList: CelebrationTheme[] = [
   {
-    id: 'mandapam',
+    id: 'complete-wedding',
     category: 'wedding',
-    title: 'Royal Mandapam & Wedding Stage',
-    tagline: 'Temple Architecture & Sacred Floral Canopies',
-    occasionName: 'Pelli / Main Wedding Muhurtham',
-    badge: 'Signature Grandeur',
-    shortDesc: 'Handcrafted temple pillars, fresh marigold & jasmine ceilings, brass urlis, and warm ambient stage lighting.',
+    title: 'Complete End-to-End Wedding (Pelli)',
+    tagline: 'All-Inclusive: Mandapam, Panthulu, Decor, Lighting, Nadaswaram & Cinema',
+    occasionName: 'Grand Telugu & Indian Wedding',
+    badge: '360° All-Inclusive',
+    shortDesc: 'Complete wedding orchestration—temple pillar mandapam, certified Vedic Panthulu (Purohit) team, Nadaswaram troupe, Haldi/Sangeet decor, 4K cinema, and on-ground hospitality.',
     fullDesc:
-      'Engineered for the sanctity and grandeur of Telugu and South Indian weddings. Features customized traditional temple pillars, lush South Indian floral chandeliers with fresh Bangalore marigolds and tuberose (nandivardhanam), auspicious kalasam backdrops, and seamless 4K cinematography lighting.',
+      'We take care of your entire wedding from sacred muhurtham rituals to grand reception. Includes authentic temple mandapam fabrication, certified Vedic Panthulu for all rituals & homams, Nadaswaram/Shehnai artists, fresh Bangalore flower canopies, 4K cinematography & drone coverage, stage sound/lighting, and dedicated event coordinators so your family enjoys stress-free.',
     highlights: [
-      'Authentic Temple Arch & Pillar Mandapam',
-      'Fresh Jasmine, Rose & Marigold Floral Ceiling',
-      'Sacred Homa Kundam & Seating Arrangements',
-      'Grand 40ft Stage Backdrop & Warm Mandap Lighting',
-      'Red Carpet Walk-in Entrance Arch',
+      'Certified Vedic Panthulu (Priest) Team & Muhurtham Pooja Samagri',
+      'Authentic Temple Arch & Pillar Mandap with Fresh Floral Canopies',
+      'Live Nadaswaram / Shehnai & Mangala Vadyam Troupe',
+      'Haldi, Sangeet & Reception Stage Production & Sound',
+      '4K Cinema Photo/Video Team & Drone Aerial Feeds',
+      'Senior Production Director & On-Site Logistics Crew',
     ],
-    idealFor: 'Grand Weddings, Convention Centers & Resorts',
-    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=85',
-    priceEst: '₹85,000 – ₹2,50,000+',
+    idealFor: 'Grand Weddings, Convention Centers & Star Resorts',
+    image: '/wow/Royal%20Mandapam%20&%20Stage%20Architecture.jpg',
+  },
+  {
+    id: 'housewarming-pooja',
+    category: 'housewarming',
+    title: 'Housewarming (Gruhapravesam) & Sacred Homam',
+    tagline: 'Vedic Panthulu, Navagraha Homam, Fresh Mango Thoranam & Brass Deepams',
+    occasionName: 'Gruhapravesam & Vratam',
+    badge: 'Sacred Vedic',
+    shortDesc: 'Complete Vedic rituals and auspicious decor: experienced Panthulu for Vastu & Ganapathi Homam, fresh mango leaf thoranam, pooja mandapam, and entrance flower rangoli.',
+    fullDesc:
+      'Start your new home on an auspicious note with complete all-inclusive Vedic arrangements. We provide revered Telugu/Vedic Panthulu with all sacred homa dravyas & samagri, fresh mango leaf & marigold door thoranams, decorated pooja mandap backdrop with kalasam, brass deepam pillars, plantain banana trees, and welcoming flower rangoli.',
+    highlights: [
+      'Revered Vedic Panthulu (Purohit) for Vastu, Ganapathi & Navagraha Homam',
+      'Complete Sacred Pooja & Homam Samagri Provided',
+      'Fresh Mango Leaves & Bangalore Marigold Main Door Thoranam',
+      'Traditional Pooja Stage Backdrop with Kalasam & Silk Drapes',
+      'Auspicious Banana Trees & Brass Deepam Pillar Setup',
+      'Intricate Fresh Flower Petal Rangoli at Threshold',
+    ],
+    idealFor: 'New Apartments, Independent Houses, Villas & Farmhouses',
+    image: '/wow/Housewarming%20(Gruhapravesam)%20&%20Sacred%20Homam.webp',
+  },
+  {
+    id: 'birthday-milestone',
+    category: 'birthday',
+    title: 'Grand Birthday & Kids Milestone Extravaganza',
+    tagline: '3D Custom Theme Backdrops, Balloon Architecture & Kids Entertainment',
+    occasionName: '1st Birthday / Milestones',
+    badge: 'High Energy',
+    shortDesc: 'Complete birthday experiences: 3D character backdrops, luxury pastel balloon arches, neon signage, cake table styling, emcee/magician, and sound setup.',
+    fullDesc:
+      'Make your child’s milestone birthday unforgettable with our customized 3D theme productions. From Jungle Safari, Boss Baby, Princess Castle, to Cocomelon, we build multi-layered backdrop sets, customized neon LED name signs, pastel balloon garlands, interactive game hosts/magicians, sound system, and themed return gift setups.',
+    highlights: [
+      'Custom 3D Theme Backdrop & Layered Stage Architecture',
+      'Organic Pastel & Chrome Balloon Garlands & Arches',
+      'Customized LED Neon Name Signage & Themed Cake Table',
+      'Professional Emcee / Game Host / Magician for Kids',
+      'DJ Sound System, Stage Spotlights & Party Entry Sparklers',
+      'Coordinated Themed Welcome Arch & Return Gift Counter',
+    ],
+    idealFor: 'Banquet Halls, Gated Community Clubhouses & Terraces',
+    image: '/wow/Grand%20Birthday%20&%20Kids%20Milestone%20Extravaganza.jpg',
   },
   {
     id: 'haldi-pellikuthuru',
-    category: 'pre-wedding',
+    category: 'wedding',
     title: 'Vibrant Haldi & Pellikuthuru Setups',
-    tagline: 'Marigold Drops, Floral Urli Tubs & Quirky Props',
+    tagline: 'Brass Urli Tubs, Marigold Drops & Floral Showers',
     occasionName: 'Haldi & Mangala Snanam',
-    badge: 'Most Popular',
-    shortDesc: 'Bright yellow marigold drapes, engraved brass urli seating, flower shower baskets, and photo corners.',
+    badge: 'Vibrant & Festive',
+    shortDesc: 'Auspicious yellow marigold backdrops, engraved brass urli for Haldi snanam, flower petal shower baskets, and Telugu photo corners.',
     fullDesc:
-      'A joyful explosion of auspicious yellows and oranges. Includes traditional engraved brass water tubs (urli) for the bride and groom, cascading marigold curtains, traditional cane baskets filled with rose petals for flower showers, and quirky Telugu signage photobooths.',
+      'Joyous, vibrant pre-wedding experiences. Features traditional engraved brass tubs for Mangala Snanam, cascading genda phool backdrops, fresh rose petal shower baskets, and vibrant cultural photobooths.',
     highlights: [
-      'Royal Brass Urli / Tub for Haldi Snanam',
+      'Royal Engraved Brass Urli / Tub for Bride & Groom Haldi Snanam',
       'Cascading Genda Phool (Marigold) Backdrops',
-      'Fresh Rose Petal Baskets for Floral Showers',
-      'Quirky Telugu Photobooth with Traditional Props',
-      'Waterproof Stage Flooring & Easy Cleanup',
+      'Fresh Rose & Marigold Petal Baskets for Floral Showers',
+      'Telugu Cultural Photobooth with Traditional Props',
+      'Waterproof Stage Flooring & Fast Cleanup',
     ],
     idealFor: 'Home Backyards, Terraces & Resort Lawns',
-    image: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=85',
-    priceEst: '₹25,000 – ₹65,000',
+    image: '/wow/Vibrant%20Haldi%20&%20Pellikuthuru%20Setups.jpg',
   },
   {
-    id: 'sangeet-concert',
-    category: 'pre-wedding',
+    id: 'sangeet-dj',
+    category: 'wedding',
     title: 'Sangeet & DJ Night Concert Stage',
-    tagline: 'High-Energy Truss Lighting, Cold Pyro & LED Walls',
+    tagline: 'High-Energy Truss Lighting, Cold Pyro & Dance Floors',
     occasionName: 'Sangeet & Cocktail Night',
-    badge: 'High Octane',
-    shortDesc: 'Concert-grade sound, dynamic beam truss lighting, LED visual wall, glossy dance floor & cold sparklers.',
+    badge: 'Concert Scale',
+    shortDesc: 'Concert-grade sound, dynamic beam truss lighting, LED visual wall, glossy dance floor & safe cold sparklers.',
     fullDesc:
-      'Transform your sangeet into a Bollywood concert. Features massive P3 LED digital display backdrops, synchronized intelligent moving-head lighting, safe indoor cold pyro sparklers for couple entries, fog machines, and a seamless high-gloss acrylic dance floor.',
+      'Transform your sangeet into a concert experience. Features massive P3 LED visual display backdrops, synchronized intelligent moving-head lighting, safe indoor cold pyro sparklers for couple entries, heavy cloud fog machines, and a high-gloss dance floor.',
     highlights: [
       'P3 HD LED Video Wall & Visual VJ Loops',
       'Concert Truss with Moving-Head Beam Lights',
       'Cold Pyro Sparklers & Low-Lying Heavy Fog',
       'Glossy Dance Floor & Customized Stage Wrapping',
-      'Professional Line-Array Sound System Setup',
+      'Professional Audio System Setup',
     ],
     idealFor: 'Hotel Ballrooms, Resorts & Banquet Stages',
-    image: 'https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1200&q=85',
-    priceEst: '₹60,000 – ₹1,80,000',
+    image: '/wow/Sangeet%20&%20DJ%20Night%20Concert%20Stag.jpeg',
   },
   {
-    id: 'reception-stage',
-    category: 'wedding',
-    title: 'Grand Reception & Fairy Light Tunnel',
-    tagline: 'Luxury Chandeliers, Pastel Florals & Royal Thrones',
-    occasionName: 'Wedding Reception',
-    badge: 'Red Carpet',
-    shortDesc: 'Massive floral backdrop, imperial sofa setup, fairy light walkthrough tunnel, and sparkling chandeliers.',
+    id: 'corporate-conclave',
+    category: 'corporate',
+    title: 'Corporate Galas, Conferences & Product Launches',
+    tagline: 'P3 HD LED Walls, Line-Array Audio, Stage Rigging & Media Walls',
+    occasionName: 'Corporate Conclaves & Galas',
+    badge: 'Corporate Standard',
+    shortDesc: 'End-to-end corporate event production: seamless LED backdrops, speaker podiums, stage lighting, line-array audio, and branded registration booths.',
     fullDesc:
-      'Elegant, opulent, and breathtakingly photogenic. Tailored for grand evening receptions featuring lush English pastel roses, hydrangeas, crystal chandeliers, royal bride & groom throne seating, and a magical 60ft fairy-light tunnel entrance.',
+      'Full-scale event production for enterprise conferences, tech product unveils, dealer awards nights, and annual galas in Hyderabad. We deliver flawless acoustic engineering, seamless LED video displays, branded media walls, live streaming tech, and dedicated stage managers.',
     highlights: [
-      '60ft Starlight & Floral Walk-in Tunnel',
-      'Lush Exotic Florals (Roses, Orchids, Hydrangeas)',
-      'Royal Velvet Couch & Stage Furniture',
-      'Crystal Chandelier Ceiling Suspensions',
-      'Dedicated Stage Portrait Photography Lighting',
+      'P3 High-Definition Seamless LED Video Display Wall & VJ Loop Control',
+      'Professional Line-Array JBL Audio Engineering & Podium Mics',
+      'Stage Lighting Truss Rigging & Dynamic Beam Uplighting',
+      'Branded Media Backdrop, Red Carpet & Registration Desks',
+      'Dedicated Technical Director & Stage Crew on Standby',
     ],
-    idealFor: 'Grand Convention Centers & Star Hotel Lawns',
-    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=85',
-    priceEst: '₹75,000 – ₹2,20,000',
-  },
-  {
-    id: 'half-saree',
-    category: 'milestone',
-    title: 'Half-Saree / Langa Voni Ceremony',
-    tagline: 'Traditional Floral Swings & South Indian Heritage',
-    occasionName: 'Langa Voni & Dhoti Function',
-    badge: 'Teen Milestone',
-    shortDesc: 'Ornate floral wooden swing (jhoola), brass diya pillars, jasmine floral arches, and sweet dessert tables.',
-    fullDesc:
-      'A heartfelt celebration of tradition and coming-of-age. Features an authentic carved wooden swing decorated with fresh flowers, traditional South Indian umbrella entrances, brass deepam pillars, and customized name backdrops.',
-    highlights: [
-      'Carved Wooden Swing (Jhoola) with Floral Vines',
-      'Traditional South Indian Silk Umbrella Entry',
-      'Brass Deepam Stands & Floral Rangoli Borders',
-      'Customized Name Cutout & 3D Stage Elements',
-    ],
-    idealFor: 'Banquets, Community Halls & Home Celebrations',
-    image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=85',
-    priceEst: '₹30,000 – ₹75,000',
-  },
-  {
-    id: 'baby-shower',
-    category: 'milestone',
-    title: 'Sreemantham & Cradle Ceremony (Barasala)',
-    tagline: 'Pastel Floral Nests & Traditional Wooden Cradles',
-    occasionName: 'Baby Shower & Naming Ceremony',
-    badge: 'Warm & Divine',
-    shortDesc: 'Pastel organic balloon arches, fresh baby’s breath, decorated brass cradle, and comfortable seating.',
-    fullDesc:
-      'Gentle, soothing, and joyous celebrations for mother and newborn. Features decorated floral swings for Sreemantham, authentic silver/brass baby cradles with flower garlands for Barasala, and cute pastel cloud balloon installations.',
-    highlights: [
-      'Decorated Brass/Silver Cradle (Uyyala) Setup',
-      'Pastel Floral Arch with Pampas Grass & Baby’s Breath',
-      'Comfortable Seated Floral Swing for Mother',
-      'Cute Photo Wall & Milestone Memory Board',
-    ],
-    idealFor: 'Home Living Rooms, Clubhouses & Banquets',
-    image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=85',
-    priceEst: '₹20,000 – ₹55,000',
-  },
-  {
-    id: 'theme-birthday',
-    category: 'birthday',
-    title: 'Magical 3D Theme Birthday Worlds',
-    tagline: 'Jungle Safari, Fairytale Princess, Space & Candy Land',
-    occasionName: '1st Birthdays & Kids Milestones',
-    badge: 'Kids Favourite',
-    shortDesc: 'Multi-layer 3D character cutouts, organic balloon garlands, marquee milestone light-up numbers & cake table.',
-    fullDesc:
-      'Turn your child’s imagination into reality. Immersive customized 3D backdrops (Jungle Safari, Little Prince/Princess, Cocomelon, Space Astronaut, Superhero), giant LED light-up numbers, balloon arches, and custom sweet-table cake pedestals.',
-    highlights: [
-      'Custom 3D Theme Character Cutouts & Arches',
-      'Organic 100% Biodegradable Balloon Styling',
-      'Giant 3ft Illuminated LED Marquee Number (1, 2, 5...)',
-      'Matching Cake Table Pedestals & Welcome Standee',
-      'Tattoo Artist, Magic Show & Mascot Coordination',
-    ],
-    idealFor: 'Apartment Clubhouses, Banquets & Farmhouses',
-    image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1200&q=85',
-    priceEst: '₹18,000 – ₹50,000',
-  },
-  {
-    id: 'gruhapravesam',
-    category: 'traditional',
-    title: 'Gruhapravesam & Satyanarayana Pooja',
-    tagline: 'Sacred Mango Leaves, Temple Thoranam & Urli Rangoli',
-    occasionName: 'Housewarming & Vratam Rituals',
-    badge: 'Purely Traditional',
-    shortDesc: 'Fresh mango leaf door thoranam, sacred pooja stage backdrop, floor flower rangoli, and brass lamp aisles.',
-    fullDesc:
-      'Auspicious and serene housewarming decor grounded in Vedic traditions. Includes fresh mango leaf and marigold entrance thoranam, sacred pooja stage background with silk curtains and brass bells, and floating flower urlis.',
-    highlights: [
-      'Fresh Mango Leaf & Marigold Main Door Thoranam',
-      'Traditional Pooja Backdrop with Kalasam Setup',
-      'Intricate Flower Petal Rangoli at Entrance',
-      'Brass Deepam Stands & Auspicious Banana Stems',
-    ],
-    idealFor: 'New Apartments, Villas & Independent Houses',
-    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=85',
-    priceEst: '₹12,000 – ₹35,000',
+    idealFor: 'Hitec City / Financial District Star Hotels & Convention Centers',
+    image: '/wow/Corporate%20Galas,%20Conferences%20&%20Product%20Launches.jpg',
   },
 ]
 
-const productionServices = [
+const corporateServices = [
   {
     icon: '🏛️',
-    title: 'Mandap Architecture & Stage Fabrication',
-    desc: 'Custom wooden, fiber, and metal framework built to exact structural dimensions for grand mandaps and reception stages.',
-    tags: ['Temple Pillars', '3D Fabrication', 'Truss Rigging'],
+    title: 'Mandap Architecture & Fabrication',
+    desc: 'Custom wooden, fiber, and metal frameworks built to exact structural dimensions for grand temple mandaps and conference stages.',
+    tags: ['Structural Rigging', '3D Fabrication', 'CAD Design'],
   },
   {
     icon: '🌺',
-    title: 'Fresh Floral Sculpting & Procurement',
+    title: 'Fresh Floral Procurement & Styling',
     desc: 'Daily fresh flower sourcing from Bangalore & local markets—marigolds, carnations, roses, orchids, and traditional lotus buds.',
-    tags: ['Fresh Flowers', 'Flower Chandeliers', 'Floral Walls'],
+    tags: ['Fresh Bangalore Florals', 'Floral Canopies', 'Custom Urlis'],
+  },
+  {
+    icon: '🪔',
+    title: 'Vedic Panthulu & Pooja Samagri',
+    desc: 'Certified and experienced Telugu Vedic Panthulu for Gruhapravesam Homams, Vivaha Muhurthams, and family Vrathams.',
+    tags: ['Certified Purohits', 'Homam Samagri', 'Muhurtham Guidance'],
   },
   {
     icon: '💡',
-    title: 'Theatrical Lighting & Concert Effects',
-    desc: 'Sharpy moving heads, warm par cans, ambient uplighting, fairy light canopies, and programmed mood lighting.',
-    tags: ['Moving Heads', 'Fairy Lights', 'Ambient Glow'],
+    title: 'Theatrical & Intelligent Lighting',
+    desc: 'Sharpy moving heads, warm par cans, ambient uplighting, fairy light canopies, and programmed mood lighting controllers.',
+    tags: ['Moving Heads', 'Architectural Uplighting', 'DMX Controllers'],
   },
   {
     icon: '✨',
     title: 'Cold Pyro & Atmospheric Entry Effects',
     desc: '100% smokeless & indoor-safe cold spark fountains, low-lying heavy cloud fog, CO2 jets, and confetti cannons for grand entries.',
-    tags: ['Cold Pyro', 'Dry Ice Fog', 'Confetti Blasters'],
+    tags: ['Indoor Cold Pyro', 'Dry Ice Fog', 'Confetti Blasters'],
   },
   {
     icon: '📸',
-    title: 'Candid Photography & 4K Drone Film',
-    desc: 'Cinematic wedding films, traditional photography, drone aerial coverage, live LED streaming, and instant photo booths.',
-    tags: ['4K Cinema', 'Drone Footage', 'Instant Photobooth'],
-  },
-  {
-    icon: '🎶',
-    title: 'Sound, DJ & Traditional Music Troupe',
-    desc: 'High-fidelity audio systems, club DJs, traditional Nadaswaram/Shehnai players, and interactive emcees.',
-    tags: ['JBL Sound', 'Wedding DJ', 'Nadaswaram Troupes'],
+    title: 'Cinematography, Drones & Sound',
+    desc: '4K cinema wedding films, live multi-camera LED feeds, drone aerial coverage, and professional line-array audio systems.',
+    tags: ['4K Cinema Coverage', 'Drone Aerials', 'Line Array Sound'],
   },
 ]
 
-const celebrationPackages = [
+const corporatePackages = [
   {
-    name: 'Aarambham (Home Rituals)',
-    tag: 'Haldi / Pooja / Cradle / Gruhapravesam',
+    name: 'Housewarming & Sacred Pooja Suite',
+    tag: 'Gruhapravesam / Navagraha Homam / Vratam',
     popular: false,
-    price: '₹18,000',
+    subtitle: 'End-to-End Vedic Priest & Auspicious Decor Setup',
     features: [
-      'Traditional Floral & Fabric Backdrop (10x8 ft)',
-      'Fresh Marigold & Jasmine Thoranam Framing',
-      'Engraved Brass Urli / Wooden Swing Setup',
-      'Entrance Welcome Board with Fresh Florals',
-      'Warm LED Spotlights & Floor Flower Rangoli',
-      'Dedicated Setup & Takedown Crew',
+      'Certified Vedic Panthulu (Purohit) & Complete Homam Samagri',
+      'Fresh Mango Leaf & Bangalore Marigold Main Door Thoranam',
+      'Sacred Pooja Stage Setup with Silk Backdrop & Kalasam',
+      'Auspicious Plantain Banana Stems & Brass Deepam Stands',
+      'Intricate Fresh Flower Petal Rangoli at Threshold',
+      'Dedicated On-Site Setup & Cleanup Crew',
     ],
   },
   {
-    name: 'Sankalpam (Grand Celebrations)',
-    tag: 'Sangeet / Half-Saree / Milestone Birthdays',
+    name: 'Grand Birthday & Milestone Suite',
+    tag: '1st Birthday / Half-Saree / Milestones',
+    popular: false,
+    subtitle: '3D Theme Fabrication & High-Energy Kids Production',
+    features: [
+      'Multi-Layered 3D Theme Stage Backdrop (15x8 ft)',
+      'Customized Neon LED Name Sign & Themed Cake Table',
+      'Organic Pastel & Chrome Balloon Arch Installation',
+      'Professional Emcee / Magician / Kids Activity Host',
+      'DJ Sound System, Stage Spotlights & Party Lighting',
+      'Safe Indoor Cold Pyro Sparkler Fountains (4 Units)',
+    ],
+  },
+  {
+    name: 'Complete End-to-End Wedding Suite',
+    tag: 'Muhurtham Wedding, Sangeet & Reception',
     popular: true,
-    price: '₹55,000',
+    subtitle: 'All-Inclusive 360° Royal Wedding Orchestration',
     features: [
-      'Grand Stage Decor with 3D Props & Florals (20x10 ft)',
-      'Full Banquet Entrance Floral Arch / Tunnel',
-      'Couple Entry Cold Pyro Sparklers (4 units)',
-      'Low-Lying Heavy Cloud Fog Machine for Dance',
-      'Ambient LED Uplighting Across Entire Venue',
-      'Cake Table / Seating Furniture Styling',
-      'On-Site Event Coordinator Throughout Function',
-    ],
-  },
-  {
-    name: 'Vaibhavam (Royal Mandap Suite)',
-    tag: 'Complete Wedding & Reception Suite',
-    popular: false,
-    price: '₹1,45,000',
-    features: [
-      'Full Scale Temple Pillar Mandapam with Fresh Flower Ceiling',
-      'Grand 30ft Reception Backdrop with Crystal Chandeliers',
-      '60ft Starlight & Floral Walkway Entrance Tunnel',
-      'Cold Pyro & Confetti Blaster Package (8 units)',
-      'Intelligent Moving-Head Stage Lighting System',
-      'Royal Throne Chairs & VIP Lounge Furniture',
-      'Complimentary Photobooth with Custom Props',
-      'Dedicated Senior Production Manager & Tech Crew',
+      'Authentic Temple Mandapam with Fresh Flower Ceiling',
+      'Certified Vedic Panthulu (Priest) Team & Muhurtham Coordination',
+      'Live Nadaswaram / Shehnai Mangala Vadyam Troupe',
+      'Sangeet & Reception Stage with P3 LED Wall & Moving Head Lights',
+      '4K Cinema Photography, Video & Drone Aerial Coverage',
+      'Traditional Silk Umbrella & Royal Entry Coordination',
+      'Senior Production Director & Dedicated On-Ground Coordinators',
     ],
   },
 ]
@@ -278,304 +233,260 @@ const hyderabadVenues = [
   'Secunderabad, Begumpet & Kompally',
   'Abids, Old City & Charminar Heritage Palaces',
   'Kukatpally, Miyapur & Bachupally Banquets',
-  'Vijayawada, Warangal & Outstation Telangana/AP',
-]
-
-const celebrationFaqs = [
-  {
-    q: 'How many days in advance should we book event decor in Hyderabad?',
-    a: 'For weddings and auspicious Muhurtham dates, we recommend booking 2 to 4 months in advance. For intimate home rituals, haldi, and birthdays, 1 to 2 weeks notice is usually sufficient depending on slot availability.',
-  },
-  {
-    q: 'Do you provide customizable decor based on our theme or Pinterest references?',
-    a: 'Yes, 100%! We customize color palettes, floral choices, structural dimensions, and theme props according to your venue size, budget, and personal Pinterest/Instagram inspiration.',
-  },
-  {
-    q: 'Are your cold pyro sparklers safe for indoor banquet halls?',
-    a: 'Yes, absolutely. We use certified indoor cold-pyrotechnics that produce zero smoke, no toxic odor, and low-temperature sparks that are completely safe around fabrics, children, and indoor ceilings.',
-  },
-  {
-    q: 'Do you handle destination weddings outside Hyderabad?',
-    a: 'Yes, our team regularly travels across Telangana, Andhra Pradesh (Vijayawada, Guntur, Vizag), and destination resort properties with our full fabrication and decor inventory.',
-  },
+  'Vijayawada, Warangal & Destination Telangana/AP',
 ]
 
 export default function CelebrationsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
-  const [activeModalTheme, setActiveModalTheme] = useState<CelebrationTheme | null>(null)
-  const [activeTabSection, setActiveTabSection] = useState<'catalog' | 'services' | 'packages' | 'venues'>('catalog')
+  const [selectedThemeModal, setSelectedThemeModal] = useState<CelebrationTheme | null>(null)
 
   // Quote Calculator State
   const [calcName, setCalcName] = useState('')
   const [calcDate, setCalcDate] = useState('')
-  const [calcEventType, setCalcEventType] = useState('Grand Telugu Wedding Mandap')
+  const [calcEventType, setCalcEventType] = useState('Complete End-to-End Wedding (Pelli)')
   const [calcVenueType, setCalcVenueType] = useState('Convention Center / Star Hotel')
   const [calcLocation, setCalcLocation] = useState('Banjara Hills & Jubilee Hills Venues')
   const [calcGuestCount, setCalcGuestCount] = useState('300 - 800 Guests (Grand)')
 
-  const filteredThemes = useMemo(() => {
-    if (selectedCategory === 'all') return themesList
-    return themesList.filter((t) => t.category === selectedCategory)
-  }, [selectedCategory])
+  const filteredThemes = themesList.filter(
+    (t) => selectedCategory === 'all' || t.category === selectedCategory
+  )
 
   const handleWhatsAppQuote = (customTheme?: string) => {
     const event = customTheme || calcEventType
     const nameStr = calcName ? `Name: *${encodeURIComponent(calcName)}*%0A` : ''
     const dateStr = calcDate ? `Date: *${encodeURIComponent(calcDate)}*%0A` : ''
-    const text = `✨ *Hi WOW Magical Celebrations (ALCA)!*%0A${nameStr}I would like to get a decor & event quote for Hyderabad.%0A%0A🎉 *Occasion:* ${encodeURIComponent(event)}%0A🏛️ *Venue Style:* ${encodeURIComponent(calcVenueType)}%0A📍 *Location:* ${encodeURIComponent(calcLocation)}%0A👥 *Guest Scale:* ${encodeURIComponent(calcGuestCount)}%0A${dateStr}%0APlease share portfolio pictures, availability, and estimate. Thank you! ✨`
+    const text = `✨ *Hi WOW Magical Celebrations (ALCA)!*%0A${nameStr}I would like to inquire about event decor & production in Hyderabad.%0A%0A🎉 *Occasion:* ${encodeURIComponent(event)}%0A🏛️ *Venue Style:* ${encodeURIComponent(calcVenueType)}%0A📍 *Location:* ${encodeURIComponent(calcLocation)}%0A👥 *Guest Scale:* ${encodeURIComponent(calcGuestCount)}%0A${dateStr}%0APlease share portfolio, slot availability, and quote estimate. Thank you! ✨`
     window.open(`https://wa.me/919010995180?text=${text}`, '_blank')
   }
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#FAF6F2] text-[#201818] pb-24 lg:pb-0 selection:bg-[#8B1A1A] selection:text-white">
-      {/* ───────────────── TOP NAVIGATION ───────────────── */}
-      <nav className="fixed left-1/2 top-3 z-50 flex w-[calc(100%-20px)] max-w-6xl -translate-x-1/2 items-center justify-between rounded-full border border-white/15 bg-[#201818]/92 px-3.5 py-2 text-white shadow-2xl backdrop-blur-xl md:px-6 md:py-2.5">
-        <a href="/" className="flex items-center gap-2.5 group">
-          <img
-            src="/images/alca-logo-1.webp"
-            alt="ALCA Logo"
-            className="h-8 w-8 rounded-full object-cover shadow-sm ring-2 ring-[#D7A15D]/40 transition group-hover:scale-105"
-          />
-          <div>
-            <div className="font-serif text-base font-bold tracking-wider text-white">
-              WOW<span className="text-[#D7A15D]">.</span>
-              <span className="ml-1 text-[10px] font-sans font-normal uppercase tracking-widest text-[#D7A15D]">
-                Celebrations
-              </span>
+    <main className="relative min-h-screen text-slate-900 selection:bg-blue-600 selection:text-white pb-24 lg:pb-0">
+      {/* ───────────────── FULL-PAGE FIXED SANGEET & CONCERT BACKGROUND ───────────────── */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <img
+          src="/wow/Sangeet%20&%20DJ%20Night%20Concert%20Stag.jpeg"
+          alt="Sangeet & DJ Concert Production Background"
+          className="h-full w-full object-cover object-center scale-100"
+        />
+        {/* Soft luminous light glass frosted overlay so background image is clearly visible */}
+        <div className="absolute inset-0 bg-white/45 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-slate-50/40 to-slate-100/50" />
+      </div>
+
+      {/* ───────────────── LOCKED STICKY HERO SECTION ───────────────── */}
+      <section className="sticky top-0 z-0 flex min-h-screen items-center justify-center py-8 md:py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+            {/* Left Content Card */}
+            <div className="lg:col-span-7 rounded-3xl bg-white/85 p-6 sm:p-10 shadow-2xl backdrop-blur-2xl border border-white/80 ring-1 ring-slate-900/5">
+              {/* Simple Clean ALCA WOW Celebrations Branding */}
+              <div className="flex items-center gap-3 border-b border-slate-200/70 pb-4 mb-5">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white font-bold text-xs shadow-sm">
+                    A
+                  </div>
+                  <div>
+                    <div className="font-serif text-base font-bold tracking-tight text-slate-900 leading-none">
+                      ALCA <span className="text-blue-600">WOW CELEBRATIONS</span>
+                    </div>
+                    <div className="text-[10px] font-medium tracking-wide text-slate-500 uppercase mt-1">
+                      Event Architecture & Production · Hyderabad
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="inline-flex items-center gap-2 rounded-full bg-blue-50/90 px-3.5 py-1 text-xs font-semibold text-blue-700 border border-blue-200/60 shadow-sm">
+                <span className="h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
+                Bespoke Event Architecture & Production Management
+              </div>
+
+              <h1 className="mt-4 font-serif text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.12]">
+                Signature Celebrations.
+                <br />
+                <span className="text-blue-600 italic">Flawlessly Orchestrated.</span>
+              </h1>
+
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-700 sm:text-base">
+                Hyderabad's premier luxury event production house specializing in grand Vedic temple mandapams, concert-grade Sangeet stages, auspicious family ceremonies, and enterprise conclaves—delivered with direct in-house technical fabrication, certified ritual coordinators, and transparent end-to-end execution.
+              </p>
+
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                <a
+                  href="#calculator"
+                  className="rounded-lg bg-blue-600 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-blue-700 active:scale-95"
+                >
+                  Request Consultation & Quote ↓
+                </a>
+                <a
+                  href="#themes"
+                  className="rounded-lg border border-slate-300 bg-white/90 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-slate-800 shadow-sm transition hover:bg-white"
+                >
+                  Explore Curated Portfolio ↓
+                </a>
+              </div>
+
+              {/* Metric Badges */}
+              <div className="mt-8 grid grid-cols-2 gap-4 border-t border-slate-200/70 pt-6 sm:grid-cols-4">
+                <div>
+                  <div className="font-serif text-2xl font-bold text-slate-900">500+</div>
+                  <div className="text-xs text-slate-600 font-medium">Distinguished Events</div>
+                </div>
+                <div>
+                  <div className="font-serif text-2xl font-bold text-slate-900">100%</div>
+                  <div className="text-xs text-slate-600 font-medium">Fresh Botanical Florals</div>
+                </div>
+                <div>
+                  <div className="font-serif text-2xl font-bold text-slate-900">In-House</div>
+                  <div className="text-xs text-slate-600 font-medium">Rigging & AV Tech</div>
+                </div>
+                <div>
+                  <div className="font-serif text-2xl font-bold text-slate-900">Pan-City</div>
+                  <div className="text-xs text-slate-600 font-medium">Hyderabad & Destinations</div>
+                </div>
+              </div>
             </div>
-            <div className="text-[8px] uppercase tracking-[0.2em] text-white/50">
-              Hyderabad Events & Decor
-            </div>
-          </div>
-        </a>
 
-        {/* Quick Nav Anchors */}
-        <div className="hidden items-center gap-5 text-[11px] font-medium uppercase tracking-[0.14em] text-white/70 lg:flex">
-          <a href="#hub" onClick={() => setActiveTabSection('catalog')} className="transition hover:text-[#D7A15D]">
-            Themes
-          </a>
-          <a href="#hub" onClick={() => setActiveTabSection('services')} className="transition hover:text-[#D7A15D]">
-            Production
-          </a>
-          <a href="#hub" onClick={() => setActiveTabSection('packages')} className="transition hover:text-[#D7A15D]">
-            Packages
-          </a>
-          <a href="#hub" onClick={() => setActiveTabSection('venues')} className="transition hover:text-[#D7A15D]">
-            Venues
-          </a>
-          <a href="#calculator" className="transition hover:text-[#D7A15D]">
-            Quote Calculator
-          </a>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => handleWhatsAppQuote()}
-            className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-[#D7A15D]/40 bg-white/5 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[#D7A15D] transition hover:bg-[#D7A15D] hover:text-[#201818]"
-          >
-            WhatsApp
-          </button>
-          <a
-            href="tel:+919010995180"
-            className="rounded-full bg-gradient-to-r from-[#D7A15D] to-[#C78B3F] px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[#201818] shadow-md transition hover:scale-105 active:scale-95"
-          >
-            Call 90109 95180
-          </a>
-        </div>
-      </nav>
-
-      {/* ───────────────── HERO (Compact, High-Energy) ───────────────── */}
-      <section className="relative overflow-hidden bg-[#201818] pb-10 pt-20 text-white md:pb-16 md:pt-28">
-        <div className="absolute inset-0 overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=2000&q=85"
-            alt="Hyderabad Wedding Mandap Decor"
-            className="h-full w-full object-cover object-center opacity-40"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#201818] via-[#201818]/85 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#201818] via-transparent to-[#201818]/40" />
-        </div>
-
-        <div className="relative mx-auto max-w-6xl px-4 md:px-6">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#D7A15D]/30 bg-white/5 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#D7A15D] backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#D7A15D] animate-ping" />
-              Hyderabad & Telangana Premier Event Designers
-            </div>
-
-            <h1 className="mt-4 font-serif text-3xl font-light leading-tight tracking-tight sm:text-5xl md:text-6xl">
-              Dream Decors. <span className="italic text-[#D7A15D]">Magical Celebrations.</span>
-            </h1>
-
-            <p className="mt-3 max-w-xl text-xs leading-relaxed text-white/75 sm:text-sm md:text-base">
-              From grand temple-style Telugu wedding mandaps, vibrant Haldi floral urlis, and Bollywood Sangeet truss stages to 1st birthday fairytale themes and sacred Gruhapravesam setups across Hyderabad.
-            </p>
-
-            {/* Quick Action Buttons */}
-            <div className="mt-5 flex flex-wrap items-center gap-2.5">
-              <a
-                href="#calculator"
-                className="rounded-full bg-gradient-to-r from-[#D7A15D] to-[#C78B3F] px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-[#201818] shadow-lg transition hover:brightness-110 active:scale-95"
-              >
-                Calculate Event Estimate ↓
-              </a>
-              <button
-                onClick={() => {
-                  const el = document.getElementById('hub')
-                  el?.scrollIntoView({ behavior: 'smooth' })
-                }}
-                className="rounded-full border border-white/20 bg-white/5 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-white backdrop-blur-md transition hover:bg-white/10"
-              >
-                Browse Decor Themes
-              </button>
-            </div>
-          </div>
-
-          {/* Compact Mini Metric Strip */}
-          <div className="mt-8 grid grid-cols-2 gap-2 border-t border-white/10 pt-4 sm:grid-cols-4 sm:gap-3">
-            <div className="rounded-xl border border-white/5 bg-white/5 px-3 py-2 backdrop-blur-sm">
-              <div className="font-serif text-lg font-bold text-[#D7A15D]">500+ Events</div>
-              <div className="text-[9px] uppercase tracking-wider text-white/60">Weddings & Milestones</div>
-            </div>
-            <div className="rounded-xl border border-white/5 bg-white/5 px-3 py-2 backdrop-blur-sm">
-              <div className="font-serif text-lg font-bold text-[#D7A15D]">100% Fresh Flowers</div>
-              <div className="text-[9px] uppercase tracking-wider text-white/60">Daily Bangalore Influx</div>
-            </div>
-            <div className="rounded-xl border border-white/5 bg-white/5 px-3 py-2 backdrop-blur-sm">
-              <div className="font-serif text-lg font-bold text-[#D7A15D]">In-House Truss & SFX</div>
-              <div className="text-[9px] uppercase tracking-wider text-white/60">Cold Pyro & 3D Sets</div>
-            </div>
-            <div className="rounded-xl border border-white/5 bg-white/5 px-3 py-2 backdrop-blur-sm">
-              <div className="font-serif text-lg font-bold text-[#D7A15D]">Pan-Hyderabad</div>
-              <div className="text-[9px] uppercase tracking-wider text-white/60">Full Venue Execution</div>
+            {/* Right Featured Image Frame */}
+            <div className="lg:col-span-5">
+              <div className="relative overflow-hidden rounded-3xl border border-white/80 bg-white/80 shadow-2xl backdrop-blur-xl">
+                <img
+                  src="/wow/Sangeet%20&%20DJ%20Night%20Concert%20Stag.jpeg"
+                  alt="Sangeet & DJ Night Concert Stage Setup"
+                  className="aspect-[4/3] w-full object-cover"
+                />
+                <div className="p-4 bg-white/95 backdrop-blur-md border-t border-slate-100">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600">
+                        Featured Production
+                      </span>
+                      <h3 className="font-serif text-base font-bold text-slate-900">
+                        Sangeet & DJ Night Concert Stage
+                      </h3>
+                    </div>
+                    <span className="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-700 border border-blue-100">
+                      Hyderabad Star Venues
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ───────────────── INTERACTIVE QUICK-HUB ───────────────── */}
-      <section id="hub" className="mx-auto max-w-6xl px-4 pt-8 md:px-6">
-        {/* Sticky-feeling Segmented Tabs */}
-        <div className="flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar gap-1.5 rounded-2xl border border-[#8B1A1A]/15 bg-white p-1.5 shadow-sm">
-          {[
-            { key: 'catalog', label: '🎪 Decor Themes', desc: 'Browse Setups' },
-            { key: 'services', label: '✨ Production Services', desc: 'Lighting & SFX' },
-            { key: 'packages', label: '💎 Packages & Pricing', desc: 'Transparent' },
-            { key: 'venues', label: '📍 Hyderabad Venues', desc: 'Coverage' },
-          ].map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTabSection(tab.key as any)}
-              className={`flex-shrink-0 rounded-xl px-4 py-2 text-left transition-all duration-200 ${
-                activeTabSection === tab.key
-                  ? 'bg-[#8B1A1A] text-white shadow-md'
-                  : 'text-[#554749] hover:bg-neutral-100'
-              }`}
-            >
-              <div className="text-xs font-bold leading-none">{tab.label}</div>
-            </button>
-          ))}
-        </div>
+      {/* ───────────────── SCROLLABLE CONTENT (SLIDES OVER LOCKED HERO WITH GLASS TRANSPARENCY) ───────────────── */}
+      <div className="relative z-20 rounded-t-[2.5rem] sm:rounded-t-[4rem] bg-white/40 shadow-[0_-25px_60px_rgba(15,23,42,0.18)] backdrop-blur-2xl border-t border-white/80 ring-1 ring-slate-900/5">
+        {/* ───────────────── OCCASION THEMES SECTION ───────────────── */}
+        <section id="themes" className="py-16 md:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200/60 pb-6">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-600">
+                  Event Catalog
+                </span>
+                <h2 className="mt-1 font-serif text-2xl font-bold text-slate-900 sm:text-4xl">
+                  Curated Occasions & Decor Styles
+                </h2>
+                <p className="mt-1 text-sm text-slate-700">
+                  Filter through our specialized setups crafted for Telugu weddings, corporate conferences, and family rituals.
+                </p>
+              </div>
 
-        {/* ────────────── TAB 1: DECOR THEMES ────────────── */}
-        {activeTabSection === 'catalog' && (
-          <div className="mt-6 animate-fadeIn">
-            {/* Filter Chips */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-2 no-scrollbar">
-              {[
-                { key: 'all', label: 'All Occasions' },
-                { key: 'wedding', label: '💍 Telugu Mandaps & Reception' },
-                { key: 'pre-wedding', label: '🌼 Haldi & Sangeet Nights' },
-                { key: 'milestone', label: '🌸 Half-Saree & Baby Shower' },
-                { key: 'birthday', label: '🎂 3D Theme Birthdays' },
-                { key: 'traditional', label: '🪔 Gruhapravesam & Pooja' },
-              ].map((cat) => (
-                <button
-                  key={cat.key}
-                  onClick={() => setSelectedCategory(cat.key)}
-                  className={`flex-shrink-0 rounded-full px-3.5 py-1.5 text-[11px] font-semibold transition ${
-                    selectedCategory === cat.key
-                      ? 'bg-[#201818] text-white shadow-sm'
-                      : 'border border-[#8B1A1A]/20 bg-white text-[#44383A] hover:bg-[#8B1A1A]/10'
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
+              {/* Clean Category Pills */}
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  { key: 'all', label: 'All Core Events' },
+                  { key: 'wedding', label: '💍 Complete Wedding' },
+                  { key: 'housewarming', label: '🪔 Housewarming (Gruhapravesam)' },
+                  { key: 'birthday', label: '🎂 Birthdays & Milestones' },
+                  { key: 'traditional', label: '🌸 Half-Saree & Sreemantham' },
+                  { key: 'corporate', label: '🏢 Corporate Conclaves' },
+                ].map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setSelectedCategory(tab.key)}
+                    className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition ${
+                      selectedCategory === tab.key
+                        ? 'bg-blue-600 text-white shadow-sm'
+                        : 'border border-white/60 bg-white/75 text-slate-700 hover:bg-white backdrop-blur-md'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* Compact Grid of Themes */}
-            <div className="mt-4 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Clean Grid of Cards */}
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {filteredThemes.map((theme) => (
                 <div
                   key={theme.id}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#8B1A1A]/15 bg-white p-3.5 shadow-sm transition-all duration-300 hover:border-[#8B1A1A]/40 hover:shadow-lg"
+                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-white/80 bg-white/80 shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-blue-300 hover:bg-white/95 hover:shadow-2xl"
                 >
                   <div>
-                    {/* Portrait Framed Image */}
-                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-neutral-100">
+                    {/* Clean Visual Frame */}
+                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
                       <img
                         src={theme.image}
                         alt={theme.title}
                         loading="lazy"
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute left-2.5 top-2.5 rounded-md bg-[#201818]/85 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-white backdrop-blur-sm shadow">
+                      <div className="absolute left-3 top-3 rounded-md bg-slate-900/80 px-2.5 py-1 text-[10px] font-semibold text-white backdrop-blur-sm">
                         {theme.occasionName}
                       </div>
                       {theme.badge && (
-                        <div className="absolute right-2.5 top-2.5 rounded-md bg-[#8B1A1A] px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-white shadow">
+                        <div className="absolute right-3 top-3 rounded-md bg-blue-600 px-2.5 py-1 text-[10px] font-bold uppercase text-white shadow-sm">
                           {theme.badge}
                         </div>
                       )}
                     </div>
 
-                    {/* Content */}
-                    <div className="mt-3">
-                      <div className="text-[10px] font-bold uppercase tracking-wider text-[#8B1A1A]">
+                    <div className="p-5">
+                      <div className="text-[11px] font-bold uppercase tracking-wider text-blue-600">
                         {theme.tagline}
                       </div>
-                      <h3 className="font-serif text-lg font-bold text-[#201818] leading-snug">
+                      <h3 className="mt-1 font-serif text-xl font-bold text-slate-900">
                         {theme.title}
                       </h3>
-                      <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-[#685D5D]">
+                      <p className="mt-2 text-xs leading-relaxed text-slate-600 line-clamp-2">
                         {theme.shortDesc}
                       </p>
 
-                      {/* Mini Highlights */}
-                      <div className="mt-2.5 flex flex-wrap gap-1">
+                      <div className="mt-4 space-y-1 border-t border-slate-100/80 pt-3">
                         {theme.highlights.slice(0, 2).map((h, i) => (
-                          <span
-                            key={i}
-                            className="rounded bg-[#FAF0E6] px-2 py-0.5 text-[10px] font-medium text-[#8B1A1A]"
-                          >
-                            ✓ {h}
-                          </span>
+                          <div key={i} className="flex items-center gap-2 text-xs text-slate-700">
+                            <span className="font-bold text-blue-600">✓</span>
+                            <span>{h}</span>
+                          </div>
                         ))}
                       </div>
                     </div>
                   </div>
 
-                  {/* Actions Bar */}
-                  <div className="mt-3.5 flex items-center justify-between border-t border-neutral-100 pt-2.5">
+                  <div className="flex items-center justify-between border-t border-slate-100/80 bg-slate-50/60 p-4">
                     <div>
-                      <span className="block text-[9px] uppercase tracking-wider text-neutral-400">
-                        Starting Estimate
+                      <span className="block text-[10px] uppercase font-semibold text-slate-400">
+                        Scope & Design
                       </span>
-                      <span className="font-serif text-sm font-bold text-[#8B1A1A]">
-                        {theme.priceEst}
+                      <span className="font-serif text-sm font-bold text-slate-800">
+                        Custom End-to-End Setup
                       </span>
                     </div>
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-2">
                       <button
-                        onClick={() => setActiveModalTheme(theme)}
-                        className="rounded-lg border border-neutral-200 bg-neutral-50 px-2.5 py-1.5 text-[11px] font-semibold text-[#201818] transition hover:bg-neutral-100"
+                        onClick={() => setSelectedThemeModal(theme)}
+                        className="rounded-lg border border-slate-200 bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-white"
                       >
                         Details
                       </button>
                       <button
                         onClick={() => handleWhatsAppQuote(theme.title)}
-                        className="rounded-lg bg-[#8B1A1A] px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm transition hover:bg-[#6b1414]"
+                        className="rounded-lg bg-blue-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-sm transition hover:bg-blue-700"
                       >
                         Enquire
                       </button>
@@ -585,33 +496,43 @@ export default function CelebrationsPage() {
               ))}
             </div>
           </div>
-        )}
+        </section>
 
-        {/* ────────────── TAB 2: PRODUCTION SERVICES ────────────── */}
-        {activeTabSection === 'services' && (
-          <div className="mt-6 animate-fadeIn">
-            <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
-              {productionServices.map((svc, i) => (
+        {/* ───────────────── PRODUCTION SERVICES (LIGHT BENTO) ───────────────── */}
+        <section id="services" className="border-y border-white/50 bg-white/30 backdrop-blur-md py-16 md:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl">
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">
+                Comprehensive Production
+              </span>
+              <h2 className="mt-1 font-serif text-2xl font-bold text-slate-900 sm:text-4xl">
+                End-to-End Infrastructure & Execution
+              </h2>
+              <p className="mt-2 text-sm text-slate-700">
+                We own and manage our complete inventory of metal truss rigs, 3D theme fabrication, intelligent lighting consoles, audio systems, and fresh flower supply chains.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {corporateServices.map((svc, i) => (
                 <div
                   key={i}
-                  className="rounded-2xl border border-[#8B1A1A]/15 bg-white p-4 shadow-sm transition-all hover:border-[#8B1A1A]/40 hover:shadow-md"
+                  className="rounded-2xl border border-white/80 bg-white/80 backdrop-blur-xl p-6 shadow-md transition hover:border-blue-200 hover:bg-white/95 hover:shadow-xl"
                 >
-                  <div className="flex items-center gap-2.5">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#FAF0E6] text-xl">
-                      {svc.icon}
-                    </span>
-                    <h3 className="font-serif text-base font-bold text-[#201818]">
-                      {svc.title}
-                    </h3>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-2xl border border-blue-100">
+                    {svc.icon}
                   </div>
-                  <p className="mt-2 text-xs leading-relaxed text-[#685D5D]">
+                  <h3 className="mt-4 font-serif text-lg font-bold text-slate-900">
+                    {svc.title}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-600">
                     {svc.desc}
                   </p>
-                  <div className="mt-3 flex flex-wrap gap-1">
+                  <div className="mt-4 flex flex-wrap gap-1.5">
                     {svc.tags.map((t, idx) => (
                       <span
                         key={idx}
-                        className="rounded-full bg-neutral-100 px-2 py-0.5 text-[9px] font-medium text-[#8B1A1A]"
+                        className="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-medium text-slate-600"
                       >
                         {t}
                       </span>
@@ -621,45 +542,54 @@ export default function CelebrationsPage() {
               ))}
             </div>
           </div>
-        )}
+        </section>
 
-        {/* ────────────── TAB 3: PACKAGES & PRICING ────────────── */}
-        {activeTabSection === 'packages' && (
-          <div className="mt-6 animate-fadeIn">
-            <div className="grid gap-4 lg:grid-cols-3">
-              {celebrationPackages.map((pkg, i) => (
+        {/* ───────────────── PRODUCTION PACKAGES ───────────────── */}
+        <section id="packages" className="py-16 md:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">
+                Production Tiers
+              </span>
+              <h2 className="mt-1 font-serif text-2xl font-bold text-slate-900 sm:text-4xl">
+                Curated Event Decor Packages
+              </h2>
+              <p className="mt-2 text-sm text-slate-700">
+                Comprehensive all-inclusive packages tailored to venue scale. Includes fabrication, structural rigging, fresh florals, ambient lighting, and dedicated on-site event directors.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-8 lg:grid-cols-3">
+              {corporatePackages.map((pkg, i) => (
                 <div
                   key={i}
-                  className={`relative flex flex-col justify-between rounded-2xl p-5 transition-all ${
+                  className={`relative flex flex-col justify-between rounded-2xl p-7 backdrop-blur-xl transition-all ${
                     pkg.popular
-                      ? 'border-2 border-[#8B1A1A] bg-white shadow-xl'
-                      : 'border border-[#8B1A1A]/15 bg-white shadow-sm'
+                      ? 'border-2 border-blue-600 bg-white/90 shadow-2xl lg:-translate-y-2'
+                      : 'border border-white/80 bg-white/80 shadow-md hover:bg-white/90'
                   }`}
                 >
                   {pkg.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#8B1A1A] px-3 py-0.5 text-[9px] font-bold uppercase tracking-widest text-white shadow">
-                      Most Chosen by Families
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-4 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-sm">
+                      Most Popular Choice
                     </div>
                   )}
 
                   <div>
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-[#8B1A1A]">
+                    <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
                       {pkg.tag}
                     </span>
-                    <h3 className="mt-0.5 font-serif text-xl font-bold text-[#201818]">
+                    <h3 className="mt-1 font-serif text-2xl font-bold text-slate-900">
                       {pkg.name}
                     </h3>
-                    <div className="mt-2 flex items-baseline gap-1">
-                      <span className="font-serif text-3xl font-bold text-[#8B1A1A]">
-                        {pkg.price}
-                      </span>
-                      <span className="text-xs text-neutral-400">/ starting</span>
-                    </div>
+                    <p className="mt-2 text-xs font-medium text-slate-500">
+                      {pkg.subtitle}
+                    </p>
 
-                    <div className="mt-4 space-y-1.5 border-t border-neutral-100 pt-3">
+                    <div className="mt-6 space-y-2.5 border-t border-slate-100/80 pt-5">
                       {pkg.features.map((f, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-xs text-[#44383A]">
-                          <span className="font-bold text-[#8B1A1A]">✓</span>
+                        <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-700">
+                          <span className="font-bold text-blue-600">✓</span>
                           <span>{f}</span>
                         </div>
                       ))}
@@ -668,357 +598,239 @@ export default function CelebrationsPage() {
 
                   <button
                     onClick={() => handleWhatsAppQuote(pkg.name)}
-                    className={`mt-5 w-full rounded-xl py-2.5 text-xs font-bold uppercase tracking-wider transition ${
+                    className={`mt-8 w-full rounded-lg py-3 text-xs font-bold uppercase tracking-wider transition ${
                       pkg.popular
-                        ? 'bg-[#8B1A1A] text-white shadow-md hover:bg-[#6b1414]'
-                        : 'border border-[#201818] text-[#201818] hover:bg-[#201818] hover:text-white'
+                        ? 'bg-blue-600 text-white shadow-sm hover:bg-blue-700'
+                        : 'border border-slate-300 bg-white/90 text-slate-800 hover:bg-white'
                     }`}
                   >
-                    Get Package Quote on WhatsApp
+                    Inquire Package on WhatsApp
                   </button>
                 </div>
               ))}
             </div>
           </div>
-        )}
+        </section>
 
-        {/* ────────────── TAB 4: HYDERABAD VENUES ────────────── */}
-        {activeTabSection === 'venues' && (
-          <div className="mt-6 rounded-2xl border border-[#8B1A1A]/15 bg-white p-5 shadow-sm animate-fadeIn">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-neutral-100 pb-4">
+        {/* ───────────────── CORPORATE ESTIMATOR & CALCULATOR ───────────────── */}
+        <section id="calculator" className="border-t border-white/50 bg-white/30 backdrop-blur-md py-16 md:py-24">
+          <div className="mx-auto max-w-4xl rounded-3xl border border-white/80 bg-white/85 p-6 sm:p-10 shadow-2xl backdrop-blur-2xl">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-6">
               <div>
-                <h3 className="font-serif text-lg font-bold text-[#201818]">
-                  Event Decor Across Hyderabad & Destination Venues
-                </h3>
-                <p className="text-xs text-[#685D5D]">
-                  Our fabrication trucks and setup crews operate across all major star hotels, convention centers, and home communities.
-                </p>
-              </div>
-              <a
-                href="tel:9010995180"
-                className="inline-flex shrink-0 items-center justify-center rounded-xl bg-[#8B1A1A] px-4 py-2 text-xs font-bold text-white shadow hover:bg-[#6b1414]"
-              >
-                Call for Venue Recce
-              </a>
-            </div>
-
-            <div className="mt-4 flex flex-wrap gap-2">
-              {hyderabadVenues.map((loc, i) => (
-                <span
-                  key={i}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-[#8B1A1A]/20 bg-[#FAF6F2] px-3 py-1.5 text-xs font-medium text-[#201818]"
-                >
-                  <span className="text-[#8B1A1A]">📍</span>
-                  {loc}
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-600">
+                  Instant Estimate Tool
                 </span>
-              ))}
-            </div>
-
-            <div className="mt-4 grid gap-2 sm:grid-cols-3 border-t border-neutral-100 pt-4 text-xs text-[#554749]">
-              <div className="rounded-lg bg-neutral-50 p-2.5">
-                <strong className="block text-[#201818]">Site Recce & 3D Pre-Vis:</strong> In-person measurements and 3D visual preview before fabrication.
+                <h2 className="mt-1 font-serif text-2xl font-bold text-slate-900 sm:text-3xl">
+                  Event Decor & Production Calculator
+                </h2>
               </div>
-              <div className="rounded-lg bg-neutral-50 p-2.5">
-                <strong className="block text-[#201818]">Punctual Timelines:</strong> Venue handed over 3 hours before guest arrival guaranteed.
+              <p className="max-w-sm text-xs text-slate-600">
+                Select your parameters below to generate a tailored estimate and check slot availability instantly on WhatsApp.
+              </p>
+            </div>
+
+            <div className="mt-8 grid gap-5 sm:grid-cols-2">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Your Name / Organization
+                </label>
+                <input
+                  type="text"
+                  value={calcName}
+                  onChange={(e) => setCalcName(e.target.value)}
+                  placeholder="e.g. Sravya Reddy / Tech Corp Ltd"
+                  className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
               </div>
-              <div className="rounded-lg bg-neutral-50 p-2.5">
-                <strong className="block text-[#201818]">Zero-Hassle Takedown:</strong> Clean disassembly and waste removal included.
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Event Date
+                </label>
+                <input
+                  type="date"
+                  value={calcDate}
+                  onChange={(e) => setCalcDate(e.target.value)}
+                  className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
               </div>
-            </div>
-          </div>
-        )}
-      </section>
 
-      {/* ───────────────── INSTANT EVENT QUOTE CALCULATOR ───────────────── */}
-      <section id="calculator" className="mx-auto max-w-6xl px-4 pt-10 md:px-6">
-        <div className="rounded-3xl border border-white/10 bg-[#201818] p-6 text-white shadow-2xl md:p-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-5">
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#D7A15D]">
-                Instant WhatsApp Quote
-              </span>
-              <h2 className="mt-1 font-serif text-2xl font-light sm:text-3xl">
-                Event Decor & Production Estimator
-              </h2>
-            </div>
-            <p className="max-w-md text-xs text-white/70">
-              Select your celebration details below to immediately trigger an estimate and check date availability directly on WhatsApp.
-            </p>
-          </div>
-
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <div>
-              <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#D7A15D]">
-                Your Name / Family Name
-              </label>
-              <input
-                type="text"
-                value={calcName}
-                onChange={(e) => setCalcName(e.target.value)}
-                placeholder="e.g. Rao Family / Rajesh"
-                className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#D7A15D] focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#D7A15D]">
-                Event Date
-              </label>
-              <input
-                type="date"
-                value={calcDate}
-                onChange={(e) => setCalcDate(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#D7A15D] focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#D7A15D]">
-                Celebration Occasion
-              </label>
-              <select
-                value={calcEventType}
-                onChange={(e) => setCalcEventType(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-white/15 bg-[#2A1E1E] px-3 py-2 text-xs text-white focus:border-[#D7A15D] focus:outline-none"
-              >
-                <option value="Grand Telugu Wedding Mandap">Grand Telugu Wedding Mandap</option>
-                <option value="Vibrant Haldi & Pellikuthuru Setup">Vibrant Haldi & Pellikuthuru Setup</option>
-                <option value="Sangeet & DJ Night Concert Stage">Sangeet & DJ Night Concert Stage</option>
-                <option value="Wedding Reception & Fairy Tunnel">Wedding Reception & Fairy Tunnel</option>
-                <option value="Half-Saree / Langa Voni Ceremony">Half-Saree / Langa Voni Ceremony</option>
-                <option value="Sreemantham / Baby Shower">Sreemantham / Baby Shower</option>
-                <option value="3D Kids Theme Birthday Party">3D Kids Theme Birthday Party</option>
-                <option value="Gruhapravesam & Pooja Ritual">Gruhapravesam & Pooja Ritual</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#D7A15D]">
-                Venue Area in Hyderabad
-              </label>
-              <select
-                value={calcLocation}
-                onChange={(e) => setCalcLocation(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-white/15 bg-[#2A1E1E] px-3 py-2 text-xs text-white focus:border-[#D7A15D] focus:outline-none"
-              >
-                {hyderabadVenues.map((loc, i) => (
-                  <option key={i} value={loc}>
-                    {loc}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="mt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="flex flex-wrap items-center gap-3 text-xs text-white/75">
-              <div className="flex items-center gap-1.5">
-                <span>🏛️ Venue:</span>
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Occasion Type
+                </label>
                 <select
-                  value={calcVenueType}
-                  onChange={(e) => setCalcVenueType(e.target.value)}
-                  className="rounded-lg border border-white/15 bg-[#2A1E1E] px-2.5 py-1 text-xs text-white focus:outline-none"
+                  value={calcEventType}
+                  onChange={(e) => setCalcEventType(e.target.value)}
+                  className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
                 >
-                  <option value="Home / Backyard / Terrace">Home / Backyard / Terrace</option>
-                  <option value="Apartment Clubhouse / Community Hall">Apartment Clubhouse</option>
-                  <option value="Convention Center / Star Hotel">Convention Center / Star Hotel</option>
-                  <option value="Open Lawn / Farmhouse / Resort">Open Lawn / Resort</option>
+                  <option value="Complete End-to-End Wedding (Pelli)">Complete End-to-End Wedding (Pelli)</option>
+                  <option value="Housewarming (Gruhapravesam) & Sacred Homam">Housewarming (Gruhapravesam) & Sacred Homam</option>
+                  <option value="Grand Birthday & Kids Milestone Theme">Grand Birthday & Kids Milestone Theme</option>
+                  <option value="Half-Saree (Langa Voni) & Sreemantham Ceremony">Half-Saree (Langa Voni) & Sreemantham Ceremony</option>
+                  <option value="Haldi, Mehendi & Sangeet Production">Haldi, Mehendi & Sangeet Production</option>
+                  <option value="Corporate Conclave, Summit & Product Launch">Corporate Conclave, Summit & Product Launch</option>
                 </select>
               </div>
 
-              <div className="flex items-center gap-1.5">
-                <span>👥 Guests:</span>
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Location in Hyderabad
+                </label>
                 <select
-                  value={calcGuestCount}
-                  onChange={(e) => setCalcGuestCount(e.target.value)}
-                  className="rounded-lg border border-white/15 bg-[#2A1E1E] px-2.5 py-1 text-xs text-white focus:outline-none"
+                  value={calcLocation}
+                  onChange={(e) => setCalcLocation(e.target.value)}
+                  className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
                 >
-                  <option value="50 - 150 Guests (Intimate)">50 - 150 (Intimate)</option>
-                  <option value="150 - 350 Guests (Medium)">150 - 350 (Medium)</option>
-                  <option value="350 - 1000+ Guests (Grand)">350 - 1000+ (Grand)</option>
+                  {hyderabadVenues.map((loc, i) => (
+                    <option key={i} value={loc}>
+                      {loc}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 w-full sm:w-auto">
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 pt-6">
+              <div className="flex flex-wrap items-center gap-3 text-xs text-slate-700">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-semibold">Venue:</span>
+                  <select
+                    value={calcVenueType}
+                    onChange={(e) => setCalcVenueType(e.target.value)}
+                    className="rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs text-slate-900 focus:outline-none"
+                  >
+                    <option value="Convention Center / Star Hotel">Convention Center / Hotel</option>
+                    <option value="Open Lawn / Farmhouse / Resort">Open Lawn / Resort</option>
+                    <option value="Home / Backyard / Terrace">Home / Backyard</option>
+                    <option value="Apartment Clubhouse">Apartment Clubhouse</option>
+                  </select>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <span className="font-semibold">Guests:</span>
+                  <select
+                    value={calcGuestCount}
+                    onChange={(e) => setCalcGuestCount(e.target.value)}
+                    className="rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs text-slate-900 focus:outline-none"
+                  >
+                    <option value="50 - 150 Guests (Intimate)">50 - 150 (Intimate)</option>
+                    <option value="150 - 350 Guests (Medium)">150 - 350 (Medium)</option>
+                    <option value="350 - 1000+ Guests (Grand)">350 - 1000+ (Grand)</option>
+                  </select>
+                </div>
+              </div>
+
               <button
                 onClick={() => handleWhatsAppQuote()}
-                className="w-full sm:w-auto rounded-full bg-gradient-to-r from-[#D7A15D] to-[#C78B3F] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-[#201818] shadow-lg transition hover:scale-105 active:scale-95"
+                className="w-full sm:w-auto rounded-lg bg-blue-600 px-7 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition hover:bg-blue-700 active:scale-95"
               >
-                Send Quote Request ↗
+                Get WhatsApp Quote ↗
               </button>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      {/* ───────────────── FAQS (Compact Accordion) ───────────────── */}
-      <section className="mx-auto max-w-4xl px-4 pt-10 pb-6 md:px-6">
-        <div className="text-center">
-          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#8B1A1A]">
-            Planning Questions?
-          </span>
-          <h2 className="mt-1 font-serif text-2xl font-light text-[#201818]">
-            Frequently Asked Questions
-          </h2>
-        </div>
-
-        <div className="mt-5 space-y-2.5">
-          {celebrationFaqs.map((faq, i) => (
-            <details
-              key={i}
-              className="group rounded-xl border border-[#8B1A1A]/15 bg-white p-3.5 shadow-sm transition open:shadow-md"
-            >
-              <summary className="flex cursor-pointer items-center justify-between text-xs font-bold text-[#201818]">
-                <span>{faq.q}</span>
-                <span className="text-sm font-normal text-[#8B1A1A] transition-transform duration-200 group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <p className="mt-2 text-xs leading-relaxed text-[#685D5D]">
-                {faq.a}
-              </p>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      {/* ───────────────── COMPACT THEME DETAILS MODAL ───────────────── */}
-      {activeModalTheme && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/70 p-0 sm:p-4 backdrop-blur-sm animate-fadeIn">
+      {/* ───────────────── THEME DETAILS MODAL ───────────────── */}
+      {selectedThemeModal && (
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-900/60 p-0 sm:p-4 backdrop-blur-sm animate-fadeIn">
           <div
-            className="w-full max-w-xl max-h-[88vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl bg-white p-5 sm:p-6 shadow-2xl text-[#201818] animate-slideUp"
+            className="w-full max-w-xl max-h-[88vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl text-slate-900 animate-slideUp"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <span className="rounded bg-[#FAF0E6] px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-[#8B1A1A]">
-                  {activeModalTheme.occasionName}
+                <span className="rounded-md bg-blue-50 px-2.5 py-1 text-[10px] font-bold uppercase text-blue-700 border border-blue-100">
+                  {selectedThemeModal.occasionName}
                 </span>
-                <h3 className="mt-1.5 font-serif text-2xl font-bold text-[#201818]">
-                  {activeModalTheme.title}
+                <h3 className="mt-2 font-serif text-2xl font-bold text-slate-900">
+                  {selectedThemeModal.title}
                 </h3>
-                <p className="text-xs font-medium text-[#8B1A1A]">
-                  {activeModalTheme.tagline}
+                <p className="text-xs font-medium text-blue-600">
+                  {selectedThemeModal.tagline}
                 </p>
               </div>
               <button
-                onClick={() => setActiveModalTheme(null)}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 text-neutral-500 hover:bg-neutral-200"
+                onClick={() => setSelectedThemeModal(null)}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200"
               >
                 ✕
               </button>
             </div>
 
-            <div className="mt-4 relative aspect-[16/10] max-h-[340px] w-full overflow-hidden rounded-2xl bg-neutral-100">
+            <div className="mt-4 relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-100 border border-slate-200">
               <img
-                src={activeModalTheme.image}
-                alt={activeModalTheme.title}
+                src={selectedThemeModal.image}
+                alt={selectedThemeModal.title}
                 className="h-full w-full object-cover"
               />
             </div>
 
-            <p className="mt-4 text-xs leading-relaxed text-[#554749]">
-              {activeModalTheme.fullDesc}
+            <p className="mt-4 text-xs leading-relaxed text-slate-600">
+              {selectedThemeModal.fullDesc}
             </p>
 
-            <div className="mt-4 rounded-xl bg-neutral-50 p-3.5 border border-neutral-100">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+            <div className="mt-4 rounded-xl bg-slate-50 border border-slate-200 p-4">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
                 Setup Inclusions:
               </div>
               <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
-                {activeModalTheme.highlights.map((h, i) => (
-                  <div key={i} className="flex items-center gap-1.5 text-xs text-[#201818]">
-                    <span className="text-[#8B1A1A] font-bold">✓</span>
+                {selectedThemeModal.highlights.map((h, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-slate-800">
+                    <span className="text-blue-600 font-bold">✓</span>
                     <span>{h}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="mt-4 flex items-center justify-between border-t border-neutral-100 pt-3">
+            <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
               <div>
-                <span className="text-[9px] uppercase tracking-wider text-neutral-400">
-                  Estimated Pricing
+                <span className="text-[10px] uppercase font-semibold text-slate-400">
+                  Custom Quotation
                 </span>
-                <div className="font-serif text-lg font-bold text-[#8B1A1A]">
-                  {activeModalTheme.priceEst}
+                <div className="font-serif text-sm font-bold text-slate-800">
+                  Tailored to Venue & Scale
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => {
-                    handleWhatsAppQuote(activeModalTheme.title)
-                    setActiveModalTheme(null)
-                  }}
-                  className="rounded-xl bg-[#8B1A1A] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow hover:bg-[#6b1414]"
-                >
-                  Book on WhatsApp ↗
-                </button>
-              </div>
+              <button
+                onClick={() => {
+                  handleWhatsAppQuote(selectedThemeModal.title)
+                  setSelectedThemeModal(null)
+                }}
+                className="rounded-lg bg-blue-600 px-5 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:bg-blue-700"
+              >
+                Inquire on WhatsApp ↗
+              </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* ───────────────── STICKY MOBILE QUICK-ACTION BAR ───────────────── */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between border-t border-white/15 bg-[#201818]/95 px-4 py-2.5 backdrop-blur-md lg:hidden">
+      {/* ───────────────── FLOATING SIDE DOCK (CALL & WHATSAPP) ───────────────── */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2.5">
         <a
           href="tel:+919010995180"
-          className="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-3.5 py-2 text-[11px] font-bold uppercase tracking-wider text-white"
+          className="group flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-xs font-bold text-slate-800 shadow-xl border border-slate-200 transition-all duration-300 hover:scale-105 hover:border-blue-300 hover:text-blue-600 active:scale-95"
         >
-          📞 Call
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-600 text-xs font-normal">
+            📞
+          </span>
+          <span className="hidden sm:inline">Call +91 90109 95180</span>
+          <span className="sm:hidden">Call</span>
         </a>
+
         <button
           onClick={() => handleWhatsAppQuote()}
-          className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#D7A15D] to-[#C78B3F] px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-[#201818] shadow-md"
+          className="group flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-xs font-bold text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-[#20bd5a] active:scale-95"
         >
-          🎉 Instant Event Quote
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20 text-white text-sm">
+            💬
+          </span>
+          <span>WhatsApp Chat</span>
         </button>
       </div>
-
-      {/* ───────────────── FOOTER (Compact) ───────────────── */}
-      <footer className="mt-10 bg-[#1A1212] px-4 py-8 text-white md:px-6">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 border-b border-white/10 pb-6 text-center sm:flex-row sm:text-left">
-          <div className="flex items-center gap-2.5">
-            <img
-              src="/images/alca-logo-1.webp"
-              alt="ALCA Logo"
-              className="h-8 w-8 rounded-full object-cover ring-1 ring-white/20"
-            />
-            <div>
-              <div className="font-serif text-lg font-bold tracking-wider text-white">
-                WOW CELEBRATIONS
-              </div>
-              <div className="text-[9px] uppercase tracking-widest text-[#D7A15D]">
-                Hyderabad Event Decor & Production by ALCA
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 text-[11px] uppercase tracking-wider text-white/70">
-            <a href="tel:9010995180" className="hover:text-white">
-              +91 90109 95180
-            </a>
-            <a
-              href="https://instagram.com/alca_urs_emerveil_celebrations"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-white"
-            >
-              Instagram
-            </a>
-            <a href="/" className="hover:text-white">
-              All ALCA Services
-            </a>
-          </div>
-        </div>
-
-        <div className="mx-auto mt-4 flex max-w-6xl flex-col items-center justify-between gap-2 text-[9px] uppercase tracking-widest text-white/40 sm:flex-row">
-          <div>© {new Date().getFullYear()} WOW Magical Celebrations · Hyderabad, Telangana</div>
-          <div>Bespoke Wedding Mandaps, Haldi Setups & Theme Productions</div>
-        </div>
-      </footer>
     </main>
   )
 }
