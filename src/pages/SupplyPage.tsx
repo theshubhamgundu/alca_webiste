@@ -170,15 +170,18 @@ export default function SupplyPage() {
       {/* NAVIGATION */}
       <header className="sticky top-0 z-40 border-b border-[#19351D]/10 bg-[#F4F1E8]/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[1450px] items-center justify-between px-5 py-5 lg:px-10">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-[#687365]">
-              Supply & Manufacturing
-            </p>
+          <a href="/" className="flex items-center gap-3">
+            <img src="/images/alca-logo-1.webp" alt="ALCA Logo" className="h-10 w-10 rounded-full object-cover shadow-sm" />
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-[#687365]">
+                Supply & Manufacturing
+              </p>
 
-            <h1 className="mt-1 font-serif text-2xl tracking-tight">
-              ALCA
-            </h1>
-          </div>
+              <h1 className="mt-0.5 font-serif text-2xl tracking-tight">
+                ALCA
+              </h1>
+            </div>
+          </a>
 
           <nav className="hidden items-center gap-9 text-xs uppercase tracking-[0.18em] lg:flex">
             <a href="#shop" className="hover:opacity-50">

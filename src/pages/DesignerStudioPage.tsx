@@ -2,13 +2,13 @@ import { useState } from 'react'
 
 const images = {
   hero:
-    'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=2400&q=90',
+    'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=2400&q=90',
 
   bridal:
-    'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=1600&q=90',
+    'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90',
 
   saree:
-    'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90',
+    'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1600&q=90',
 
   embroidery:
     'https://images.unsplash.com/photo-1610189012906-6f3d8c2c5a0e?auto=format&fit=crop&w=1600&q=90',
@@ -17,10 +17,10 @@ const images = {
     'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1600&q=90',
 
   fashion:
-    'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1600&q=90',
+    'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1600&q=90',
 
   fabric:
-    'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1600&q=90',
+    'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1600&q=90',
 }
 
 const collections = [
@@ -140,10 +140,11 @@ export default function DesignerStudioPage() {
       <nav className="fixed left-1/2 top-5 z-50 flex w-[calc(100%-32px)] max-w-7xl -translate-x-1/2 items-center justify-between rounded-full border border-white/10 bg-[#18271E]/90 px-5 py-3 text-white shadow-2xl backdrop-blur-xl">
 
         <a
-          href="#"
-          className="font-serif text-xl tracking-[0.08em]"
+          href="/"
+          className="flex items-center gap-2 font-serif text-xl tracking-[0.08em]"
         >
-          STUDIO<span className="text-[#B7A06B]">.</span>
+          <img src="/images/alca-logo-1.webp" alt="ALCA Logo" className="h-8 w-8 rounded-full object-cover shadow-sm" />
+          <span>STUDIO<span className="text-[#B7A06B]">.</span></span>
         </a>
 
         <div className="hidden items-center gap-8 text-[10px] uppercase tracking-[0.2em] md:flex">

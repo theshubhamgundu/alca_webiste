@@ -2,25 +2,25 @@ import { useState } from 'react'
 
 const images = {
   hero:
-    'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2400&q=90',
+    'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=2400&q=90',
 
   wedding:
-    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=90',
+    'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90',
 
   birthday:
-    'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1600&q=90',
+    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1600&q=90',
 
   decor:
-    'https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1600&q=90',
+    'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1600&q=90',
 
   flowers:
-    'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=1600&q=90',
+    'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1600&q=90',
 
   celebration:
-    'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=90',
+    'https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1600&q=90',
 
   venue:
-    'https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1600&q=90',
+    'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1600&q=90',
 }
 
 const experiences = [
@@ -129,10 +129,11 @@ export default function CelebrationsPage() {
       <nav className="fixed left-1/2 top-5 z-50 flex w-[calc(100%-32px)] max-w-7xl -translate-x-1/2 items-center justify-between rounded-full border border-white/10 bg-[#201818]/90 px-5 py-3 text-white shadow-2xl backdrop-blur-xl">
 
         <a
-          href="#"
-          className="font-serif text-xl tracking-[0.08em]"
+          href="/"
+          className="flex items-center gap-2 font-serif text-xl tracking-[0.08em]"
         >
-          WOW<span className="text-[#D7A15D]">.</span>
+          <img src="/images/alca-logo-1.webp" alt="ALCA Logo" className="h-8 w-8 rounded-full object-cover shadow-sm" />
+          <span>WOW<span className="text-[#D7A15D]">.</span></span>
         </a>
 
         <div className="hidden items-center gap-8 text-[10px] uppercase tracking-[0.2em] md:flex">

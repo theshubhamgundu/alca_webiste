@@ -4,6 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    if (window.location.pathname.endsWith('/index.html')) {
+      const cleanPath = window.location.pathname.replace(/\/index\.html$/, '') || '/';
+      window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+    }
+  </script>
   <title>ALCA Bites — Wholesome Snacks, Real Ingredients</title>
   <meta name="description"
     content="Looking for the best healthy snacks and food near you in Gudivada? ALCA Bites offers the finest wholesome veggie crunches and fruit snacks in Andhra Pradesh, made with 100% real ingredients.">
@@ -55,7 +61,7 @@
       "description": "Premium, wholesome snacks crafted with 100% real ingredients.",
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+91-9490703566",
+        "telephone": "+91-9010995180",
         "contactType": "customer service"
       }
     },
@@ -66,7 +72,7 @@
       "image": "https://res.cloudinary.com/du61o2usw/image/upload/q_auto,f_auto/v1777263290/alca_logo_iqbnfn.png",
       "@id": "https://alca-bites.vercel.app/",
       "url": "https://alca-bites.vercel.app/",
-      "telephone": "+919490703566",
+      "telephone": "+919010995180",
       "priceRange": "₹",
       "address": {
         "@type": "PostalAddress",
@@ -916,16 +922,20 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
       }
+
       .prod-card {
         border-radius: 18px;
       }
+
       .prod-body {
         padding: 12px 12px 16px;
       }
+
       .prod-name {
         font-size: 15px;
         margin-bottom: 2px;
       }
+
       .prod-tagline {
         font-size: 10px;
         margin-bottom: 8px;
@@ -934,14 +944,17 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
+
       .prod-tags {
         display: none;
       }
+
       .prod-footer {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
       }
+
       .btn-order {
         width: 100%;
         justify-content: center;
@@ -1708,8 +1721,13 @@
     }
 
     @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
     }
 
     .review-grid {
@@ -1752,7 +1770,7 @@
       left: 0;
       right: 0;
       padding: 32px 16px 14px;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
       color: white;
       font-size: 13px;
       font-weight: 600;
@@ -1775,7 +1793,7 @@
     .review-lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.85);
+      background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(8px);
       z-index: 9999;
       display: none;
@@ -1791,15 +1809,20 @@
     }
 
     @keyframes lbFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     .review-lightbox img {
       max-width: 90vw;
       max-height: 90vh;
       border-radius: 16px;
-      box-shadow: 0 24px 80px -20px rgba(0,0,0,0.5);
+      box-shadow: 0 24px 80px -20px rgba(0, 0, 0, 0.5);
       object-fit: contain;
     }
 
@@ -1810,8 +1833,8 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       color: white;
       font-size: 22px;
       display: flex;
@@ -1822,7 +1845,7 @@
     }
 
     .review-lightbox-close:hover {
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
     }
 
     @media (max-width: 800px) {
@@ -1830,6 +1853,7 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
       }
+
       .review-gallery-loading {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
@@ -1841,9 +1865,11 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
       }
+
       .review-screenshot {
         border-radius: 14px;
       }
+
       .review-gallery-loading {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
@@ -3241,11 +3267,11 @@
       color: #FFF !important;
       text-decoration: none !important;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       width: 220px;
       border: none;
     }
-    
+
     .f-contact-bar:hover {
       transform: translateY(-2px);
       filter: brightness(1.1);
@@ -3255,9 +3281,11 @@
     .f-contact-bar.cb-phone {
       background: #4A7C2A;
     }
+
     .f-contact-bar.cb-wa {
       background: #25D366;
     }
+
     .f-contact-bar.cb-ig {
       background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     }
@@ -3716,20 +3744,115 @@
         font-size: 13px;
       }
     }
+
+    /* NATURAL JUICES SECTION STYLES */
+    .juices-section {
+      background: #FAF8F2;
+      border-top: 1px solid rgba(74, 124, 42, 0.08);
+      position: relative;
+      padding: 100px 5%;
+    }
+
+    .juice-perks-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 32px 0 40px;
+      background: #FFFFFF;
+      padding: 20px 24px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(30, 77, 10, 0.04);
+    }
+
+    .j-perk {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .j-perk-icon {
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #FFF7ED;
+      flex-shrink: 0;
+    }
+
+    .j-perk div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .j-perk strong {
+      font-size: 13px;
+      color: var(--dk);
+      font-weight: 600;
+    }
+
+    .j-perk span {
+      font-size: 11px;
+      color: var(--tl);
+      margin-top: 2px;
+    }
+
+    .juice-card {
+      background: #FFFFFF;
+      border-color: rgba(224, 122, 48, 0.2);
+    }
+
+    .juice-card:hover {
+      box-shadow: 0 20px 56px rgba(224, 122, 48, 0.16);
+      border-color: #E07A30;
+    }
+
+    .juice-card .btn-order {
+      background: #E07A30;
+    }
+
+    .juice-card .btn-order:hover {
+      background: #c8651f;
+    }
+
+    .j-btn.on,
+    .j-btn:hover {
+      background: #E07A30 !important;
+      border-color: #E07A30 !important;
+      color: #FFF !important;
+    }
+
+    @media (max-width: 900px) {
+      .juice-perks-strip {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .juice-perks-strip {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 16px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <a href="https://wa.me/919490703566?text=Hi! I'd like to order from ALCA Bites" class="wa-float"
-    target="_blank" aria-label="Order on WhatsApp">
+  <a href="https://wa.me/919010995180?text=Hi! I'd like to order from ALCA Bites" class="wa-float" target="_blank"
+    aria-label="Order on WhatsApp">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
       <path
         d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
     </svg>
   </a>
 
-  <a href="tel:+919490703566" class="call-float" aria-label="Call us">
+  <a href="tel:+919010995180" class="call-float" aria-label="Call us">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
       <path
         d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
@@ -3739,24 +3862,24 @@
     ALCA Bites - Best Snacks & Healthy Food Near Me in Gudivada</h1>
   <nav id="nav">
     <a href="/" class="nav-logo" aria-label="ALCA Bites Home">
-      <img
-        src="https://res.cloudinary.com/du61o2usw/image/upload/q_auto,f_auto/v1777263290/alca_logo_iqbnfn.png"
-        alt="ALCA Bites Logo" width="48" height="48">
+      <img src="/images/alca-logo-1.webp"
+        alt="ALCA Logo" width="48" height="48" style="border-radius: 50%; object-fit: cover; box-shadow: 0 2px 10px rgba(0,0,0,0.12);">
       <div>
         <div class="nav-brand-name">ALCA Bites</div>
-        <div class="nav-brand-sub">Wholesome Snacks & Dehydrated Food</div>
+        <div class="nav-brand-sub">Wholesome Snacks & Fresh Natural Juices</div>
       </div>
     </a>
     <ul class="nav-links">
-      <li><a href="#products">Products</a></li>
-      <li><a href="#menu">Price List</a></li>
-      
-      <li><a href="https://wa.me/919490703566" class="nav-cta" target="_blank">Order Now</a></li>
+      <li><a href="#products">Crunchy Snacks</a></li>
+      <li><a href="#juices">Natural Juices</a></li>
+
+      <li><a href="https://wa.me/919010995180" class="nav-cta" target="_blank">Order Now</a></li>
     </ul>
     <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
 
-  <div class="offer-marquee" id="offerMarquee" style="position: fixed; top: 72px; left: 0; right: 0; z-index: 199; background: var(--y); padding: 8px 0; color: var(--dk); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; white-space: nowrap; display: none;">
+  <div class="offer-marquee" id="offerMarquee"
+    style="position: fixed; top: 72px; left: 0; right: 0; z-index: 199; background: var(--y); padding: 8px 0; color: var(--dk); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; white-space: nowrap; display: none;">
     <div style="display: flex; width: max-content; animation: scroll 20s linear infinite;" id="marqueeInner">
       <!-- Dynamic Offers -->
     </div>
@@ -3766,18 +3889,15 @@
     <div class="banner-viewport">
       <div class="banner-track" id="bannerTrack">
         <div class="banner-slide">
-          <img
-            src="https://res.cloudinary.com/du61o2usw/image/upload/v1777902544/pro_ban_1_lllmer.png"
+          <img src="https://res.cloudinary.com/du61o2usw/image/upload/v1777902544/pro_ban_1_lllmer.png"
             alt="Healthy Tasty Ready - Fresh Dehydrated Snacks" fetchpriority="high">
         </div>
         <div class="banner-slide">
-          <img
-            src="https://res.cloudinary.com/du61o2usw/image/upload/v1777902538/pro_ban_2_ttacep.png"
+          <img src="https://res.cloudinary.com/du61o2usw/image/upload/v1777902538/pro_ban_2_ttacep.png"
             alt="Snacking The Healthy Upgrade - ALCA Bites" loading="lazy">
         </div>
         <div class="banner-slide">
-          <img
-            src="https://res.cloudinary.com/du61o2usw/image/upload/v1777902540/pro_ban_3_x0zffq.png"
+          <img src="https://res.cloudinary.com/du61o2usw/image/upload/v1777902540/pro_ban_3_x0zffq.png"
             alt="Happy Food Happy You - Wholesome Ingredients" loading="lazy">
         </div>
       </div>
@@ -3853,14 +3973,78 @@
     </div>
   </section>
 
+  <section id="juices" class="products-section juices-section">
+    <div class="prod-header">
+      <div class="prod-header-left">
+        <div class="eyebrow reveal" style="color: #E07A30;">Fresh & Cold-Pressed</div>
+        <h2 class="sec-title reveal">Natural <em>Juices & Elixirs</em></h2>
+        <p class="sec-sub reveal">
+          100% pure, slow cold-pressed juices with zero added sugar, water, or preservatives. Packed with live enzymes, vitamins, and natural revitalizing goodness.
+        </p>
 
-  
+        <div class="filters reveal" id="juiceFilters">
+          <button class="f-btn on j-btn" data-jfilter="all">All Juices</button>
+          <button class="f-btn j-btn" data-jfilter="detox">Detox & Cleanse</button>
+          <button class="f-btn j-btn" data-jfilter="immunity">Immunity Boosters</button>
+          <button class="f-btn j-btn" data-jfilter="hydrating">Hydration & Coolers</button>
+        </div>
+      </div>
+
+      <div class="search-wrap reveal">
+        <input type="text" id="juiceSearch" class="search-input"
+          placeholder="Search juices (e.g. ABC, Orange, Green)...">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Juice Highlights Banner -->
+    <div class="juice-perks-strip reveal">
+      <div class="j-perk">
+        <span class="j-perk-icon">🍏</span>
+        <div>
+          <strong>100% Cold-Pressed</strong>
+          <span>Raw & unheated, preserving active enzymes</span>
+        </div>
+      </div>
+      <div class="j-perk">
+        <span class="j-perk-icon">🚫</span>
+        <div>
+          <strong>Zero Added Sugar</strong>
+          <span>100% natural whole fruit & veg sweetness</span>
+        </div>
+      </div>
+      <div class="j-perk">
+        <span class="j-perk-icon">⚡</span>
+        <div>
+          <strong>No Added Water</strong>
+          <span>100% undiluted vitamin & mineral density</span>
+        </div>
+      </div>
+      <div class="j-perk">
+        <span class="j-perk-icon">❄️</span>
+        <div>
+          <strong>Freshly Made Daily</strong>
+          <span>Bottled in small batches in Gudivada</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-grid reveal" id="juiceGrid">
+    </div>
+  </section>
 
 
 
-  
 
-  
+
+
+
+
+
 
   <div id="orderModal" class="order-modal">
     <div class="om-box">
@@ -3880,9 +4064,13 @@
         <label class="om-label">Delivery Address</label>
         <input type="text" id="custLoc" class="om-input" placeholder="e.g. Near Market, Gudivada">
 
-        <div id="firstTimeToggleContainer" style="display: none; align-items: center; gap: 12px; margin-top: 12px; padding: 12px; background: #F4F7F1; border-radius: 12px; border: 1px dashed #C5D1BD;">
-          <input type="checkbox" id="firstTimeCheck" onchange="renderOrderItems()" style="width: 20px; height: 20px; accent-color: #4A7C2A; cursor: pointer;">
-          <label for="firstTimeCheck" id="firstTimeLabel" style="font-size: 14px; color: #3A5F22; font-weight: 600; cursor: pointer;">🎉 First Time Order? Get 10% OFF!</label>
+        <div id="firstTimeToggleContainer"
+          style="display: none; align-items: center; gap: 12px; margin-top: 12px; padding: 12px; background: #F4F7F1; border-radius: 12px; border: 1px dashed #C5D1BD;">
+          <input type="checkbox" id="firstTimeCheck" onchange="renderOrderItems()"
+            style="width: 20px; height: 20px; accent-color: #4A7C2A; cursor: pointer;">
+          <label for="firstTimeCheck" id="firstTimeLabel"
+            style="font-size: 14px; color: #3A5F22; font-weight: 600; cursor: pointer;">🎉 First Time Order? Get 10%
+            OFF!</label>
         </div>
 
         <label class="om-label">Your Selection</label>
@@ -3916,53 +4104,7 @@
     </div>
   </div>
 
-  <footer class="clean-footer">
-    <div class="nc-inner">
-      <div class="f-main">
-        <div class="f-brand">
-          <img src="https://res.cloudinary.com/du61o2usw/image/upload/v1777263290/alca_logo_iqbnfn.png"
-            alt="ALCA Bites Logo" class="f-logo">
-          <div class="f-name">ALCA <em>Bites</em></div>
-          <p class="f-motto">Handcrafted nutrition from the heart of Andhra Pradesh.</p>
-        </div>
 
-        <div class="f-nav">
-          <div class="f-nav-col">
-            <h4>Explore</h4>
-            <a href="#products">Our Snacks</a>
-            <a href="#story">The Story</a>
-            <a href="#faq">FAQ</a>
-          </div>
-          <div class="f-nav-col">
-            <h4>Contact</h4>
-            <a href="tel:+919490703566" class="f-contact-bar cb-phone">
-              <div class="f-contact-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-              </div>
-              Call +91 94907 03566
-            </a>
-            <a href="https://wa.me/919490703566" class="f-contact-bar cb-wa">
-              <div class="f-contact-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              </div>
-              WhatsApp Order
-            </a>
-            <a href="https://www.instagram.com/alca_bites" class="f-contact-bar cb-ig">
-              <div class="f-contact-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-              </div>
-              Instagram
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="f-bottom">
-        <div class="f-copy">© 2026 ALCA Bites. All rights reserved.</div>
-        <div class="f-meta">FSSAI: 20126121000239 • Gudivada, Krishna District, AP</div>
-      </div>
-    </div>
-  </footer>
 
   <script>
     // Nav scroll
@@ -4007,7 +4149,7 @@
     if (craftMonthsEl) craftMonthsEl.innerText = Math.max(diffMonths, 1) + '+';
 
     // Products: fetch from API and render
-    const WHATSAPP = '919490703566';
+    const WHATSAPP = '919010995180';
     const WA_SVG = '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
     const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const opt = (url) => typeof url === 'string' && url.includes('cloudinary.com') ? url.replace('/upload/', '/upload/q_auto,f_auto/') : url;
@@ -4028,7 +4170,7 @@
       const activeMarquee = allOffers.filter(o => o.is_active && o.type === 'marquee');
       const marquee = document.getElementById('offerMarquee');
       const inner = document.getElementById('marqueeInner');
-      
+
       if (!activeMarquee.length) {
         if (marquee) marquee.style.display = 'none';
         return;
@@ -4051,24 +4193,145 @@
       return p.pricing || {};
     }
 
+    const naturalJuices = [
+      {
+        id: 'j-abc',
+        name: 'ABC Immunity & Glow Booster',
+        tagline: 'Apple, Beetroot, Carrot with Fresh Ginger & Lemon',
+        category: 'detox',
+        weight: '300ml / 500ml',
+        badge: 'Top Seller',
+        badgeStyle: 'b-best',
+        tags: ['Immunity', 'Glowing Skin', 'Enzyme Rich'],
+        pricing: { '300ml': 99, '500ml': 159 },
+        image: 'https://images.unsplash.com/photo-1622597467836-f3285f2131b7?q=80&w=800&auto=format&fit=crop',
+        description: 'Cold-pressed Himalayan apples, crisp carrots, and ruby beetroots with a zesty touch of ginger and lemon.'
+      },
+      {
+        id: 'j-orange',
+        name: 'Valencia Pure Citrus Splash',
+        tagline: '100% Pure Cold-Pressed Sweet Oranges',
+        category: 'immunity',
+        weight: '300ml / 500ml',
+        badge: 'Pure Pulp',
+        badgeStyle: 'b-new',
+        tags: ['Vitamin C', 'Zero Added Sugar', '100% Raw'],
+        pricing: { '300ml': 89, '500ml': 149 },
+        image: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?q=80&w=800&auto=format&fit=crop',
+        description: 'Sweet, sun-ripened oranges cold-pressed fresh daily with natural juicy pulp intact.'
+      },
+      {
+        id: 'j-green',
+        name: 'Green Goddess Cleanser',
+        tagline: 'Cucumber, Spinach, Celery, Mint & Green Apple',
+        category: 'detox',
+        weight: '300ml / 500ml',
+        badge: 'Alkalizing',
+        badgeStyle: 'b-veg',
+        tags: ['Deep Detox', 'Metabolism', 'Nutrient Dense'],
+        pricing: { '300ml': 99, '500ml': 159 },
+        image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=800&auto=format&fit=crop',
+        description: 'Deeply alkalizing green juice loaded with natural chlorophyll, electrolytes, and antioxidants.'
+      },
+      {
+        id: 'j-pom',
+        name: 'Pomegranate Ruby Pure',
+        tagline: '100% Hand-Shelled Pomegranate Pearls',
+        category: 'immunity',
+        weight: '300ml / 500ml',
+        badge: 'Antioxidant',
+        badgeStyle: 'b-best',
+        tags: ['Heart Health', 'Polyphenols', 'Pure Ruby'],
+        pricing: { '300ml': 119, '500ml': 189 },
+        image: 'https://images.unsplash.com/photo-1543362906-acfc16c67564?q=80&w=800&auto=format&fit=crop',
+        description: 'Gently cold-extracted from rich red pomegranate seeds without crushing pith for pristine sweetness.'
+      },
+      {
+        id: 'j-pineapple',
+        name: 'Tropical Pineapple Mint Cooler',
+        tagline: 'Fresh Pineapple, Garden Mint & Himalayan Pink Salt',
+        category: 'hydrating',
+        weight: '300ml / 500ml',
+        badge: 'Digestive',
+        badgeStyle: 'b-new',
+        tags: ['Bromelain', 'Gut Health', 'Cooling'],
+        pricing: { '300ml': 89, '500ml': 149 },
+        image: 'https://images.unsplash.com/photo-1525385133512-2f3bdd039054?q=80&w=800&auto=format&fit=crop',
+        description: 'Rich in bromelain digestive enzymes with fresh cooling mint and a pinch of pink mineral salt.'
+      },
+      {
+        id: 'j-watermelon',
+        name: 'Watermelon Basil-Seed Hydrator',
+        tagline: 'Farm-Fresh Watermelon, Lime & Sabja Seeds',
+        category: 'hydrating',
+        weight: '300ml / 500ml',
+        badge: 'Hydration Hero',
+        badgeStyle: 'b-veg',
+        tags: ['Electrolytes', 'Sabja Seeds', 'Summer Vitality'],
+        pricing: { '300ml': 79, '500ml': 129 },
+        image: 'https://images.unsplash.com/photo-1589734005822-48a04be85939?q=80&w=800&auto=format&fit=crop',
+        description: 'Ultra-hydrating red watermelon infused with freshly squeezed lime and cooling basil seeds.'
+      }
+    ];
+
+    let activeJuiceFilter = 'all';
+    let juiceSearchQuery = '';
+
+    function renderJuices() {
+      const grid = document.getElementById('juiceGrid');
+      if (!grid) return;
+      let list = activeJuiceFilter === 'all' ? naturalJuices : naturalJuices.filter(j => j.category === activeJuiceFilter);
+      if (juiceSearchQuery) {
+        const q = juiceSearchQuery.toLowerCase();
+        list = list.filter(j => j.name.toLowerCase().includes(q) || j.tagline.toLowerCase().includes(q) || (j.tags || []).some(t => t.toLowerCase().includes(q)));
+      }
+      if (!list.length) {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--tl);font-size:16px;background:var(--cream);border-radius:24px;border:1px dashed var(--border)"><div style="font-size:32px;margin-bottom:16px">🥤</div>No juices found ${juiceSearchQuery ? `matching "${esc(juiceSearchQuery)}"` : 'in this category'}.<br><span style="font-size:13px;opacity:0.7;display:block;margin-top:8px">Try searching for ABC, Orange, or Green Elixir!</span></div>`;
+        return;
+      }
+      grid.innerHTML = list.map(p => {
+        const tagsHtml = (p.tags || []).map(t => `<span class="p-tag" style="background:#FFF6EB;color:#B45309;border-color:#FDE68A;">${esc(t)}</span>`).join('');
+        const badgeHtml = p.badge ? `<span class="prod-badge ${esc(p.badgeStyle || 'b-new')}">${esc(p.badge)}</span>` : '';
+        const pMap = p.pricing || {};
+        const priceStr = Object.entries(pMap).map(([k, v]) => `${k}: ₹${v}`).join(' · ');
+        return `
+          <div class="prod-card juice-card" onclick="openOrderModal('${p.id}')">
+            <div class="prod-img" style="aspect-ratio: 1 / 0.9; background: #FFFDF9;">
+              <img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" style="object-fit: cover; border-radius: 14px; width: 100%; height: 100%;">
+              ${badgeHtml}
+            </div>
+            <div class="prod-body">
+              <div class="prod-name">${esc(p.name)}</div>
+              <div class="prod-tagline">${esc(p.tagline)}</div>
+              <div class="prod-tags">${tagsHtml}</div>
+              <div class="prod-footer">
+                <div class="prod-wt" style="font-weight: 600; color: #E07A30;">${esc(priceStr)}</div>
+                <div class="btn-order" style="background: #E07A30;">Add to Order</div>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
     // ORDER MODAL LOGIC
     let currentOrder = [];
     let omSearchQuery = '';
     const orderModal = document.getElementById('orderModal');
 
     function openOrderModal(productId) {
-      const p = allProducts.find(x => x.id === productId);
+      const allItems = [...allProducts, ...naturalJuices];
+      const p = allItems.find(x => x.id === productId);
       if (!p) return;
 
       const pMap = getPricesFor(p);
       const keys = Object.keys(pMap);
 
       if (keys.length === 0) {
-        alert('Pricing for this snack is being updated. Please contact us on WhatsApp to order!');
+        alert('Pricing for this item is being updated. Please contact us on WhatsApp to order!');
         return;
       }
 
-      const defaultQty = keys[2] || keys[0]; // Use 100g (3rd item) or 1st
+      const defaultQty = keys[2] || keys[0]; // Use 100g/300ml or 1st
 
       currentOrder = [{
         id: p.id,
@@ -4113,7 +4376,7 @@
             </div>
             <div class="om-item-opts">
               <div>
-                <span class="om-label" style="font-size:10px;margin-bottom:4px">Select Weight</span>
+                <span class="om-label" style="font-size:10px;margin-bottom:4px">Select Size / Qty</span>
                 <select class="om-select" onchange="updateItemQty(${idx}, this.value)">
                   ${Object.keys(pMap).map(k => `<option value="${k}" ${item.qty === k ? 'selected' : ''}>${k} - ₹${pMap[k]}</option>`).join('')}
                 </select>
@@ -4129,7 +4392,7 @@
       const isFirstTime = document.getElementById('firstTimeCheck') && document.getElementById('firstTimeCheck').checked;
       let totalDiscount = 0;
       let finalTotal = total;
-      
+
       // Dynamic Discount Calculation
       let volDiscountPct = 0;
       let firstTimeDiscountPct = 0;
@@ -4137,7 +4400,7 @@
       if (total > 0) {
         // 1. Find Volume/Tier Discount (best met min_amount)
         const volOffers = allOffers.filter(o => o.is_active && o.type === 'checkout' && !o.title.toLowerCase().includes('first'));
-        const bestVol = volOffers.filter(o => total >= o.min_amount).sort((a,b) => b.min_amount - a.min_amount)[0];
+        const bestVol = volOffers.filter(o => total >= o.min_amount).sort((a, b) => b.min_amount - a.min_amount)[0];
         if (bestVol) volDiscountPct = bestVol.discount_pct;
 
         // 2. Find First Time Discount
@@ -4190,7 +4453,8 @@
       if (!list) return;
 
       const inOrderIds = currentOrder.map(o => o.id);
-      let others = allProducts.filter(p => !inOrderIds.includes(p.id));
+      const allItems = [...allProducts, ...naturalJuices];
+      let others = allItems.filter(p => !inOrderIds.includes(p.id));
 
       if (omSearchQuery) {
         const q = omSearchQuery.toLowerCase();
@@ -4200,7 +4464,7 @@
       list.innerHTML = `
         <div style="padding:12px;position:sticky;top:0;background:#FFF;border-bottom:1px solid #EEE">
           <input type="text" id="omOtherSearch" class="om-input" style="margin-bottom:0;padding:10px 15px;font-size:14px" 
-                 placeholder="Search more snacks..." value="${esc(omSearchQuery)}"
+                 placeholder="Search more snacks & juices..." value="${esc(omSearchQuery)}"
                  onclick="event.stopPropagation()" oninput="handleOmSearch(this.value)">
         </div>
         <div style="max-height:200px;overflow-y:auto">
@@ -4208,7 +4472,7 @@
             <div class="om-other-item" onclick="addOtherItem('${p.id}')">
               + ${esc(p.name)}
             </div>
-          `).join('') : '<div style="padding:20px;text-align:center;font-size:13px;color:#999">No other snacks found</div>'}
+          `).join('') : '<div style="padding:20px;text-align:center;font-size:13px;color:#999">No other items found</div>'}
         </div>
       `;
     }
@@ -4219,7 +4483,8 @@
     }
 
     function addOtherItem(id) {
-      const p = allProducts.find(x => x.id === id);
+      const allItems = [...allProducts, ...naturalJuices];
+      const p = allItems.find(x => x.id === id);
       if (!p) return;
       const pMap = getPricesFor(p);
       const defaultQty = Object.keys(pMap)[2] || Object.keys(pMap)[0];
@@ -4237,16 +4502,16 @@
 
       let total = 0;
       currentOrder.forEach(i => total += i.price);
-      
+
       const itemsText = currentOrder.map(item => `✅ *${item.name}* (${item.qty}) - ₹${item.price}`).join('%0A');
-      
+
       let pricingText = `%0A%0A💰 *Subtotal:* ₹${total}`;
       const isFirstTime = document.getElementById('firstTimeCheck') && document.getElementById('firstTimeCheck').checked;
       let volDiscountPct = 0;
       let firstTimeDiscountPct = 0;
 
       const volOffers = allOffers.filter(o => o.is_active && o.type === 'checkout' && !o.title.toLowerCase().includes('first'));
-      const bestVol = volOffers.filter(o => total >= o.min_amount).sort((a,b) => b.min_amount - a.min_amount)[0];
+      const bestVol = volOffers.filter(o => total >= o.min_amount).sort((a, b) => b.min_amount - a.min_amount)[0];
       if (bestVol) volDiscountPct = bestVol.discount_pct;
 
       if (isFirstTime) {
@@ -4260,10 +4525,10 @@
 
       if (totalDiscountAmt > 0) {
         if (firstTimeDiscountAmt > 0) {
-           pricingText += `%0A🎉 *First Order Discount (${firstTimeDiscountPct}%):* -₹${firstTimeDiscountAmt}`;
+          pricingText += `%0A🎉 *First Order Discount (${firstTimeDiscountPct}%):* -₹${firstTimeDiscountAmt}`;
         }
         if (volumeDiscountAmt > 0) {
-           pricingText += `%0A🎁 *Volume Discount (${volDiscountPct}%):* -₹${volumeDiscountAmt}`;
+          pricingText += `%0A🎁 *Volume Discount (${volDiscountPct}%):* -₹${volumeDiscountAmt}`;
         }
         pricingText += `%0A💳 *Final Amount:* ₹${total - totalDiscountAmt}`;
       } else {
@@ -4271,7 +4536,7 @@
       }
 
       const greeting = `👋 *Hi ALCA Bites!*`;
-      const intro = `My name is *${encodeURIComponent(name)}* and I'd like to place an order for these snacks:`;
+      const intro = `My name is *${encodeURIComponent(name)}* and I'd like to place an order for these items:`;
       const divider = `--------------------------------`;
       const details = `🛍️ *ORDER DETAILS:*%0A${itemsText}${pricingText}`;
       const locationText = `📍 Delivery Address:%0A*${encodeURIComponent(loc)}*`;
@@ -4279,7 +4544,7 @@
 
       const message = `${greeting}%0A%0A${intro}%0A%0A${divider}%0A${details}%0A%0A${locationText}%0A${divider}%0A%0A${closing}`;
       window.open(`https://wa.me/${WHATSAPP}?text=${message}`, '_blank');
-      
+
       localStorage.setItem('nc_has_ordered', 'true');
       closeOrderModal();
     }
@@ -4329,12 +4594,21 @@
       }
     }
 
-    document.querySelectorAll('.f-btn').forEach(btn => {
+    document.querySelectorAll('.f-btn:not(.j-btn)').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('on'));
+        document.querySelectorAll('.f-btn:not(.j-btn)').forEach(b => b.classList.remove('on'));
         btn.classList.add('on');
         activeFilter = btn.dataset.filter;
         renderProducts();
+      });
+    });
+
+    document.querySelectorAll('.j-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.j-btn').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        activeJuiceFilter = btn.dataset.jfilter;
+        renderJuices();
       });
     });
 
@@ -4346,7 +4620,16 @@
       });
     }
 
+    const juiceSearchInput = document.getElementById('juiceSearch');
+    if (juiceSearchInput) {
+      juiceSearchInput.addEventListener('input', (e) => {
+        juiceSearchQuery = e.target.value.trim();
+        renderJuices();
+      });
+    }
+
     loadProducts();
+    renderJuices();
     loadOffers();
 
     // Reviews: fetch screenshots from API and render gallery

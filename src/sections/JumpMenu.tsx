@@ -41,7 +41,7 @@ export function JumpMenu({ site }: { site: SiteData }) {
       <nav className="jump" id="jump" aria-label="Jump to a business">
         {visibleDivisions.map((d) => {
           const divisionToPath: Record<string, string> = {
-            bites: "/bites/index.html",
+            bites: "/bites",
             catering: "/catering",
             celebrations: "/celebrations",
             gifts: "/crafts-gifts",
@@ -54,7 +54,6 @@ export function JumpMenu({ site }: { site: SiteData }) {
             <a
               key={d.id}
               href={href}
-              rel={href.includes('.html') ? "external" : undefined}
               className={active === d.id ? "active" : ""}
               title={d.name}
             >

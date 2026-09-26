@@ -44,8 +44,8 @@ const HERO_BG_LOOP_IMAGES = [
 ];
 
 const ABOUT_IMAGES = {
-  chef: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=900&h=1100&fit=crop&auto=format",
-  plating: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=700&h=900&fit=crop&auto=format",
+  chef: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=900&h=1100&fit=crop&auto=format",
+  plating: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=700&h=900&fit=crop&auto=format",
 };
 
 const SERVICES = [

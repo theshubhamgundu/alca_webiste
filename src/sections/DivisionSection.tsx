@@ -352,7 +352,7 @@ export function DivisionSection({
       <div className="cta">
         {(() => {
           const divisionToPath: Record<string, string> = {
-            bites: "/bites/index.html",
+            bites: "/bites",
             catering: "/catering",
             celebrations: "/celebrations",
             gifts: "/crafts-gifts",
@@ -365,7 +365,6 @@ export function DivisionSection({
             <a
               className="btn !bg-white !text-black border border-transparent shadow-sm"
               href={href}
-              rel={href.includes('.html') ? "external" : undefined}
             >
               Explore {div.short} <span className="arrow">→</span>
             </a>

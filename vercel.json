@@ -1,6 +1,8 @@
 {
   "outputDirectory": "dist",
   "rewrites": [
+    { "source": "/bites", "destination": "/bites/index.html" },
+    { "source": "/bites/(.*)", "destination": "/bites/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

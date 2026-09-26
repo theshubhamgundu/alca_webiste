@@ -25,8 +25,9 @@ export default function CraftsPage() {
 
       {/* NAV */}
       <nav className="fixed left-1/2 top-5 z-50 flex w-[calc(100%-32px)] max-w-7xl -translate-x-1/2 items-center justify-between rounded-full border border-white/10 bg-[#211A24]/90 px-5 py-3 text-white shadow-2xl backdrop-blur-xl">
-        <a href="/" className="font-serif text-xl tracking-[0.08em]">
-          ALCA<span className="text-[#B89AD2]">.</span>
+        <a href="/" className="flex items-center gap-2 font-serif text-xl tracking-[0.08em]">
+          <img src="/images/alca-logo-1.webp" alt="ALCA Logo" className="h-8 w-8 rounded-full object-cover shadow-sm" />
+          <span>ALCA<span className="text-[#B89AD2]">.</span></span>
         </a>
         <div className="flex gap-2">
           <a
