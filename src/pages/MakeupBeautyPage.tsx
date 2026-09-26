@@ -200,20 +200,20 @@ export default function BeautyPage() {
               Luxury Beauty · Makeup · Skincare
             </div>
 
-            <h1 className="font-serif text-[18vw] font-light leading-[0.75] tracking-[-0.07em] md:text-[10rem]">
+             <h1 className="font-serif text-[18vw] font-light leading-[0.75] tracking-[-0.07em] md:text-[10rem]">
 
               BEAUTY
 
               <br />
 
               <span className="ml-[7vw] italic text-[#D7A7B7]">
-                that
+                refined
               </span>
 
               <br />
 
               <span className="ml-[14vw]">
-                FEELS.
+                FOR YOU.
               </span>
 
             </h1>
@@ -221,15 +221,14 @@ export default function BeautyPage() {
             <div className="mt-12 flex flex-col justify-between gap-8 md:flex-row md:items-end">
 
               <p className="max-w-md text-sm leading-7 text-white/65 md:text-base">
-                Natural artistry, thoughtful skincare and luxury beauty
-                experiences designed to make you feel unmistakably yourself.
+                Bespoke makeup artistry and consciously crafted skincare rituals, meticulously designed to unveil your natural radiance and celebrate your unique essence.
               </p>
 
               <a
                 href="tel:9010995180"
-                className="group flex w-fit items-center gap-4 rounded-full bg-[#F7F0EB] px-6 py-3 text-xs font-bold uppercase tracking-[0.18em] text-[#251C1C]"
+                className="group flex w-fit items-center gap-4 rounded-full bg-[#F7F0EB] px-6 py-3 text-xs font-bold uppercase tracking-[0.18em] text-[#251C1C] !text-[#251C1C]"
               >
-                Book Your Look
+                Book Your Experience
                 <Arrow dark />
               </a>
 

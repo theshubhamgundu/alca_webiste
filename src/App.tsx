@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Router as WouterRouter, Switch } from "wouter";
 import { PhotoAdmin } from "./pages/PhotoAdmin";
+import { AdminDashboard } from "./pages/AdminDashboard";
 import CateringPage from "./pages/CateringPage";
 import CelebrationsPage from "./pages/CelebrationsPage";
 import CraftsGiftsPage from "./pages/CraftsGiftsPage";
@@ -261,7 +262,8 @@ function SiteRoutes() {
       <Route path="/designer-studio" component={DesignerStudioPage} />
       <Route path="/makeup-beauty" component={MakeupBeautyPage} />
       <Route path="/supply" component={SupplyPage} />
-      <Route path="/admin" component={PhotoAdmin} />
+      <Route path="/admin" component={AdminDashboard} />
+      <Route path="/admin/photos" component={PhotoAdmin} />
     </Switch>
   );
 }
