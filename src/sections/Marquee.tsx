@@ -1,11 +1,8 @@
 import type { SiteData } from "../types/site";
 
 export function Marquee({ site }: { site: SiteData }) {
-  const words = site.divisions.flatMap(d => [
-    ...(d.s ?? []).map(([name]) => name),
-    ...(d.feature ?? []).map(([name]) => name),
-  ]);
-  const trackItems = [...words, ...words];
+  const words = site.divisions.map(d => d.name);
+  const trackItems = [...words, ...words, ...words, ...words];
 
   return (
     <div className="marquee" aria-hidden="true">

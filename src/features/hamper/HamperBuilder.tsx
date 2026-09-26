@@ -14,6 +14,7 @@ export function HamperBuilder({ site }: { site: SiteData }) {
   if (!site.hamper.on) return null;
 
   const box = site.hamper.boxes[size];
+  if (!box) return null;
   const limit = Number(box?.[1]) || 0;
   const remaining = Math.max(limit - items.length, 0);
   const isFull = limit > 0 && items.length === limit;

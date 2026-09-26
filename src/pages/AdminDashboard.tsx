@@ -540,11 +540,10 @@ export function AdminDashboard() {
                     🛍️ *NEW ORDER — ALCA*<br />
                     ───────────────────────<br />
                     *Items Ordered:*<br />
-                    • ABC Ultimate Detox Juice (250ml) × 2 — ₹198<br />
-                    • California Almonds (500g) × 1 — ₹680<br />
-                    • Varalakshmi Devi Idol with Vayanam Kit × 1 — ₹2,499<br />
+                    • [Item 1 Name] ([Variant]) × [Qty] — ₹[Price]<br />
+                    • [Item 2 Name] ([Variant]) × [Qty] — ₹[Price]<br />
                     ───────────────────────<br />
-                    *Total:* ₹3,377
+                    *Total:* ₹[Total Price]
                   </code>
                 </div>
 

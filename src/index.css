@@ -616,7 +616,6 @@ footer .wmf {
   color: var(--ground);
   overflow: hidden;
   padding-block: 14px;
-  transform: rotate(-1.2deg);
   margin-block: 12px 36px;
 }
 
