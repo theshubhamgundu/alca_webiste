@@ -63,6 +63,7 @@ export interface StoreItem {
   name: string;
   emoji: string;
   price: string;
+  image?: string;
   weight?: string;
   options?: { weight: string; price: string }[];
   inStock: boolean;

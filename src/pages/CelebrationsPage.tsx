@@ -283,9 +283,11 @@ export default function CelebrationsPage() {
               {/* Simple Clean ALCA WOW Celebrations Branding */}
               <div className="flex items-center gap-3 border-b border-slate-200/70 pb-4 mb-5">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white font-bold text-xs shadow-sm">
-                    A
-                  </div>
+                  <img
+                    src="/images/alca-logo-1.webp"
+                    alt="ALCA Logo"
+                    className="h-9 w-9 rounded-full object-cover shadow-sm border border-slate-200"
+                  />
                   <div>
                     <div className="font-serif text-base font-bold tracking-tight text-slate-900 leading-none">
                       ALCA <span className="text-blue-600">WOW CELEBRATIONS</span>

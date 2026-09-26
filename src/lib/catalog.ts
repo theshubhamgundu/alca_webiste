@@ -283,6 +283,7 @@ export function saveProductToSite(
     name: product.name,
     emoji: product.emoji || group.emoji || "✨",
     price: product.price,
+    image: product.image,
     weight: product.weight || "",
     options: product.options,
     inStock: product.inStock,
