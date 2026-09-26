@@ -350,8 +350,30 @@ export function DivisionSection({
       )}
 
       <div className="cta">
+        {(() => {
+          const divisionToPath: Record<string, string> = {
+            bites: "/bites/index.html",
+            catering: "/catering",
+            celebrations: "/celebrations",
+            gifts: "/crafts-gifts",
+            studio: "/designer-studio",
+            beauty: "/makeup-beauty",
+            supply: "/supply",
+          };
+          const href = divisionToPath[div.id];
+          return href ? (
+            <a
+              className="btn !bg-white !text-black border border-transparent shadow-sm"
+              href={href}
+              rel={href.includes('.html') ? "external" : undefined}
+            >
+              Explore {div.short} <span className="arrow">→</span>
+            </a>
+          ) : null;
+        })()}
+
         <a
-          className="btn !text-white"
+          className="btn ghost !text-white"
           href={waLink(
             div.phone
               ? site.contact.ordersPhone
@@ -362,8 +384,7 @@ export function DivisionSection({
           target="_blank"
           rel="noopener noreferrer"
         >
-          {div.phone ? "Order on WhatsApp" : "Enquire on WhatsApp"}{" "}
-          <span className="arrow">→</span>
+          {div.phone ? "WhatsApp us" : "WhatsApp"}{" "}
         </a>
 
         {div.ig && (

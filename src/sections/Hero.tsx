@@ -116,6 +116,7 @@ export function Hero({ site }: { site: SiteData }) {
                 : `${import.meta.env.BASE_URL}images/${img}`;
 
               const divisionToPath: Record<string, string> = {
+                bites: "/bites/index.html",
                 catering: "/catering",
                 celebrations: "/celebrations",
                 gifts: "/crafts-gifts",
@@ -129,6 +130,7 @@ export function Hero({ site }: { site: SiteData }) {
                 <motion.a
                   key={div.id}
                   href={href}
+                  rel={href.includes('.html') ? "external" : undefined}
                   style={
                     {
                       "--a": angle,

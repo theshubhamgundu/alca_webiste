@@ -39,17 +39,30 @@ export function JumpMenu({ site }: { site: SiteData }) {
   return (
     <div className="wrap">
       <nav className="jump" id="jump" aria-label="Jump to a business">
-        {visibleDivisions.map((d) => (
-          <a
-            key={d.id}
-            href={`#${d.id}`}
-            className={active === d.id ? "active" : ""}
-            title={d.name}
-          >
-            <span className="jump-icon">{divIcons[d.id] || "📦"}</span>
-            <span className="jump-label">{d.short || d.name}</span>
-          </a>
-        ))}
+        {visibleDivisions.map((d) => {
+          const divisionToPath: Record<string, string> = {
+            bites: "/bites/index.html",
+            catering: "/catering",
+            celebrations: "/celebrations",
+            gifts: "/crafts-gifts",
+            studio: "/designer-studio",
+            beauty: "/makeup-beauty",
+            supply: "/supply",
+          };
+          const href = divisionToPath[d.id] || `#${d.id}`;
+          return (
+            <a
+              key={d.id}
+              href={href}
+              rel={href.includes('.html') ? "external" : undefined}
+              className={active === d.id ? "active" : ""}
+              title={d.name}
+            >
+              <span className="jump-icon">{divIcons[d.id] || "📦"}</span>
+              <span className="jump-label">{d.short || d.name}</span>
+            </a>
+          );
+        })}
       </nav>
     </div>
   );

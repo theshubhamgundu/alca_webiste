@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Login · Lil Leena's NutriCrunch</title>
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--g1:#0B2604;--g2:#143908;--y:#FAD84A;--yd:#1F1A05;--cream:#FFF9E8}
+  html,body{height:100%}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:radial-gradient(ellipse at top,#143908 0%,#0B2604 60%,#06190A 100%);
+    color:#fff;display:flex;align-items:center;justify-content:center;padding:24px;min-height:100vh
+  }
+  .card{
+    width:100%;max-width:420px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-radius:20px;padding:44px 36px;box-shadow:0 30px 80px -20px rgba(0,0,0,0.6)
+  }
+  .logo-row{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+  .logo-row img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--y)}
+  .brand{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--y);line-height:1}
+  .sub{font-size:11px;color:rgba(255,255,255,0.55);letter-spacing:0.12em;text-transform:uppercase;margin-top:4px}
+  h1{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:6px;letter-spacing:-0.01em}
+  .lead{font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:28px;line-height:1.5}
+  label{display:block;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:8px}
+  input{
+    width:100%;padding:13px 16px;border-radius:12px;background:rgba(0,0,0,0.3);
+    border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:15px;font-family:inherit;
+    transition:border-color .2s,background .2s;outline:none
+  }
+  input:focus{border-color:var(--y);background:rgba(0,0,0,0.45)}
+  .field{margin-bottom:18px}
+  button{
+    width:100%;padding:14px;border-radius:12px;background:var(--y);color:var(--yd);
+    font-weight:700;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;
+    border:none;cursor:pointer;font-family:inherit;margin-top:8px;transition:transform .15s
+  }
+  button:hover{transform:translateY(-1px)}
+  button:active{transform:translateY(0)}
+  button:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+  .err{
+    background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.4);
+    color:#FCA5A5;padding:12px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;display:none
+  }
+  .err.show{display:block}
+  .back{display:inline-block;margin-top:24px;color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none}
+  .back:hover{color:var(--y)}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo-row">
+      <img src="/leena_round.png" alt="">
+      <div>
+        <div class="brand">Lil Leena's NutriCrunch</div>
+        <div class="sub">Admin Console</div>
+      </div>
+    </div>
+    <h1>Sign in</h1>
+    <p class="lead">Enter your credentials to manage products.</p>
+    <div class="err" id="err"></div>
+    <form id="loginForm">
+      <div class="field">
+        <label for="u">Username</label>
+        <input id="u" name="username" autocomplete="username" required autofocus>
+      </div>
+      <div class="field">
+        <label for="p">Password</label>
+        <input id="p" name="password" type="password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" id="btn">Sign in</button>
+    </form>
+    <a class="back" href="/">← Back to site</a>
+  </div>
+<script>
+  const form = document.getElementById('loginForm');
+  const err = document.getElementById('err');
+  const btn = document.getElementById('btn');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    err.classList.remove('show');
+    btn.disabled = true; btn.textContent = 'Signing in…';
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: document.getElementById('u').value, password: document.getElementById('p').value })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        location.href = '/admin';
+      } else {
+        err.textContent = data.error || 'Login failed.';
+        err.classList.add('show');
+        btn.disabled = false; btn.textContent = 'Sign in';
+      }
+    } catch (ex) {
+      err.textContent = 'Network error. Please try again.';
+      err.classList.add('show');
+      btn.disabled = false; btn.textContent = 'Sign in';
+    }
+  });
+</script>
+</body>
+</html>
