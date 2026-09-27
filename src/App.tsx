@@ -14,10 +14,7 @@ import "./features/admin/admin.css";
 import { Nav } from "./sections/Nav";
 import { Hero } from "./sections/Hero";
 import { Marquee } from "./sections/Marquee";
-import { Gallery } from "./sections/Gallery";
-import { JumpMenu } from "./sections/JumpMenu";
-import { DivisionSection } from "./sections/DivisionSection";
-import { SwapConcierge } from "./sections/SwapConcierge";
+import { FoundersStory } from "./sections/FoundersStory";
 import { ReviewsFaq } from "./sections/ReviewsFaq";
 import { ContactFooter } from "./sections/ContactFooter";
 import { useSiteData } from "./hooks/useSiteData";
@@ -121,28 +118,10 @@ function SiteHome() {
       <Nav site={site} />
       <Hero site={site} />
       <Marquee site={site} />
-      <Gallery site={site} />
+
+      <FoundersStory site={site} />
 
       <div className="wrap">
-        <JumpMenu site={site} />
-        <main id="services">
-          {site.divisions.map((div) => (
-            <DivisionSection
-              key={div.id}
-              div={div}
-              site={site}
-              addToCart={(name, price) => {
-                cart.addToCart(name, price);
-                setCartOpen(true);
-              }}
-            />
-          ))}
-        </main>
-
-        <div id="swapbox">
-          <SwapConcierge site={site} />
-        </div>
-
         <ReviewsFaq site={site} />
         <ContactFooter site={site} />
       </div>
