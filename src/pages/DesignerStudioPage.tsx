@@ -105,91 +105,37 @@ export default function DesignerStudioPage() {
       </header>
 
       {/* ───────────────── HERO SHOWCASE ───────────────── */}
-      <section className="relative overflow-hidden border-b border-[#92704E]/10 bg-gradient-to-b from-white via-[#FAF8F5] to-[#F3EDE4] py-12 md:py-20">
+      <section className="relative overflow-hidden border-b border-[#92704E]/10 bg-gradient-to-b from-white via-[#FAF8F5] to-[#F3EDE4] py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-            {/* Left Hero Content */}
-            <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#F5EBE0] px-3.5 py-1 text-xs font-semibold text-[#7A5B3B] border border-[#92704E]/20 shadow-sm">
-                <span className="h-2 w-2 rounded-full bg-[#92704E] animate-pulse" />
-                In-House Master Karigars · Double Trial Fit Guarantee
-              </div>
-
-              <h1 className="mt-5 font-serif text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.14]">
-                Crafted for Distinction.
-                <br />
-                <span className="text-[#92704E] italic">Tailored to Perfection.</span>
-              </h1>
-
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-700 sm:text-base">
-                From intricate zardosi bridal blouses and multi-panelled raw silk lehengas to contemporary Indo-Western cocktail gowns and heritage sherwanis—every creation is designed, hand-embroidered, and master-tailored with obsessive attention to silhouette.
-              </p>
-
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a
-                  href="#catalog"
-                  className="rounded-lg bg-[#92704E] px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-[#7D5F41] active:scale-95"
-                >
-                  View Studio Portfolio ({allProducts.length}) ↓
-                </a>
-                <a
-                  href="#consultation"
-                  className="rounded-lg border border-[#92704E]/25 bg-white px-5 py-3 text-xs font-semibold uppercase tracking-wider text-slate-800 shadow-sm transition hover:bg-[#FAF4ED]"
-                >
-                  Schedule Fitting Appointment ↓
-                </a>
-              </div>
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#F5EBE0] px-3.5 py-1 text-xs font-semibold text-[#7A5B3B] border border-[#92704E]/20 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-[#92704E] animate-pulse" />
+              In-House Master Karigars · Double Trial Fit Guarantee
             </div>
 
-            {/* Right Visual Bento Showcase */}
-            <div className="lg:col-span-5">
-              <div className="grid grid-cols-2 gap-3.5">
-                <div className="space-y-3.5">
-                  <div className="group relative overflow-hidden rounded-2xl border border-[#92704E]/15 bg-white p-2.5 shadow-md">
-                    <img
-                      src="/media/studio-960.webp"
-                      alt="Bridal Maggam Blouse"
-                      className="aspect-square w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="mt-2 text-center">
-                      <span className="text-[11px] font-bold text-slate-900">Bridal Maggam Work</span>
-                    </div>
-                  </div>
-                  <div className="group relative overflow-hidden rounded-2xl border border-[#92704E]/15 bg-white p-2.5 shadow-md">
-                    <img
-                      src="/images/illustrative-studio.jpg"
-                      alt="Designer Lehengas"
-                      className="aspect-[4/3] w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="mt-2 text-center">
-                      <span className="text-[11px] font-bold text-slate-900">Heritage Lehengas</span>
-                    </div>
-                  </div>
-                </div>
+            <h1 className="mt-5 font-serif text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.14]">
+              Crafted for Distinction.
+              <br />
+              <span className="text-[#92704E] italic">Tailored to Perfection.</span>
+            </h1>
 
-                <div className="space-y-3.5 pt-4">
-                  <div className="group relative overflow-hidden rounded-2xl border border-[#92704E]/15 bg-white p-2.5 shadow-md">
-                    <img
-                      src="/images/illustrative-studio.jpg"
-                      alt="Party Gowns & Anarkalis"
-                      className="aspect-[4/3] w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="mt-2 text-center">
-                      <span className="text-[11px] font-bold text-slate-900">Indo-Western Gowns</span>
-                    </div>
-                  </div>
-                  <div className="group relative overflow-hidden rounded-2xl border border-[#92704E]/15 bg-white p-2.5 shadow-md">
-                    <img
-                      src="/media/studio-960.webp"
-                      alt="Sherwanis & Couple Wear"
-                      className="aspect-square w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="mt-2 text-center">
-                      <span className="text-[11px] font-bold text-slate-900">Sherwanis & Couple Sets</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-700 sm:text-base">
+              From bespoke bridal couture and custom blouses to contemporary designer party wear and heritage ethnic attire—every creation is designed, hand-embroidered, and master-tailored with obsessive attention to silhouette.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href="#catalog"
+                className="rounded-lg bg-[#92704E] px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-[#7D5F41] active:scale-95"
+              >
+                View Studio Portfolio ({allProducts.length}) ↓
+              </a>
+              <a
+                href="#consultation"
+                className="rounded-lg border border-[#92704E]/25 bg-white px-5 py-3 text-xs font-semibold uppercase tracking-wider text-slate-800 shadow-sm transition hover:bg-[#FAF4ED]"
+              >
+                Schedule Fitting Appointment ↓
+              </a>
             </div>
           </div>
         </div>

@@ -941,6 +941,7 @@
         margin-bottom: 8px;
         display: -webkit-box;
         -webkit-line-clamp: 1;
+        line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
@@ -4198,86 +4199,19 @@
       return p.pricing || {};
     }
 
-    const naturalJuices = [
-      {
-        id: 'j-abc',
-        name: 'ABC Immunity & Glow Booster',
-        tagline: 'Apple, Beetroot, Carrot with Fresh Ginger & Lemon',
-        category: 'detox',
-        weight: '300ml / 500ml',
-        badge: 'Top Seller',
-        badgeStyle: 'b-best',
-        tags: ['Immunity', 'Glowing Skin', 'Enzyme Rich'],
-        pricing: { '300ml': 99, '500ml': 159 },
-        image: 'https://images.unsplash.com/photo-1622597467836-f3285f2131b7?q=80&w=800&auto=format&fit=crop',
-        description: 'Cold-pressed Himalayan apples, crisp carrots, and ruby beetroots with a zesty touch of ginger and lemon.'
-      },
-      {
-        id: 'j-orange',
-        name: 'Valencia Pure Citrus Splash',
-        tagline: '100% Pure Cold-Pressed Sweet Oranges',
-        category: 'immunity',
-        weight: '300ml / 500ml',
-        badge: 'Pure Pulp',
-        badgeStyle: 'b-new',
-        tags: ['Vitamin C', 'Zero Added Sugar', '100% Raw'],
-        pricing: { '300ml': 89, '500ml': 149 },
-        image: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?q=80&w=800&auto=format&fit=crop',
-        description: 'Sweet, sun-ripened oranges cold-pressed fresh daily with natural juicy pulp intact.'
-      },
-      {
-        id: 'j-green',
-        name: 'Green Goddess Cleanser',
-        tagline: 'Cucumber, Spinach, Celery, Mint & Green Apple',
-        category: 'detox',
-        weight: '300ml / 500ml',
-        badge: 'Alkalizing',
-        badgeStyle: 'b-veg',
-        tags: ['Deep Detox', 'Metabolism', 'Nutrient Dense'],
-        pricing: { '300ml': 99, '500ml': 159 },
-        image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=800&auto=format&fit=crop',
-        description: 'Deeply alkalizing green juice loaded with natural chlorophyll, electrolytes, and antioxidants.'
-      },
-      {
-        id: 'j-pom',
-        name: 'Pomegranate Ruby Pure',
-        tagline: '100% Hand-Shelled Pomegranate Pearls',
-        category: 'immunity',
-        weight: '300ml / 500ml',
-        badge: 'Antioxidant',
-        badgeStyle: 'b-best',
-        tags: ['Heart Health', 'Polyphenols', 'Pure Ruby'],
-        pricing: { '300ml': 119, '500ml': 189 },
-        image: 'https://images.unsplash.com/photo-1543362906-acfc16c67564?q=80&w=800&auto=format&fit=crop',
-        description: 'Gently cold-extracted from rich red pomegranate seeds without crushing pith for pristine sweetness.'
-      },
-      {
-        id: 'j-pineapple',
-        name: 'Tropical Pineapple Mint Cooler',
-        tagline: 'Fresh Pineapple, Garden Mint & Himalayan Pink Salt',
-        category: 'hydrating',
-        weight: '300ml / 500ml',
-        badge: 'Digestive',
-        badgeStyle: 'b-new',
-        tags: ['Bromelain', 'Gut Health', 'Cooling'],
-        pricing: { '300ml': 89, '500ml': 149 },
-        image: 'https://images.unsplash.com/photo-1525385133512-2f3bdd039054?q=80&w=800&auto=format&fit=crop',
-        description: 'Rich in bromelain digestive enzymes with fresh cooling mint and a pinch of pink mineral salt.'
-      },
-      {
-        id: 'j-watermelon',
-        name: 'Watermelon Basil-Seed Hydrator',
-        tagline: 'Farm-Fresh Watermelon, Lime & Sabja Seeds',
-        category: 'hydrating',
-        weight: '300ml / 500ml',
-        badge: 'Hydration Hero',
-        badgeStyle: 'b-veg',
-        tags: ['Electrolytes', 'Sabja Seeds', 'Summer Vitality'],
-        pricing: { '300ml': 79, '500ml': 129 },
-        image: 'https://images.unsplash.com/photo-1589734005822-48a04be85939?q=80&w=800&auto=format&fit=crop',
-        description: 'Ultra-hydrating red watermelon infused with freshly squeezed lime and cooling basil seeds.'
+    let naturalJuices = [];
+
+    async function loadJuices() {
+      try {
+        const r = await fetch('/api/juices', { cache: 'no-store' });
+        if (r.ok) {
+          naturalJuices = await r.json();
+        }
+      } catch (e) {
+        console.error('Could not load juices:', e);
       }
-    ];
+      renderJuices();
+    }
 
     let activeJuiceFilter = 'all';
     let juiceSearchQuery = '';
@@ -4634,7 +4568,7 @@
     }
 
     loadProducts();
-    renderJuices();
+    loadJuices();
     loadOffers();
 
     // Reviews: fetch screenshots from API and render gallery
