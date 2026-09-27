@@ -102,111 +102,37 @@ export default function CraftsGiftsPage() {
       </header>
 
       {/* ───────────────── HERO SHOWCASE ───────────────── */}
-      <section className="relative overflow-hidden border-b border-amber-900/10 bg-gradient-to-b from-white via-[#FAF7F2] to-[#F5EFEB] py-12 md:py-20">
+      <section className="relative overflow-hidden border-b border-amber-900/10 bg-gradient-to-b from-white via-[#FAF7F2] to-[#F5EFEB] py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-            {/* Left Hero Content */}
-            <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full bg-amber-100/80 px-3.5 py-1 text-xs font-semibold text-amber-900 border border-amber-200/60 shadow-sm">
-                <span className="h-2 w-2 rounded-full bg-amber-600 animate-pulse" />
-                Handcrafted in Hyderabad · Bespoke Personalization
-              </div>
-
-              <h1 className="mt-5 font-serif text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.14]">
-                Handcrafted Memories.
-                <br />
-                <span className="text-amber-800 italic">Curated with Emotion.</span>
-              </h1>
-
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-700 sm:text-base">
-                We design and handcraft exquisite personalized 3D couple figurines, preserved varmala resin keepsakes, consecrated devotional idols, and luxury trousseau gift hampers—crafted to celebrate life’s sacred milestones.
-              </p>
-
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a
-                  href="#catalog"
-                  className="rounded-lg bg-amber-800 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-amber-900 active:scale-95"
-                >
-                  Explore Collections ({allProducts.length}) ↓
-                </a>
-                <a
-                  href="#custom-studio"
-                  className="rounded-lg border border-amber-900/20 bg-white px-5 py-3 text-xs font-semibold uppercase tracking-wider text-slate-800 shadow-sm transition hover:bg-amber-50"
-                >
-                  Bespoke Order Studio ↓
-                </a>
-              </div>
-
-              {/* Artisan Highlights Badges */}
-              <div className="mt-10 grid grid-cols-2 gap-4 border-t border-amber-900/10 pt-6 sm:grid-cols-4">
-                <div>
-                  <div className="font-serif text-2xl font-bold text-slate-900">100%</div>
-                  <div className="text-xs text-slate-600 font-medium">Artisan Handcrafted</div>
-                </div>
-                <div>
-                  <div className="font-serif text-2xl font-bold text-slate-900">Custom</div>
-                  <div className="text-xs text-slate-600 font-medium">Photo & Name Engraving</div>
-                </div>
-                <div>
-                  <div className="font-serif text-2xl font-bold text-slate-900">Safe</div>
-                  <div className="text-xs text-slate-600 font-medium">5-Layer Shock Packing</div>
-                </div>
-                <div>
-                  <div className="font-serif text-2xl font-bold text-slate-900">Global</div>
-                  <div className="text-xs text-slate-600 font-medium">Worldwide Shipping</div>
-                </div>
-              </div>
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-2 rounded-full bg-amber-100/80 px-3.5 py-1 text-xs font-semibold text-amber-900 border border-amber-200/60 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-amber-600 animate-pulse" />
+              Handcrafted in Hyderabad · Bespoke Personalization
             </div>
 
-            {/* Right Visual Bento Showcase */}
-            <div className="lg:col-span-5">
-              <div className="grid grid-cols-2 gap-3.5">
-                <div className="space-y-3.5">
-                  <div className="group relative overflow-hidden rounded-2xl border border-amber-900/10 bg-white p-2.5 shadow-md">
-                    <img
-                      src="/images/figurine.webp"
-                      alt="3D Couple Figurine"
-                      className="aspect-square w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="mt-2 text-center">
-                      <span className="text-[11px] font-bold text-slate-900">3D Couple Figurines</span>
-                    </div>
-                  </div>
-                  <div className="group relative overflow-hidden rounded-2xl border border-amber-900/10 bg-white p-2.5 shadow-md">
-                    <img
-                      src="/images/idol.webp"
-                      alt="Sacred Idol Sculptures"
-                      className="aspect-[4/3] w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="mt-2 text-center">
-                      <span className="text-[11px] font-bold text-slate-900">Sacred Deity Idols</span>
-                    </div>
-                  </div>
-                </div>
+            <h1 className="mt-5 font-serif text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.14]">
+              Handcrafted Memories.
+              <br />
+              <span className="text-amber-800 italic">Curated with Emotion.</span>
+            </h1>
 
-                <div className="space-y-3.5 pt-4">
-                  <div className="group relative overflow-hidden rounded-2xl border border-amber-900/10 bg-white p-2.5 shadow-md">
-                    <img
-                      src="/images/gift.webp"
-                      alt="Resin Keepsakes"
-                      className="aspect-[4/3] w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="mt-2 text-center">
-                      <span className="text-[11px] font-bold text-slate-900">Resin Floral Art</span>
-                    </div>
-                  </div>
-                  <div className="group relative overflow-hidden rounded-2xl border border-amber-900/10 bg-white p-2.5 shadow-md">
-                    <img
-                      src="/images/trays.webp"
-                      alt="Luxury Gift Hampers"
-                      className="aspect-square w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="mt-2 text-center">
-                      <span className="text-[11px] font-bold text-slate-900">Trousseau Trays & Hampers</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-700 sm:text-base">
+              We design and handcraft exquisite personalized 3D couple figurines, preserved varmala resin keepsakes, consecrated devotional idols, and luxury trousseau gift hampers—crafted to celebrate life’s sacred milestones.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href="#catalog"
+                className="rounded-lg bg-amber-800 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-amber-900 active:scale-95"
+              >
+                Explore Collections ({allProducts.length}) ↓
+              </a>
+              <a
+                href="#custom-studio"
+                className="rounded-lg border border-amber-900/20 bg-white px-5 py-3 text-xs font-semibold uppercase tracking-wider text-slate-800 shadow-sm transition hover:bg-amber-50"
+              >
+                Bespoke Order Studio ↓
+              </a>
             </div>
           </div>
         </div>

@@ -1,857 +1,526 @@
-import { useMemo, useState } from 'react'
-
-type Product = {
-  id: number
-  name: string
-  category: string
-  price: number
-  oldPrice?: number
-  unit: string
-  options?: { unit: string; price: number }[]
-  image: string
-  tag?: string
-  description: string
-  benefits?: string[]
-  ingredients?: string
-  howToUse?: string
-}
-
-const products: Product[] = [
-  {
-    id: 1,
-    name: 'Premium Turmeric Powder',
-    category: 'Spices',
-    price: 149,
-    oldPrice: 179,
-    unit: '250g',
-    options: [{ unit: '250g', price: 149 }, { unit: '500g', price: 279 }],
-    tag: 'BESTSELLER',
-    image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1000&q=85',
-    description: 'Bright, aromatic turmeric powder sourced from premium turmeric roots, processed to retain high curcumin content.',
-    benefits: ['Anti-inflammatory properties', 'Boosts natural immunity', 'Promotes skin radiance'],
-    ingredients: '100% Pure Turmeric Root',
-    howToUse: 'Add to warm milk for golden latte, or use in daily curries.'
-  },
-  {
-    id: 2,
-    name: 'Dehydrated Orange Slices',
-    category: 'Dehydrated',
-    price: 299,
-    unit: '100g',
-    options: [{ unit: '100g', price: 299 }, { unit: '200g', price: 549 }],
-    tag: 'NATURAL',
-    image: 'https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=1000&q=85',
-    description: 'Naturally dehydrated, crisp orange slices bursting with concentrated citrus aroma and flavor.',
-    benefits: ['Rich in Vitamin C', 'Excellent antioxidant source', 'Zero added sugar'],
-    ingredients: '100% Fresh Oranges',
-    howToUse: 'Perfect garnish for beverages, baked goods, or enjoy as a zesty snack.'
-  },
-  {
-    id: 3,
-    name: 'Premium Mixed Seeds',
-    category: 'Healthy Snacks',
-    price: 249,
-    oldPrice: 299,
-    unit: '250g',
-    options: [{ unit: '250g', price: 249 }, { unit: '500g', price: 449 }],
-    tag: 'POPULAR',
-    image: 'https://images.unsplash.com/photo-1605966802076-5d6a6c1c0e6e?auto=format&fit=crop&w=1000&q=85',
-    description: 'A nutritious, crunchy blend of roasted sunflower, pumpkin, flax, and sesame seeds.',
-    benefits: ['High in protein', 'Source of Omega-3', 'Great for heart health'],
-    ingredients: 'Sunflower seeds, pumpkin seeds, flax seeds, sesame seeds',
-    howToUse: 'Sprinkle over salads, yogurt, or eat straight out of the jar.'
-  },
-  {
-    id: 4,
-    name: 'Natural Handmade Soap',
-    category: 'Personal Care',
-    price: 179,
-    unit: '100g',
-    tag: 'HANDMADE',
-    image: 'https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=1000&q=85',
-    description: 'Gentle, handcrafted soap infused with nourishing botanical oils for a soft skin feel.',
-    benefits: ['Gentle on skin', 'Free from harsh chemicals', 'Moisturizing'],
-    ingredients: 'Coconut oil, olive oil, essential oils, lye',
-    howToUse: 'Lather between hands and apply to skin; rinse thoroughly.'
-  },
-  {
-    id: 5,
-    name: 'Cold-Processed Coconut Oil',
-    category: 'Personal Care',
-    price: 349,
-    unit: '500ml',
-    options: [{ unit: '250ml', price: 199 }, { unit: '500ml', price: 349 }],
-    tag: 'PURE',
-    image: 'https://images.unsplash.com/photo-1621073117412-1e4a2c5f9a74?auto=format&fit=crop&w=1000&q=85',
-    description: 'Pure, cold-pressed coconut oil retains all natural nutrients for skin, hair, and cooking.',
-    benefits: ['Deeply moisturizing', 'Hair strengthening', 'Edible grade'],
-    ingredients: '100% Cold-pressed coconut oil',
-    howToUse: 'Apply to hair/skin or use in healthy cooking.'
-  },
-  {
-    id: 6,
-    name: 'Dried Strawberry Pieces',
-    category: 'Dehydrated',
-    price: 399,
-    unit: '100g',
-    tag: 'NEW',
-    image: 'https://images.unsplash.com/photo-1518635017498-87f514b751ba?auto=format&fit=crop&w=1000&q=85',
-    description: 'Sweet, chewy, and naturally dried strawberries that make a delicious healthy treat.',
-    benefits: ['Fiber-rich', 'Natural sweetness', 'Vitamin-packed'],
-    ingredients: '100% Fresh Strawberries',
-    howToUse: 'Add to breakfast cereal, oatmeal, or eat as a snack.'
-  },
-  {
-    id: 7,
-    name: 'Premium Chilli Powder',
-    category: 'Spices',
-    price: 169,
-    unit: '250g',
-    options: [{ unit: '250g', price: 169 }, { unit: '500g', price: 319 }],
-    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1000&q=85',
-    description: 'Vibrant chilli powder sourced from the finest dry chillies for balanced heat and colour.',
-    benefits: ['Enhances metabolism', 'Adds rich colour', 'Authentic flavour'],
-    ingredients: '100% Dried Red Chillies',
-    howToUse: 'Perfect for curries, marinades, and seasoning.'
-  },
-  {
-    id: 8,
-    name: 'Natural Lip Balm',
-    category: 'Personal Care',
-    price: 129,
-    unit: '10g',
-    tag: 'EVERYDAY',
-    image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1000&q=85',
-    description: 'A soothing lip balm packed with natural waxes and butters to prevent dryness.',
-    benefits: ['Long-lasting moisture', 'Heals chapped lips', 'Chemical-free'],
-    ingredients: 'Beeswax, cocoa butter, vitamin E oil',
-    howToUse: 'Apply generously to lips as needed throughout the day.'
-  },
-]
-
-const categories = [
-  'All',
-  'Spices',
-  'Dehydrated',
-  'Healthy Snacks',
-  'Personal Care',
-]
+import { useState, useMemo } from 'react'
+import { useSiteData } from '../hooks/useSiteData'
+import { getProductsForDivision, getCategoriesForDivision, type UnifiedProduct } from '../lib/catalog'
+import { rupees } from '../lib/format'
 
 export default function SupplyPage() {
-  const [activeCategory, setActiveCategory] = useState('All')
-  const [search, setSearch] = useState('')
-  const [cart, setCart] = useState<Product[]>([])
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const { site } = useSiteData()
+  const division = site.divisions.find((d) => d.id === 'supply') || site.divisions[0]
+  const phone = division.phone || '9010995180'
 
+  // Dynamic products & categories from SiteData / Admin Dashboard
+  const allProducts = useMemo(() => {
+    return getProductsForDivision(site, 'supply')
+  }, [site])
+
+  const dynamicCategories = useMemo(() => {
+    const cats = getCategoriesForDivision(site, 'supply')
+    return ['All Wholesale Categories', ...cats]
+  }, [site])
+
+  const [selectedCategory, setSelectedCategory] = useState<string>('All Wholesale Categories')
+  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [selectedProductModal, setSelectedProductModal] = useState<UnifiedProduct | null>(null)
+
+  // B2B Bulk RFQ Builder State
+  const [rfqCompanyName, setRfqCompanyName] = useState('')
+  const [rfqContactPerson, setRfqContactPerson] = useState('')
+  const [rfqCategory, setRfqCategory] = useState('Bulk Dehydrated Ingredients & Spices')
+  const [rfqEstimatedVolume, setRfqEstimatedVolume] = useState('50kg - 250kg (Medium Commercial)')
+  const [rfqDeliveryLocation, setRfqDeliveryLocation] = useState('Hyderabad (Same-Day / 24h Dispatch)')
+  const [rfqNotes, setRfqNotes] = useState('')
+
+  // Filter products
   const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      const matchesCategory =
-        activeCategory === 'All' || product.category === activeCategory
-
-      const matchesSearch = product.name
-        .toLowerCase()
-        .includes(search.toLowerCase())
-
-      return matchesCategory && matchesSearch
+    return allProducts.filter((p) => {
+      if (selectedCategory !== 'All Wholesale Categories' && p.category !== selectedCategory) {
+        return false
+      }
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase()
+        const matchName = p.name.toLowerCase().includes(q)
+        const matchCat = p.category.toLowerCase().includes(q)
+        const matchDesc = p.description?.toLowerCase().includes(q)
+        if (!matchName && !matchCat && !matchDesc) return false
+      }
+      return true
     })
-  }, [activeCategory, search])
+  }, [allProducts, selectedCategory, searchQuery])
 
-  const addToCart = (product: Product) => {
-    setCart((current) => [...current, product])
+  const handleWhatsAppProductRFQ = (product: UnifiedProduct) => {
+    const priceStr = product.price ? `%0A💰 *Wholesale Unit Ref:* ₹${product.price}` : ''
+    const weightStr = product.weight ? `%0A⚖️ *Pack/MOQ:* ${encodeURIComponent(product.weight)}` : ''
+    const text = `🏭 *Hi ALCA B2B Supply & Manufacturing!*%0AI would like to request a bulk wholesale quotation / samples:%0A%0A📦 *Product:* ${encodeURIComponent(product.name)}%0A📂 *Category:* ${encodeURIComponent(product.category)}${priceStr}${weightStr}%0A%0APlease share bulk pricing tiers, specification sheet, and sample availability. Thank you! ✨`
+    window.open(`https://wa.me/${phone}?text=${text}`, '_blank')
+  }
+
+  const handleRfqSubmitWhatsApp = () => {
+    const companyStr = rfqCompanyName ? `Company / Brand: *${encodeURIComponent(rfqCompanyName)}*%0A` : ''
+    const personStr = rfqContactPerson ? `Contact Person: *${encodeURIComponent(rfqContactPerson)}*%0A` : ''
+    const text = `📋 *Hi ALCA B2B Wholesale & Manufacturing (RFQ Inquiry)!*%0A${companyStr}${personStr}I would like to request an enterprise supply quote:%0A%0A📦 *Supply Category:* ${encodeURIComponent(rfqCategory)}%0A📊 *Estimated Volume:* ${encodeURIComponent(rfqEstimatedVolume)}%0A📍 *Delivery Location:* ${encodeURIComponent(rfqDeliveryLocation)}%0A📝 *Specifications & Customization:* ${encodeURIComponent(rfqNotes || 'Standard commercial wholesale specs')}%0A%0APlease share quotation sheet and account manager details. Thank you! ✨`
+    window.open(`https://wa.me/${phone}?text=${text}`, '_blank')
   }
 
   return (
-    <main className="min-h-screen bg-[#F4F1E8] text-[#172117]">
-      {/* TOP BAR */}
-      <div className="bg-[#19351D] px-5 py-3 text-center text-[10px] font-medium uppercase tracking-[0.22em] text-[#E8DFC8]">
-        Natural products · Wholesale supply · Pan-India delivery
-      </div>
-
-      {/* NAVIGATION */}
-      <header className="sticky top-0 z-40 border-b border-[#19351D]/10 bg-[#F4F1E8]/95 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-[1450px] items-center justify-between px-5 py-5 lg:px-10">
-          <a href="/" className="flex items-center gap-3">
-            <img src="/images/alca-logo-1.webp" alt="ALCA Logo" className="h-10 w-10 rounded-full object-cover shadow-sm" />
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.3em] text-[#687365]">
-                Supply & Manufacturing
-              </p>
-
-              <h1 className="mt-0.5 font-serif text-2xl tracking-tight">
-                ALCA
-              </h1>
-            </div>
-          </a>
-
-          <nav className="hidden items-center gap-9 text-xs uppercase tracking-[0.18em] lg:flex">
-            <a href="#shop" className="hover:opacity-50">
-              Shop
-            </a>
-            <a href="#collections" className="hover:opacity-50">
-              Collections
-            </a>
-            <a href="#wholesale" className="hover:opacity-50">
-              Wholesale
-            </a>
-            <a href="#story" className="hover:opacity-50">
-              Our Story
-            </a>
-          </nav>
-
+    <main className="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-blue-600 selection:text-white pb-24 lg:pb-12">
+      {/* ───────────────── TOP ENTERPRISE BANNER & BRANDING ───────────────── */}
+      <header className="border-b border-slate-200 bg-white/90 backdrop-blur-md sticky top-0 z-40">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <button className="hidden h-11 w-11 items-center justify-center rounded-full border border-[#19351D]/15 md:flex">
-              <SearchIcon />
-            </button>
+            <a href="/" className="flex items-center gap-2.5 group">
+              <img
+                src="/images/alca-logo-1.webp"
+                alt="ALCA Logo"
+                className="h-10 w-10 rounded-full object-cover shadow-sm border border-slate-200 transition group-hover:scale-105"
+              />
+              <div>
+                <div className="font-serif text-base font-bold tracking-tight text-slate-900 leading-none">
+                  ALCA <span className="text-blue-600">SUPPLY & MANUFACTURING</span>
+                </div>
+                <div className="text-[10px] font-medium tracking-wider text-slate-500 uppercase mt-0.5">
+                  B2B Wholesale · Food Processing · Custom Packaging · Hyderabad
+                </div>
+              </div>
+            </a>
+          </div>
 
-            <button className="relative flex h-11 items-center gap-2 rounded-full bg-[#19351D] px-5 text-xs uppercase tracking-widest text-white">
-              <CartIcon />
-
-              <span>Cart</span>
-
-              {cart.length > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#D5B66D] text-[9px] text-[#19351D]">
-                  {cart.length}
-                </span>
-              )}
-            </button>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <a
+              href="#rfq-builder"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50/70 px-3 py-1.5 text-xs font-semibold text-blue-700 transition hover:bg-blue-100"
+            >
+              <span>📋</span>
+              <span>Submit RFQ</span>
+            </a>
+            <a
+              href={`https://wa.me/${phone}?text=${encodeURIComponent('Hi ALCA B2B Supply, I would like to inquire about wholesale commercial supply and contract manufacturing.')}`}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg bg-blue-600 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition hover:bg-blue-700 active:scale-95"
+            >
+              B2B WhatsApp Desk ↗
+            </a>
           </div>
         </div>
       </header>
 
-      {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="grid min-h-[680px] lg:grid-cols-[1fr_1.05fr]">
-          <div className="flex items-center px-6 py-20 lg:px-16 xl:px-24">
-            <div className="max-w-[650px]">
-              <p className="mb-7 text-xs uppercase tracking-[0.35em] text-[#75816F]">
-                Naturally made · Responsibly supplied
-              </p>
-
-              <h2 className="font-serif text-[64px] leading-[0.9] tracking-[-0.045em] sm:text-[82px] lg:text-[100px]">
-                GOOD
-                <br />
-                THINGS.
-                <br />
-                <span className="italic text-[#526F43]">Simply.</span>
-              </h2>
-
-              <p className="mt-9 max-w-[510px] text-[15px] leading-7 text-[#596257]">
-                Natural ingredients, nourishing foods and thoughtful personal
-                care products — sourced, manufactured and supplied with care.
-              </p>
-
-              <div className="mt-10 flex flex-wrap gap-3">
-                <a
-                  href="#shop"
-                  className="rounded-full bg-[#19351D] px-7 py-4 text-xs uppercase tracking-[0.2em] text-white transition hover:-translate-y-1"
-                >
-                  Shop products
-                </a>
-
-                <a
-                  href="#wholesale"
-                  className="rounded-full border border-[#19351D]/20 px-7 py-4 text-xs uppercase tracking-[0.2em] transition hover:bg-[#19351D] hover:text-white"
-                >
-                  Wholesale
-                </a>
-              </div>
-
-              <div className="mt-14 grid max-w-[500px] grid-cols-3 border-t border-[#19351D]/10 pt-6">
-                <div>
-                  <p className="font-serif text-2xl">100%</p>
-                  <p className="mt-1 text-[9px] uppercase tracking-widest text-[#778074]">
-                    Quality focused
-                  </p>
-                </div>
-
-                <div>
-                  <p className="font-serif text-2xl">Bulk</p>
-                  <p className="mt-1 text-[9px] uppercase tracking-widest text-[#778074]">
-                    Supply ready
-                  </p>
-                </div>
-
-                <div>
-                  <p className="font-serif text-2xl">Pan</p>
-                  <p className="mt-1 text-[9px] uppercase tracking-widest text-[#778074]">
-                    India delivery
-                  </p>
-                </div>
-              </div>
+      {/* ───────────────── HERO SHOWCASE ───────────────── */}
+      <section className="relative overflow-hidden border-b border-slate-200 bg-gradient-to-b from-white via-[#F8FAFC] to-[#EFF6FF]/40 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-700 border border-blue-200/60 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
+              FSSAI Certified Commercial Processing Facility
             </div>
-          </div>
 
-          <div className="relative min-h-[550px] overflow-hidden lg:min-h-full">
-            <img
-              src="https://images.unsplash.com/photo-1532336414038-cf19250c5757?auto=format&fit=crop&w=1800&q=90"
-              alt="Natural ingredients"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+            <h1 className="mt-5 font-serif text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.14]">
+              Enterprise Supply & Manufacturing.
+              <br />
+              <span className="text-blue-600 italic">Built for Scale & Reliability.</span>
+            </h1>
 
-            <div className="absolute inset-0 bg-gradient-to-t from-[#19351D]/60 via-transparent to-transparent" />
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-700 sm:text-base">
+              Direct manufacturer and commercial distributor of farm-grade spices, commercial dehydrated fruit slices & powders, custom printed luxury rigid packaging boxes, and private labeling solutions for Hyderabad hotels, cafes, cloud kitchens, and retail brands.
+            </p>
 
-            <div className="absolute bottom-8 left-8 text-white lg:bottom-12 lg:left-12">
-              <p className="text-[10px] uppercase tracking-[0.3em] opacity-70">
-                From nature
-              </p>
-              <p className="mt-2 font-serif text-4xl">
-                To your shelf.
-              </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href="#catalog"
+                className="rounded-lg bg-blue-600 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-blue-700 active:scale-95"
+              >
+                Explore Wholesale Catalog ({allProducts.length}) ↓
+              </a>
+              <a
+                href="#rfq-builder"
+                className="rounded-lg border border-slate-300 bg-white px-5 py-3 text-xs font-semibold uppercase tracking-wider text-slate-800 shadow-sm transition hover:bg-slate-50"
+              >
+                Request Bulk Quotation (RFQ) ↓
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CATEGORY STRIP */}
-      <section
-        id="collections"
-        className="border-y border-[#19351D]/10 bg-[#E8E4D8]"
-      >
-        <div className="mx-auto grid max-w-[1450px] md:grid-cols-4">
-          {[
-            {
-              title: 'Spices',
-              subtitle: 'Aromatic essentials',
-              image:
-                'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=700&q=80',
-            },
-            {
-              title: 'Dehydrated',
-              subtitle: 'Fruit & natural powders',
-              image:
-                'https://images.unsplash.com/photo-1518635017498-87f514b751ba?auto=format&fit=crop&w=700&q=80',
-            },
-            {
-              title: 'Healthy Snacks',
-              subtitle: 'Goodness between meals',
-              image:
-                'https://images.unsplash.com/photo-1605966802076-5d6a6c1c0e6e?auto=format&fit=crop&w=700&q=80',
-            },
-            {
-              title: 'Personal Care',
-              subtitle: 'Botanical everyday care',
-              image:
-                'https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=700&q=80',
-            },
-          ].map((item) => (
-            <a
-              href="#shop"
-              key={item.title}
-              className="group relative min-h-[250px] overflow-hidden border-b border-[#19351D]/10 md:border-b-0 md:border-r"
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="absolute inset-0 h-full w-full object-cover grayscale-[15%] transition duration-700 group-hover:scale-105"
+      {/* ───────────────── WHOLESALE CATALOG (DYNAMIC FROM ADMIN) ───────────────── */}
+      <section id="catalog" className="py-14 md:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Header & Filter Controls */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 pb-6">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">
+                B2B Inventory
+              </span>
+              <h2 className="mt-1 font-serif text-2xl font-bold text-slate-900 sm:text-4xl">
+                Commercial Supply Lines & Packaging
+              </h2>
+              <p className="mt-1 text-sm text-slate-600">
+                View real-time wholesale availability, packaging MOQ specifications, and sample dispatch options.
+              </p>
+            </div>
+
+            {/* Search Bar */}
+            <div className="w-full md:w-72">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search spices, boxes, powders..."
+                className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs text-slate-900 placeholder-slate-400 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
               />
+            </div>
+          </div>
 
-              <div className="absolute inset-0 bg-[#19351D]/45 transition group-hover:bg-[#19351D]/35" />
+          {/* Category Tabs */}
+          <div className="mt-6 flex flex-wrap gap-2 overflow-x-auto pb-2 scrollbar-none">
+            {dynamicCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`rounded-lg px-4 py-2 text-xs font-semibold whitespace-nowrap transition ${
+                  selectedCategory === cat
+                    ? 'bg-blue-600 text-white shadow-sm'
+                    : 'border border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
 
-              <div className="absolute bottom-7 left-7 text-white">
-                <p className="text-[9px] uppercase tracking-[0.25em] opacity-75">
-                  {item.subtitle}
-                </p>
+          {/* Product Grid */}
+          {filteredProducts.length === 0 ? (
+            <div className="mt-12 rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center">
+              <div className="text-3xl">📦</div>
+              <h3 className="mt-3 font-serif text-lg font-bold text-slate-800">No supply items found</h3>
+              <p className="mt-1 text-xs text-slate-500">Try changing your search query or category filter.</p>
+              <button
+                onClick={() => {
+                  setSelectedCategory('All Wholesale Categories')
+                  setSearchQuery('')
+                }}
+                className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-xs font-bold text-white"
+              >
+                Reset Filters
+              </button>
+            </div>
+          ) : (
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {filteredProducts.map((product) => {
+                const img = product.image || '/media/supply-960.webp'
+                const displayPrice = product.price && !isNaN(Number(product.price)) ? rupees(Number(product.price)) : product.price
 
-                <h3 className="mt-2 font-serif text-3xl">
-                  {item.title}
+                return (
+                  <div
+                    key={product.id}
+                    className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:border-blue-300 hover:shadow-xl"
+                  >
+                    <div>
+                      {/* Product Image Box */}
+                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-50">
+                        <img
+                          src={img}
+                          alt={product.name}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute left-3 top-3 rounded-md bg-slate-900/80 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm">
+                          {product.category}
+                        </div>
+                        {product.inStock ? (
+                          <div className="absolute right-3 top-3 rounded-md bg-emerald-600/90 px-2 py-0.5 text-[10px] font-bold uppercase text-white shadow-sm">
+                            Wholesale Ready
+                          </div>
+                        ) : (
+                          <div className="absolute right-3 top-3 rounded-md bg-amber-600/90 px-2 py-0.5 text-[10px] font-bold uppercase text-white shadow-sm">
+                            Contract Batch
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Details */}
+                      <div className="p-4 sm:p-5">
+                        <div className="flex items-center justify-between text-[11px] font-medium text-blue-700">
+                          <span>{product.emoji || '📦'} Commercial Line</span>
+                          {product.weight && <span>{product.weight}</span>}
+                        </div>
+
+                        <h3 className="mt-1 font-serif text-lg font-bold text-slate-900 leading-snug line-clamp-2">
+                          {product.name}
+                        </h3>
+
+                        {product.description && (
+                          <p className="mt-2 text-xs leading-relaxed text-slate-600 line-clamp-2">
+                            {product.description}
+                          </p>
+                        )}
+
+                        {product.goodFor && (
+                          <div className="mt-3 rounded-md bg-blue-50/60 p-2 text-[10px] text-blue-900 border border-blue-100">
+                            <span className="font-bold">Target Industry:</span> {product.goodFor}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Footer & Actions */}
+                    <div className="border-t border-slate-100 bg-slate-50/60 p-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <span className="block text-[10px] uppercase font-semibold text-slate-400">
+                            Wholesale Tier
+                          </span>
+                          <span className="font-serif text-lg font-bold text-slate-900">
+                            {displayPrice ? `${displayPrice}` : 'RFQ Required'}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            onClick={() => setSelectedProductModal(product)}
+                            className="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+                          >
+                            Specs
+                          </button>
+                          <button
+                            onClick={() => handleWhatsAppProductRFQ(product)}
+                            className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white shadow-sm transition hover:bg-blue-700 active:scale-95"
+                          >
+                            RFQ ↗
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ───────────────── B2B RFQ & BULK QUOTATION BUILDER ───────────────── */}
+      <section id="rfq-builder" className="border-y border-slate-200 bg-white py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="text-xs font-bold uppercase tracking-widest text-blue-600">
+              Commercial Procurement
+            </span>
+            <h2 className="mt-1 font-serif text-2xl font-bold text-slate-900 sm:text-4xl">
+              Request for Quotation (RFQ)
+            </h2>
+            <p className="mt-2 text-sm text-slate-600">
+              Submit your bulk volume specifications for commercial ingredients, custom box fabrication, or private labeling. Our B2B commercial desk responds within 2 hours.
+            </p>
+          </div>
+
+          <div className="mt-10 rounded-3xl border border-slate-200 bg-[#F8FAFC] p-6 sm:p-10 shadow-lg">
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Company / Organization Name
+                </label>
+                <input
+                  type="text"
+                  value={rfqCompanyName}
+                  onChange={(e) => setRfqCompanyName(e.target.value)}
+                  placeholder="e.g. Hyderabad Hospitality Pvt Ltd / Artisan Cafe"
+                  className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Procurement Manager / Contact Name
+                </label>
+                <input
+                  type="text"
+                  value={rfqContactPerson}
+                  onChange={(e) => setRfqContactPerson(e.target.value)}
+                  placeholder="e.g. Ramesh Varma"
+                  className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Supply Category
+                </label>
+                <select
+                  value={rfqCategory}
+                  onChange={(e) => setRfqCategory(e.target.value)}
+                  className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                >
+                  <option value="Bulk Dehydrated Ingredients & Spices">Bulk Dehydrated Ingredients & Spices</option>
+                  <option value="Luxury Packaging & Rigid Gift Boxes">Luxury Packaging & Rigid Gift Boxes</option>
+                  <option value="Commercial Kitchen & Hotel Supplies">Commercial Kitchen & Hotel Supplies</option>
+                  <option value="Private Labeling & Contract Manufacturing">Private Labeling & Contract Manufacturing</option>
+                  <option value="Custom Eco-Kraft Pouches & Corrugated Boxes">Custom Eco-Kraft Pouches & Corrugated Boxes</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Estimated Order Volume
+                </label>
+                <select
+                  value={rfqEstimatedVolume}
+                  onChange={(e) => setRfqEstimatedVolume(e.target.value)}
+                  className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                >
+                  <option value="Sample / Pilot Trial Batch (5kg - 25kg / 50 Units)">Sample / Pilot Trial Batch (5kg - 25kg / 50 Units)</option>
+                  <option value="Medium Commercial (50kg - 250kg / 250 Units)">Medium Commercial (50kg - 250kg / 250 Units)</option>
+                  <option value="Large Enterprise (500kg+ / 1,000+ Units)">Large Enterprise (500kg+ / 1,000+ Units)</option>
+                  <option value="Recurring Monthly Supply Contract">Recurring Monthly Supply Contract</option>
+                </select>
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Delivery Destination
+                </label>
+                <select
+                  value={rfqDeliveryLocation}
+                  onChange={(e) => setRfqDeliveryLocation(e.target.value)}
+                  className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                >
+                  <option value="Hyderabad (Same-Day / 24h Dispatch)">Hyderabad (Same-Day / 24h Dispatch)</option>
+                  <option value="Telangana & Andhra Pradesh Regional Hubs">Telangana & Andhra Pradesh Regional Hubs</option>
+                  <option value="Pan-India Commercial Freight Delivery">Pan-India Commercial Freight Delivery</option>
+                  <option value="Self-Pickup from LB Nagar Facility">Self-Pickup from LB Nagar Facility</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="mt-5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                Detailed Product Specifications & Branding Needs
+              </label>
+              <textarea
+                rows={3}
+                value={rfqNotes}
+                onChange={(e) => setRfqNotes(e.target.value)}
+                placeholder="Mention required moisture percentages, mesh sizes for powders, custom foil stamping pantone codes, or target unit pricing..."
+                className="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600"
+              />
+            </div>
+
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 pt-6">
+              <div className="text-xs text-slate-600">
+                📋 GST invoicing provided · Sample evaluation kits dispatched upon request.
+              </div>
+              <button
+                onClick={handleRfqSubmitWhatsApp}
+                className="w-full sm:w-auto rounded-lg bg-blue-600 px-8 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-blue-700 active:scale-95"
+              >
+                Send RFQ to B2B Team on WhatsApp ↗
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────── PRODUCT DETAIL MODAL ───────────────── */}
+      {selectedProductModal && (
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-900/60 p-0 sm:p-4 backdrop-blur-sm animate-fadeIn">
+          <div
+            className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl text-slate-900 animate-slideUp"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <span className="rounded-md bg-blue-50 px-2.5 py-1 text-[10px] font-bold uppercase text-blue-700 border border-blue-200">
+                  {selectedProductModal.category}
+                </span>
+                <h3 className="mt-2 font-serif text-2xl font-bold text-slate-900">
+                  {selectedProductModal.name}
                 </h3>
               </div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      {/* SHOP */}
-      <section id="shop" className="mx-auto max-w-[1450px] px-5 py-24 lg:px-10">
-        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-[#71806D]">
-              The collection
-            </p>
-
-            <h2 className="mt-4 font-serif text-5xl tracking-tight md:text-7xl">
-              Shop the good stuff.
-            </h2>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="hidden items-center rounded-full border border-[#19351D]/15 px-4 py-3 md:flex">
-              <SearchIcon />
-
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search products"
-                className="ml-3 w-36 bg-transparent text-xs outline-none placeholder:text-[#899087]"
-              />
-            </div>
-
-            <div className="flex overflow-x-auto rounded-full border border-[#19351D]/15 p-1">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`whitespace-nowrap rounded-full px-4 py-2 text-[10px] uppercase tracking-widest transition ${
-                    activeCategory === category
-                      ? 'bg-[#19351D] text-white'
-                      : 'text-[#687365]'
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-14 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
-          {filteredProducts.map((product) => (
-            <article key={product.id} className="group">
-              <div className="relative aspect-[0.82] overflow-hidden bg-[#E7E3D7]">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-
-                {product.tag && (
-                  <span className="absolute left-4 top-4 bg-[#F4F1E8] px-3 py-2 text-[8px] font-semibold tracking-[0.2em]">
-                    {product.tag}
-                  </span>
-                )}
-
-                <button
-                  onClick={() => addToCart(product)}
-                  className="absolute bottom-4 left-4 right-4 translate-y-16 bg-[#19351D] py-4 text-[10px] uppercase tracking-[0.2em] text-white opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-                >
-                  Add to cart
-                </button>
-
-                <button
-                  onClick={() => setSelectedProduct(product)}
-                  className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 opacity-0 transition group-hover:opacity-100"
-                >
-                  <EyeIcon />
-                </button>
-              </div>
-
-              <div className="pt-5">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-[9px] uppercase tracking-[0.2em] text-[#788277]">
-                      {product.category}
-                    </p>
-
-                    <h3 className="mt-2 font-serif text-xl">
-                      {product.name}
-                    </h3>
-                  </div>
-
-                  <div className="text-right">
-                    <p className="font-medium">
-                      ₹{product.options && product.options.length > 0 ? product.options[0].price : product.price}
-                    </p>
-
-                    {product.oldPrice && (
-                      <p className="text-xs text-[#9A9E96] line-through">
-                        ₹{product.oldPrice}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                <p className="mt-2 text-[10px] uppercase tracking-widest text-[#858D83]">
-                  {product.options && product.options.length > 0 ? product.options[0].unit : product.unit}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        {filteredProducts.length === 0 && (
-          <div className="py-24 text-center">
-            <p className="font-serif text-3xl">Nothing found.</p>
-            <p className="mt-2 text-sm text-[#777F75]">
-              Try another product or category.
-            </p>
-          </div>
-        )}
-      </section>
-
-      {/* NATURAL STATEMENT */}
-      <section
-        id="story"
-        className="overflow-hidden bg-[#19351D] text-[#F4F1E8]"
-      >
-        <div className="mx-auto grid max-w-[1450px] lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="flex items-center px-6 py-24 lg:px-16">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.3em] text-[#B6C1AE]">
-                Why ALCA
-              </p>
-
-              <h2 className="mt-7 font-serif text-5xl leading-[0.95] md:text-7xl">
-                Nature is
-                <br />
-                <span className="italic text-[#D5B66D]">our raw material.</span>
-              </h2>
-
-              <p className="mt-8 max-w-lg text-sm leading-7 text-[#C0C8BB]">
-                From carefully selected ingredients to hygienic processing and
-                reliable packaging, every step is designed around quality,
-                consistency and trust.
-              </p>
-
-              <div className="mt-12 grid grid-cols-2 gap-8 border-t border-white/15 pt-8">
-                <div>
-                  <p className="font-serif text-3xl">01</p>
-                  <p className="mt-2 text-[9px] uppercase tracking-widest text-[#AAB6A5]">
-                    Source responsibly
-                  </p>
-                </div>
-
-                <div>
-                  <p className="font-serif text-3xl">02</p>
-                  <p className="mt-2 text-[9px] uppercase tracking-widest text-[#AAB6A5]">
-                    Process carefully
-                  </p>
-                </div>
-
-                <div>
-                  <p className="font-serif text-3xl">03</p>
-                  <p className="mt-2 text-[9px] uppercase tracking-widest text-[#AAB6A5]">
-                    Pack hygienically
-                  </p>
-                </div>
-
-                <div>
-                  <p className="font-serif text-3xl">04</p>
-                  <p className="mt-2 text-[9px] uppercase tracking-widest text-[#AAB6A5]">
-                    Deliver reliably
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative min-h-[600px]">
-            <img
-              src="https://images.unsplash.com/photo-1602928321679-560bb453f190?auto=format&fit=crop&w=1600&q=90"
-              alt="Natural ingredients"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-
-            <div className="absolute inset-0 bg-[#19351D]/10" />
-
-            <div className="absolute bottom-8 left-8 max-w-[320px] lg:bottom-12 lg:left-12">
-              <p className="font-serif text-4xl text-white">
-                Simple ingredients.
-                <br />
-                Serious standards.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WHOLESALE */}
-      <section id="wholesale" className="px-5 py-24 lg:px-10">
-        <div className="mx-auto max-w-[1450px] overflow-hidden bg-[#D9DFCF]">
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="px-7 py-16 lg:px-16 lg:py-20">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-[#65715F]">
-                For businesses
-              </p>
-
-              <h2 className="mt-5 max-w-xl font-serif text-5xl leading-[0.95] md:text-7xl">
-                Need more
-                <br />
-                than a
-                <br />
-                <span className="italic">shopping cart?</span>
-              </h2>
-
-              <p className="mt-7 max-w-lg text-sm leading-7 text-[#586253]">
-                We supply restaurants, retailers, caterers, resellers,
-                wellness brands and businesses with bulk quantities and
-                customised requirements.
-              </p>
-
-              <button className="mt-9 rounded-full bg-[#19351D] px-7 py-4 text-xs uppercase tracking-[0.2em] text-white">
-                Request wholesale pricing
+              <button
+                onClick={() => setSelectedProductModal(null)}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200"
+              >
+                ✕
               </button>
             </div>
 
-            <div className="relative min-h-[400px]">
+            <div className="mt-4 relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-slate-100 border border-slate-200">
               <img
-                src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1200&q=85"
-                alt="Wholesale natural products"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TRUST STRIP */}
-      <section className="border-y border-[#19351D]/10">
-        <div className="mx-auto grid max-w-[1450px] md:grid-cols-4">
-          {[
-            ['01', 'Quality First', 'Carefully selected ingredients'],
-            ['02', 'Made Responsibly', 'Thoughtful production'],
-            ['03', 'Bulk Ready', 'Wholesale quantities available'],
-            ['04', 'Reliable Supply', 'Consistent delivery support'],
-          ].map(([number, title, description]) => (
-            <div
-              key={number}
-              className="border-b border-[#19351D]/10 p-8 md:border-b-0 md:border-r"
-            >
-              <p className="font-serif text-3xl text-[#7A866F]">{number}</p>
-
-              <h3 className="mt-6 font-serif text-2xl">{title}</h3>
-
-              <p className="mt-2 text-xs leading-5 text-[#7A8179]">
-                {description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="px-5 py-24 lg:px-10">
-        <div className="mx-auto max-w-[1450px] text-center">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-[#778174]">
-            Better products start with better ingredients.
-          </p>
-
-          <h2 className="mx-auto mt-7 max-w-5xl font-serif text-6xl leading-[0.9] tracking-[-0.04em] md:text-[100px]">
-            STOCK
-            <br />
-            SOMETHING
-            <br />
-            <span className="italic text-[#526F43]">GOOD.</span>
-          </h2>
-
-          <div className="mt-10 flex justify-center gap-3">
-            <a
-              href="#shop"
-              className="rounded-full bg-[#19351D] px-8 py-4 text-xs uppercase tracking-[0.2em] !text-white"
-            >
-              Explore products
-            </a>
-
-            <a
-              href="tel:9010995180"
-              className="rounded-full bg-[#19351D] px-8 py-4 text-xs uppercase tracking-[0.2em] !text-white"
-            >
-              Talk to us
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="bg-[#19351D] px-6 py-12 text-[#F4F1E8] lg:px-10">
-        <div className="mx-auto flex max-w-[1450px] flex-col justify-between gap-10 md:flex-row">
-          <div>
-            <p className="font-serif text-3xl">ALCA</p>
-            <p className="mt-3 max-w-sm text-xs leading-6 text-[#AEB8AA]">
-              Natural ingredients, nourishing products and dependable supply —
-              naturally, responsibly, reliably.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-x-10 gap-y-3 text-[10px] uppercase tracking-[0.2em] text-[#B6C0B2]">
-            <a href="#shop">Shop</a>
-            <a href="#collections">Collections</a>
-            <a href="#wholesale">Wholesale</a>
-            <a href="#story">Our Story</a>
-            <a href="tel:9010995180">Contact</a>
-          </div>
-        </div>
-
-        <div className="mx-auto mt-12 max-w-[1450px] border-t border-white/10 pt-6 text-[9px] uppercase tracking-[0.2em] text-[#7F8B7C]">
-          Quality is our promise · Trust is our relationship · Naturally.
-          Responsibly. Reliably.
-        </div>
-      </footer>
-
-      {/* PRODUCT QUICK VIEW */}
-      {selectedProduct && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#101610]/70 p-5 backdrop-blur-sm"
-          onClick={() => setSelectedProduct(null)}
-        >
-          <div
-            className="grid max-h-[90vh] w-full max-w-4xl overflow-hidden bg-[#F4F1E8] md:grid-cols-2"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="min-h-[350px]">
-              <img
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
+                src={selectedProductModal.image || '/media/supply-960.webp'}
+                alt={selectedProductModal.name}
                 className="h-full w-full object-cover"
               />
             </div>
 
-            <div className="relative flex flex-col justify-center p-8 md:p-12">
-              <button
-                onClick={() => setSelectedProduct(null)}
-                className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full border border-[#19351D]/15"
-              >
-                ×
-              </button>
-
-              <p className="text-[9px] uppercase tracking-[0.25em] text-[#778174]">
-                {selectedProduct.category}
-              </p>
-
-              <h3 className="mt-4 font-serif text-4xl leading-none">
-                {selectedProduct.name}
-              </h3>
-
-              <p className="mt-6 text-sm leading-7 text-[#646D62]">
-                {selectedProduct.description}
-              </p>
-
-              {selectedProduct.benefits && (
-                <div className="mt-6">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#19351D]">
-                    Benefits
-                  </p>
-                  <ul className="mt-2 list-inside list-disc text-sm text-[#646D62]">
-                    {selectedProduct.benefits.map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {selectedProduct.ingredients && (
-                <div className="mt-6">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#19351D]">
-                    Ingredients
-                  </p>
-                  <p className="mt-2 text-sm text-[#646D62]">
-                    {selectedProduct.ingredients}
-                  </p>
-                </div>
-              )}
-
-              {selectedProduct.howToUse && (
-                <div className="mt-6">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#19351D]">
-                    How to use
-                  </p>
-                  <p className="mt-2 text-sm text-[#646D62]">
-                    {selectedProduct.howToUse}
-                  </p>
-                </div>
-              )}
-
-              <div className="mt-8 flex items-end gap-3">
-                <span className="font-serif text-3xl">
-                  ₹{selectedProduct.price}
-                </span>
-
-                {selectedProduct.oldPrice && (
-                  <span className="text-sm text-[#999E95] line-through">
-                    ₹{selectedProduct.oldPrice}
-                  </span>
-                )}
-
-                <span className="text-[9px] uppercase tracking-widest text-[#7A8276]">
-                  / {selectedProduct.unit}
+            <div className="mt-4 space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-semibold text-slate-500">Packaging / MOQ:</span>
+                <span className="font-bold text-slate-800">{selectedProductModal.weight || 'Custom Batch'}</span>
+              </div>
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-semibold text-slate-500">Commercial Status:</span>
+                <span className="font-bold text-emerald-700">
+                  {selectedProductModal.inStock ? 'Ready for Dispatch in Hyderabad (24-48h)' : 'Contract Manufacturing On Demand'}
                 </span>
               </div>
+            </div>
 
-              {selectedProduct.options && selectedProduct.options.length > 1 && (
-                <div className="mt-6">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#19351D]">
-                    Available Options
-                  </p>
-                  <div className="mt-2 flex gap-2">
-                    {selectedProduct.options.map((opt) => (
-                      <button
-                        key={opt.unit}
-                        className={`rounded-full border px-4 py-2 text-xs transition ${
-                          selectedProduct.unit === opt.unit
-                            ? 'border-[#19351D] bg-[#19351D] text-white'
-                            : 'border-[#19351D]/20 hover:border-[#19351D]'
-                        }`}
-                      >
-                        {opt.unit} - ₹{opt.price}
-                      </button>
-                    ))}
-                  </div>
+            <p className="mt-4 text-xs leading-relaxed text-slate-600">
+              {selectedProductModal.description || selectedProductModal.about}
+            </p>
+
+            {selectedProductModal.goodFor && (
+              <div className="mt-4 rounded-xl bg-blue-50/70 border border-blue-200/60 p-3.5 text-xs text-blue-950">
+                <span className="font-bold">Recommended Commercial Applications:</span> {selectedProductModal.goodFor}
+              </div>
+            )}
+
+            <div className="mt-6 flex items-center justify-between border-t border-slate-200 pt-4">
+              <div>
+                <span className="text-[10px] uppercase font-semibold text-slate-400">
+                  Wholesale Price
+                </span>
+                <div className="font-serif text-xl font-bold text-slate-900">
+                  {selectedProductModal.price ? `₹${selectedProductModal.price}` : 'RFQ Required'}
                 </div>
-              )}
-
+              </div>
               <button
                 onClick={() => {
-                  addToCart(selectedProduct)
-                  setSelectedProduct(null)
+                  handleWhatsAppProductRFQ(selectedProductModal)
+                  setSelectedProductModal(null)
                 }}
-                className="mt-8 w-full bg-[#19351D] py-4 text-xs uppercase tracking-[0.2em] text-white"
+                className="rounded-lg bg-blue-600 px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:bg-blue-700"
               >
-                Add to cart
+                Request Quote on WhatsApp ↗
               </button>
             </div>
           </div>
         </div>
       )}
+
+      {/* ───────────────── FLOATING SIDE DOCK (CALL & WHATSAPP) ───────────────── */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2.5">
+        <a
+          href={`tel:+91${phone}`}
+          className="group flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-xs font-bold text-slate-800 shadow-xl border border-slate-200 transition-all duration-300 hover:scale-105 hover:border-blue-300 hover:text-blue-600 active:scale-95"
+        >
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-600 text-xs font-normal">
+            📞
+          </span>
+          <span className="hidden sm:inline">Call +91 {phone}</span>
+          <span className="sm:hidden">Call</span>
+        </a>
+
+        <a
+          href={`https://wa.me/${phone}?text=${encodeURIComponent('Hi ALCA Supply! I would like to inquire about commercial B2B supply.')}`}
+          target="_blank"
+          rel="noreferrer"
+          className="group flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-xs font-bold text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-[#20bd5a] active:scale-95"
+        >
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20 text-white text-sm">
+            💬
+          </span>
+          <span>WhatsApp Chat</span>
+        </a>
+      </div>
     </main>
-  )
-}
-
-/* ICONS */
-
-function SearchIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-    >
-      <circle cx="11" cy="11" r="6.5" />
-      <path d="m16 16 5 5" />
-    </svg>
-  )
-}
-
-function CartIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-    >
-      <path d="M4 5h2l2.2 10.5h9.6L20 8H7" />
-      <circle cx="10" cy="19" r="1" />
-      <circle cx="17" cy="19" r="1" />
-    </svg>
-  )
-}
-
-function EyeIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-    >
-      <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
-      <circle cx="12" cy="12" r="2.5" />
-    </svg>
   )
 }
