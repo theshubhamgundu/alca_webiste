@@ -41,22 +41,22 @@ export type Review = [author: string, text: string, rating?: string];
 export interface Juice {
   name: string;
   emoji: string;
-  image: string;
+  image?: string;
   price: string;
-  size: string;
+  size?: string;
   inStock: boolean;
-  kcal: string;
-  protein: string;
-  carbs: string;
-  sugar: string;
-  fibre: string;
-  ingredients: string;
-  goodFor: string;
-  vitamins: string;
-  about: string;
-  bestWithin: string;
-  color: string;
-  color2: string;
+  kcal?: string;
+  protein?: string;
+  carbs?: string;
+  sugar?: string;
+  fibre?: string;
+  ingredients?: string;
+  goodFor?: string;
+  vitamins?: string;
+  about?: string;
+  bestWithin?: string;
+  color?: string;
+  color2?: string;
 }
 
 export interface StoreItem {
