@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Router as WouterRouter, Switch } from "wouter";
 import { PhotoAdmin } from "./pages/PhotoAdmin";
 import { AdminDashboard } from "./pages/AdminDashboard";
+import BitesPage from "./pages/BitesPage";
 import CateringPage from "./pages/CateringPage";
 import CelebrationsPage from "./pages/CelebrationsPage";
 import CraftsGiftsPage from "./pages/CraftsGiftsPage";
@@ -235,6 +236,7 @@ function SiteRoutes() {
   return (
     <Switch>
       <Route path="/" component={SiteHome} />
+      <Route path="/bites" component={BitesPage} />
       <Route path="/catering" component={CateringPage} />
       <Route path="/celebrations" component={CelebrationsPage} />
       <Route path="/crafts-gifts" component={CraftsGiftsPage} />

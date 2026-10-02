@@ -37,8 +37,59 @@ export const siteData: SiteData = {
         "Hygienically Packed",
       ],
       lunch: [],
-      drinks: [],
-      store: [],
+      drinks: [
+        { name: "Beetroot Juice", image: "/bites/bet juice.jpeg", price: "80", emoji: "🥤", inStock: true },
+        { name: "Carrot Juice", image: "/bites/carrot juice.jpeg", price: "80", emoji: "🥤", inStock: true },
+        { name: "Orange Juice", image: "/bites/orange juice.jpeg", price: "90", emoji: "🥤", inStock: true },
+        { name: "Pineapple Juice", image: "/bites/pinespple juice.jpeg", price: "90", emoji: "🥤", inStock: true },
+      ],
+      store: [
+        {
+          name: "Dry Fruits & Nuts",
+          emoji: "🥜",
+          items: [
+            { name: "Almonds", image: "/bites/almonds.jpeg", price: "300", emoji: "🥜", inStock: true },
+            { name: "Cashews", image: "/bites/cashwes.jpeg", price: "350", emoji: "🥜", inStock: true },
+            { name: "Dates", image: "/bites/dates.jpeg", price: "200", emoji: "🥜", inStock: true },
+            { name: "Pistachio", image: "/bites/pistachio.jpeg", price: "400", emoji: "🥜", inStock: true },
+            { name: "Classic Trail Mix", image: "/bites/classic trail mix.jpeg", price: "250", emoji: "🥜", inStock: true },
+            { name: "Dry Fruit Box", image: "/bites/dry fruit box.jpeg", price: "800", emoji: "🎁", inStock: true }
+          ]
+        },
+        {
+          name: "Dry Fruits (Dehydrated)",
+          emoji: "🍎",
+          items: [
+            { name: "Apple Chips", image: "/bites/apple chips.jpeg", price: "150", emoji: "🍎", inStock: true },
+            { name: "Banana Chips", image: "/bites/banana chips.jpeg", price: "120", emoji: "🍌", inStock: true },
+            { name: "Dragon Fruit Slice", image: "/bites/dragon fruit slice.jpeg", price: "200", emoji: "🐉", inStock: true },
+            { name: "Kiwi Slices", image: "/bites/kiwi slices.jpeg", price: "180", emoji: "🥝", inStock: true },
+            { name: "Mango Strips", image: "/bites/mango strips.jpeg", price: "160", emoji: "🥭", inStock: true },
+            { name: "Pineapple Chips", image: "/bites/pineapple chips.jpeg", price: "150", emoji: "🍍", inStock: true },
+            { name: "Strawberry Slices", image: "/bites/strawberry slices.jpeg", price: "220", emoji: "🍓", inStock: true }
+          ]
+        },
+        {
+          name: "Dry Vegetables",
+          emoji: "🥕",
+          items: [
+            { name: "Beetroot Chips", image: "/bites/betroot chips.jpeg", price: "120", emoji: "🥔", inStock: true },
+            { name: "Carrot Chips", image: "/bites/carrot chips.jpeg", price: "120", emoji: "🥕", inStock: true },
+            { name: "Okra Chips", image: "/bites/okra chips.jpeg", price: "130", emoji: "🥒", inStock: true },
+            { name: "Sweet Potato Chips", image: "/bites/sweet potato chips.jpeg", price: "140", emoji: "🍠", inStock: true }
+          ]
+        },
+        {
+          name: "Healthy Bites & Rolls",
+          emoji: "🍪",
+          items: [
+            { name: "Dates and Nuts Roll", image: "/bites/dates and nuts roll.jpeg", price: "200", emoji: "🌯", inStock: true },
+            { name: "Dry Fruit Laddu", image: "/bites/dry fruit laddu.jpeg", price: "250", emoji: "🧆", inStock: true },
+            { name: "Mango Roll", image: "/bites/mango roll.jpeg", price: "150", emoji: "🌯", inStock: true },
+            { name: "Gift Box", image: "/bites/gift box.jpeg", price: "500", emoji: "🎁", inStock: true }
+          ]
+        }
+      ],
       hidden: false,
     },
     {

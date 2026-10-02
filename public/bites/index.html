@@ -3961,7 +3961,7 @@
           <button class="f-btn on" data-filter="all">All Items</button>
           <button class="f-btn" data-filter="veggie">Veggie Crunch</button>
           <button class="f-btn" data-filter="fruit">Fruit Snacks</button>
-          <button class="f-btn" data-filter="corn">Corn & Pops</button>
+          <button class="f-btn" data-filter="nuts">Nuts & Bites</button>
         </div>
       </div>
 
@@ -4202,14 +4202,12 @@
     let naturalJuices = [];
 
     async function loadJuices() {
-      try {
-        const r = await fetch('/api/juices', { cache: 'no-store' });
-        if (r.ok) {
-          naturalJuices = await r.json();
-        }
-      } catch (e) {
-        console.error('Could not load juices:', e);
-      }
+      naturalJuices = [
+        { id: 'j1', name: 'Beetroot Juice', category: 'detox', image: '/bites/bet juice.jpeg', tagline: 'Deep cleanse & blood purify', pricing: {'250 ml': 80} },
+        { id: 'j2', name: 'Carrot Juice', category: 'detox', image: '/bites/carrot juice.jpeg', tagline: 'Vision & skin health', pricing: {'250 ml': 80} },
+        { id: 'j3', name: 'Orange Juice', category: 'immunity', image: '/bites/orange juice.jpeg', tagline: 'Vitamin C packed', pricing: {'250 ml': 90} },
+        { id: 'j4', name: 'Pineapple Juice', category: 'hydrating', image: '/bites/pinespple juice.jpeg', tagline: 'Tropical hydration', pricing: {'250 ml': 90} }
+      ];
       renderJuices();
     }
 
@@ -4523,14 +4521,33 @@
     }
 
     async function loadProducts() {
-      try {
-        const r = await fetch('/api/products', { cache: 'no-store' });
-        allProducts = await r.json();
-        renderProducts();
-      } catch (e) {
-        const grid = document.getElementById('prodGrid');
-        if (grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--g4)">Could not load products. Please refresh.</div>';
-      }
+      allProducts = [
+        // Veggie
+        { id: 'v1', name: 'Beetroot Chips', category: 'veggie', image: '/bites/betroot chips.jpeg', tagline: '100% natural crunch', weight: '100g', pricing: {'100g': 120} },
+        { id: 'v2', name: 'Carrot Chips', category: 'veggie', image: '/bites/carrot chips.jpeg', tagline: 'Zero oil baked', weight: '100g', pricing: {'100g': 120} },
+        { id: 'v3', name: 'Okra Chips', category: 'veggie', image: '/bites/okra chips.jpeg', tagline: 'Spiced and crispy', weight: '100g', pricing: {'100g': 130} },
+        { id: 'v4', name: 'Sweet Potato Chips', category: 'veggie', image: '/bites/sweet potato chips.jpeg', tagline: 'Naturally sweet', weight: '100g', pricing: {'100g': 140} },
+        // Fruit
+        { id: 'f1', name: 'Apple Chips', category: 'fruit', image: '/bites/apple chips.jpeg', tagline: 'Crisp apple slices', weight: '100g', pricing: {'100g': 150} },
+        { id: 'f2', name: 'Banana Chips', category: 'fruit', image: '/bites/banana chips.jpeg', tagline: 'Classic favourite', weight: '100g', pricing: {'100g': 120} },
+        { id: 'f3', name: 'Dragon Fruit Slice', category: 'fruit', image: '/bites/dragon fruit slice.jpeg', tagline: 'Exotic dried fruit', weight: '100g', pricing: {'100g': 200} },
+        { id: 'f4', name: 'Kiwi Slices', category: 'fruit', image: '/bites/kiwi slices.jpeg', tagline: 'Tangy and sweet', weight: '100g', pricing: {'100g': 180} },
+        { id: 'f5', name: 'Mango Strips', category: 'fruit', image: '/bites/mango strips.jpeg', tagline: 'Tropical delight', weight: '100g', pricing: {'100g': 160} },
+        { id: 'f6', name: 'Pineapple Chips', category: 'fruit', image: '/bites/pineapple chips.jpeg', tagline: 'Zesty crunch', weight: '100g', pricing: {'100g': 150} },
+        { id: 'f7', name: 'Strawberry Slices', category: 'fruit', image: '/bites/strawberry slices.jpeg', tagline: 'Sweet dried berries', weight: '100g', pricing: {'100g': 220} },
+        // Nuts
+        { id: 'n1', name: 'Almonds', category: 'nuts', image: '/bites/almonds.jpeg', tagline: 'Premium grade', weight: '250g', pricing: {'250g': 300} },
+        { id: 'n2', name: 'Cashews', category: 'nuts', image: '/bites/cashwes.jpeg', tagline: 'Whole cashews', weight: '250g', pricing: {'250g': 350} },
+        { id: 'n3', name: 'Dates', category: 'nuts', image: '/bites/dates.jpeg', tagline: 'Soft & succulent', weight: '250g', pricing: {'250g': 200} },
+        { id: 'n4', name: 'Pistachio', category: 'nuts', image: '/bites/pistachio.jpeg', tagline: 'Roasted & salted', weight: '250g', pricing: {'250g': 400} },
+        { id: 'n5', name: 'Classic Trail Mix', category: 'nuts', image: '/bites/classic trail mix.jpeg', tagline: 'Energy booster', weight: '250g', pricing: {'250g': 250} },
+        { id: 'n6', name: 'Dates and Nuts Roll', category: 'nuts', image: '/bites/dates and nuts roll.jpeg', tagline: 'Healthy bite', weight: '200g', pricing: {'200g': 200} },
+        { id: 'n7', name: 'Dry Fruit Laddu', category: 'nuts', image: '/bites/dry fruit laddu.jpeg', tagline: 'Nutritious sweet', weight: '250g', pricing: {'250g': 250} },
+        { id: 'n8', name: 'Mango Roll', category: 'nuts', image: '/bites/mango roll.jpeg', tagline: 'Aam papad roll', weight: '200g', pricing: {'200g': 150} },
+        { id: 'n9', name: 'Dry Fruit Box', category: 'nuts', image: '/bites/dry fruit box.jpeg', tagline: 'Premium assortment', weight: '500g', pricing: {'500g': 800} },
+        { id: 'n10', name: 'Gift Box', category: 'nuts', image: '/bites/gift box.jpeg', tagline: 'Perfect for gifting', weight: '1 Box', pricing: {'1 Box': 500} }
+      ];
+      renderProducts();
     }
 
     document.querySelectorAll('.f-btn:not(.j-btn)').forEach(btn => {
